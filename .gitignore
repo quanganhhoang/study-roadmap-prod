@@ -181,4 +181,12 @@ psd
 thumb
 sketch
 
+package-lock.json
+
+### vscode ###
+.vscode
+
+### misc ###
+venv
+
 # End of https://www.gitignore.io/api/react,django,python
