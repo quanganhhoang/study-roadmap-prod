@@ -1,5 +1,6 @@
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.conf.urls import include
+from django.views.generic import TemplateView
 
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
@@ -20,11 +21,11 @@ urlpatterns = router.urls
 # ]
 
 # urlpatterns = [
-#   path('', views.api_root),
 #   path('api/users/', views.UserList.as_view()),
 #   path('api/users/<int:pk>/', views.UserDetail.as_view()),
 #   path('api/roadmaps/', views.RoadmapList.as_view()),
-#   path('api/roadmaps/<int:pk>/', views.RoadmapList.as_view())
+#   path('api/roadmaps/<int:pk>/', views.RoadmapList.as_view()),
+#   re_path(r'.*', views.index)
 # ]
 
 # urlpatterns += [

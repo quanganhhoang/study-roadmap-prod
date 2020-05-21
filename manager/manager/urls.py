@@ -1,5 +1,6 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 """manager URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,5 +22,6 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('frontend.urls')),
-    path('', include('studyroadmap.urls'))
+    path('', include('studyroadmap.urls')),
+    re_path(r'^.*', TemplateView.as_view(template_name='frontend/index.html')),
 ]
