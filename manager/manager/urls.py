@@ -21,6 +21,8 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('', include('frontend.urls')),
     path('', include('studyroadmap.urls')),
     re_path(r'^.*', TemplateView.as_view(template_name='frontend/index.html')),
