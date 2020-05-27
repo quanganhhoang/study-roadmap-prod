@@ -25,7 +25,7 @@ SECRET_KEY = '9=#@pkjcwswp-8h@^0(*dn&m+x)-eii9%5fqide7iq-e4sizc#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -38,22 +38,31 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # ADDED
+    'django.contrib.sites',
+
     'corsheaders',
 
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
     'allauth.socialaccount',
-
-    'frontend',
-    'studyroadmap',
 
     'rest_framework',
     'rest_framework.authtoken',
+
     'rest_auth',
+    'rest_auth.registration',
+
+    # 'rest_framework_jwt',
+    
+    'frontend',
+    'studyroadmap',
+
+    
     # ADDED
 ]
+
+# used for extending django-rest-auth user model
+# AUTH_USER_MODEL = 'studyroadmap.CustomUser'
 
 SITE_ID = 1
 
@@ -152,16 +161,23 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_PERMISSION_CLASSES': (
-      'rest_framework.permissions.AllowAny',
+      'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
       'rest_framework.authentication.TokenAuthentication',
     ),
 }
 
+# Used to override django-rest-auth registration
+# REST_AUTH_REGISTER_SERIALIZERS = {
+#     'REGISTER_SERIALIZER': 'studyroadmap.serializers.UserSerializer',
+# }
+
 AUTHENTICATION_BACKENDS = (
-   "django.contrib.auth.backends.ModelBackend",
-   "allauth.account.auth_backends.AuthenticationBackend"
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 CORS_ORIGIN_ALLOW_ALL = True

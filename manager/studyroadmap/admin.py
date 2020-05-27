@@ -1,7 +1,10 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
-from .models import User, Roadmap
+from .models import CustomProfile, Roadmap
 
-admin.site.register(User)
+admin.site.register(CustomProfile)
 admin.site.register(Roadmap)
+
+# admin.site.register(CustomProfile, UserAdmin)

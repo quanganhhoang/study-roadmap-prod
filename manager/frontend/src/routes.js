@@ -6,6 +6,7 @@ import Roadmap from './components/Roadmap'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import RoadmapListView from './components/RoadmapListView'
+import Dashboard from './components/Dashboard'
 
 const BaseRouter = () => (
 	<div>
@@ -14,6 +15,7 @@ const BaseRouter = () => (
 		<Route exact path="/roadmaps/:roadmapId/" component={Roadmap} />
 		<Route exact path="/login/" component={Login} />
 		<Route exact path="/signup/" component={Signup} />
+        <Route exact path="/dashboard/" component={Dashboard} />
 	</div>
 );
 

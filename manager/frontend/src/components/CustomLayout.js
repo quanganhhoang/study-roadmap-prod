@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Layout, Menu, Button, Input } from 'antd';
 import { Link, withRouter } from 'react-router-dom'
-import { AudioOutlined } from '@ant-design/icons';
+
+import * as actions from '../store/actions/auth';
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -34,13 +35,17 @@ class CustomLayout extends Component {
                                 // defaultSelectedKeys={['2']}
                                 style={{ lineHeight: '64px' }}
                             >	
-                                {
+                                {    
                                 this.props.isAuthenticated ?
-                                <Button onClick={this.props.logout} type="primary">Logout</Button>
+                                <React.Fragment>
+                                    <Button className="nav-btn">My Roadmaps</Button>
+                                    <Button className="nav-btn" onClick={this.props.logout} type="primary">Logout</Button>
+                                </React.Fragment>
+                    
                                 :
                                 <React.Fragment>
-                                    <Button id="login-btn" href="/login" type="primary">Login</Button>
-                                    <Button id="signup-btn" href="/signup" type="primary">SignUp</Button>
+                                    <Button className="nav-btn" href="/login" type="primary">Login</Button>
+                                    <Button className="nav-btn" href="/signup" type="primary">Register</Button>
                                 </React.Fragment>
                                 }							
                             </Menu>
@@ -74,7 +79,7 @@ class CustomLayout extends Component {
                         
                     <div className="footer-copyright">
                         <div className="container-fluid">
-                            © 2015 Copyright: <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
+                            © 2020 Copyright: <a href="#"> Polaris.com </a>
                         </div>
                     </div>
                         

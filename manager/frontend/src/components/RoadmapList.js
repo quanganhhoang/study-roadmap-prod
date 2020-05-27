@@ -1,18 +1,26 @@
 import React from "react";
 import { List, Avatar } from "antd";
-import { Icon } from '@ant-design/icons' 
+import { StarOutlined, LikeOutlined, CommentOutlined } from '@ant-design/icons' 
 
-// const IconText = ({ type, text }) => (
-//   <span>
-//     <Icon
-//       type={type}
-//       style={{
-//         marginRight: 8
-//       }}
-//     />
-//     {text}
-//   </span>
-// );
+const IconComponent = (type) => {
+    const iconStyle = {
+        marginRight: 8,
+    }
+    switch (type) {
+        case "star":
+            return <StarOutlined style={ iconStyle }/>;
+        case "like":
+            return <LikeOutlined style={ iconStyle }/>;
+        case "comment":
+            return <CommentOutlined style={ iconStyle }/>;
+    }
+}
+const IconText = ({ type, text }) => (
+    <span>  
+        {IconComponent(type)}
+        {text}
+    </span>
+);
 
 const Roadmaps = props => {
   return (
@@ -29,11 +37,11 @@ const Roadmaps = props => {
       renderItem={item => (
         <List.Item
           key={item.title}
-        //   actions={[
-        //     <IconText type="star-o" text="156" />,
-        //     <IconText type="like-o" text="156" />,
-        //     <IconText type="message" text="2" />
-        //   ]}
+          actions={[
+            <IconText type="star" text="156" />,
+            <IconText type="like" text="156" />,
+            <IconText type="comment" text="2" />
+          ]}
           extra={
             <img
               width={272}
@@ -48,7 +56,7 @@ const Roadmaps = props => {
             // description={item.description}
             description="FAKE DESCRIPTION"
           />
-          {/* {item.content} */}
+          {item.content}
         </List.Item>
       )}
     />

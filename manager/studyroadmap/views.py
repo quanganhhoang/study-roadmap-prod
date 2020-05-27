@@ -21,6 +21,15 @@ class UserViewSet(viewsets.ModelViewSet):
   ]
   serializer_class = UserSerializer
 
+
+class CustomProfileViewSet(viewsets.ModelViewSet):
+    queryset = CustomProfile.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CustomProfileSerializer
+
+
 # Roadmap Viewset
 class RoadmapViewSet(viewsets.ModelViewSet):
   queryset = Roadmap.objects.all()

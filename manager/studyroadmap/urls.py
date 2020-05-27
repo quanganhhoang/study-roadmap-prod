@@ -10,6 +10,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register('api/users', views.UserViewSet, 'users')
 router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
+router.register('api/userprofile', views.CustomProfileViewSet, 'profile')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
