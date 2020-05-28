@@ -14,6 +14,8 @@ class CustomProfile(models.Model):
     profile_image = models.CharField(max_length = 100, default="")
     user_latitude = models.IntegerField()
     user_longitude = models.IntegerField()
+    credential = models.CharField(max_length=100)
+    description = models.TextField()
     is_admin = models.BooleanField(default=False)
 
     def __str__(self):
@@ -38,14 +40,15 @@ class Roadmap(models.Model):
     num_shares = models.IntegerField(default=0)
     num_views = models.IntegerField(default=0)
     num_votes = models.IntegerField(default=0)
-    thumbnail = models.CharField(max_length=100)
+    thumbnail = models.CharField(max_length=100, default="")
+    description = models.TextField()
 
 # Each step of a roadmap
 class RoadmapNode(models.Model):
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
     title = models.CharField(max_length = 100)
     link = models.CharField(max_length = 100)
-    content = models.CharField(max_length = 1000, default="")
+    content = models.TextField(default="")
     order_num = models.IntegerField()
 
 
@@ -65,5 +68,6 @@ class UserFollow(models.Model):
 class Comment(models.Model):
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
     creation_date = models.DateTimeField(auto_now=True)
 
