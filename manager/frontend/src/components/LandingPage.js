@@ -6,13 +6,13 @@ const { Meta } = Card;
 class LandingPage extends Component {
   render() {
     return (
-        <div className="container">
+        <div className="container-fluid">
             <Row>
                 <Col span={12}>
-                    <Row>
+                    <Row type="flex">
                         <p id="slogan-1">This is a slogan. This is a slogan. This is a slogan</p>
                     </Row>
-                    <Row>
+                    <Row type="flex">
                         <p id="slogan1-description">Lorem ipsum dolor sit amet, hincvix. Purto dissentiesse tempor tincidunt. Cum utinam virtute qualisque ad. Duo maiorum antiopam voluptatum id.</p>
                     </Row>
                 </Col>

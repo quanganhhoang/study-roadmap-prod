@@ -16,7 +16,7 @@ class NormalLoginForm extends React.Component {
             if (!err) {
                 console.log(`Logging in: ${values.username} | ${values.password}`)
                 this.props.onAuth(values.username, values.password);
-                this.props.history.push('/roadmaps');
+                this.props.history.push('/dashboard');
             }
         });
     }

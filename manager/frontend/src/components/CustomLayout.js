@@ -74,7 +74,7 @@ class CustomLayout extends Component {
                                     </div>
                                 </Col>
                                 <Col span={5}>
-                                    <h5 className="title mb-3">About Us</h5>
+                                    <h5 className="title mb-3">Home</h5>
                                     <ul>
                                         <li><a href="#!">Link 1</a></li>
                                         <li><a href="#!">Link 2</a></li>
@@ -83,7 +83,7 @@ class CustomLayout extends Component {
                                     </ul>
                                 </Col>
                                 <Col span={5}>
-                                    <h5 className="title mb-3">About Us</h5>
+                                    <h5 className="title mb-3">About</h5>
                                     <ul>
                                         <li><a href="#!">Link 1</a></li>
                                         <li><a href="#!">Link 2</a></li>
