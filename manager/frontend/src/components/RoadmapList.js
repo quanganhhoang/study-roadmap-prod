@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Avatar } from "antd";
+import { List } from "antd";
 import { StarOutlined, LikeOutlined, CommentOutlined } from '@ant-design/icons' 
 
 const IconComponent = (type) => {
@@ -22,7 +22,7 @@ const IconText = ({ type, text }) => (
     </span>
 );
 
-const Roadmaps = props => {
+const RoadmapList = props => {
   return (
     <List
       itemLayout="vertical"
@@ -52,7 +52,7 @@ const Roadmaps = props => {
         >
           <List.Item.Meta
             // avatar={<Avatar src={item.avatar} />}
-            title={<a href={`/roadmaps/${item.id}/`}> {item.title} </a>}
+            title={<a href={`/RoadmapList/${item.id}/`}> {item.title} </a>}
             // description={item.description}
             description="FAKE DESCRIPTION"
           />
@@ -63,4 +63,4 @@ const Roadmaps = props => {
   );
 };
 
-export default Roadmaps;
+export default RoadmapList;
