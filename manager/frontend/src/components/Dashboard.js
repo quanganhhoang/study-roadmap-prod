@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Avatar } from 'antd';
+import axios from 'axios'
+import { connect } from 'react-redux';
 
 import RoadmapCard from './RoadmapCard';
+import DisciplineCard from './DisciplineCard';
 
 class Dashboard extends Component {
     state = {
+        user_id: 1,
         userExistingRoadmaps: [],
         existingDisciplines: [],
-        recommendedRoadmaps: [],
+        highestRatedRoadmaps: [],
         mostPopularRoadmaps: [],
     };
     
-    fetchUserExistingRoadmaps = (user_id) => {
-        axios.get("http://localhost:8000/api/roadmaps/" + user_id).then(res => {
+    fetchUserExistingRoadmaps = () => {
+        const url = "http://localhost:8000/api/users/" + this.state.user_id + "/roadmaps/"
+        axios.get(url).then(res => {
 			this.setState({
 			    userExistingRoadmaps: res.data.results
             });
@@ -20,7 +25,7 @@ class Dashboard extends Component {
     }
 
     fetchExistingDisciplines = () => {
-        axios.get("http://localhost:8000/api/disciplines/" + user_id).then(res => {
+        axios.get("http://localhost:8000/api/disciplines/" + this.state.user_id).then(res => {
 			this.setState({
 			    existingDisciplines: res.data.results
             });
@@ -28,28 +33,29 @@ class Dashboard extends Component {
     }
 
     // TODO(qahoang)
-    fetchRecommendedRoadmaps = () => {
-
+    fetchHighestRatedRoadmaps = () => {
+        const url = "http://localhost:8000/api/roadmaps/highest-rated/"
+        console.log(url)
+        axios.get(url).then(res => {
+			this.setState({
+			    highestRatedRoadmaps: res.data.results
+            });
+		});
     }
 
     // TODO(qahoang)
     fetchMostPopularRoadmaps = () => {
-
-    }
-
-    fetchRoadmapList = () => {
-		axios.get("http://localhost:8000/api/roadmaps/").then(res => {
-            console.log(`roadmaps fetch result: ${res.data.results}`)
+        axios.get("http://localhost:8000/api/roadmaps/most-popular/").then(res => {
 			this.setState({
-			    roadmaps: res.data.results
+			    mostPopularRoadmaps: res.data.results
             });
 		});
-	}
+    }
 
 	componentDidMount() {
         this.fetchUserExistingRoadmaps();
         this.fetchExistingDisciplines();
-        this.fetchRecommendedRoadmaps();
+        this.fetchHighestRatedRoadmaps();
         this.fetchMostPopularRoadmaps();
 	}
 
@@ -60,20 +66,77 @@ class Dashboard extends Component {
     // }
     
     render() {
+        let userRoadmaps = [];
+        let numResults = Math.min(2, this.state.userExistingRoadmaps.length)
+        for (let i = 0; i < numResults; i++) {
+            let roadmap = this.state.userExistingRoadmaps[i]
+            userRoadmaps.push(
+                <Col span={12}>
+                    <RoadmapCard 
+                        title={roadmap.title}
+                        author={roadmap.author}
+                        content={roadmap.content}
+                        thumbnail={roadmap.thumbnail}
+                    />
+                </Col>
+            )
+        }    
+        
         return (
             <div className="container-fluid">
                 <p>Welcome back, let's continue our studies?</p>
                 <Row type="flex">
-                    <Col span={12}>
-                        <RoadmapCard />
+                    {userRoadmaps}
+                </Row>
+                <Row>
+                    <p>Disciplines</p>
+                </Row>
+                <Row type="flex" gutter={32}>
+                    <Col className="gutter-row" span={6}>
+                        <DisciplineCard />
                     </Col>
-                    <Col span={12}>
-                        <RoadmapCard />
+                    <Col className="gutter-row" span={6}>
+                        <DisciplineCard />
                     </Col>
+                    <Col className="gutter-row" span={6}>
+                        <DisciplineCard />
+                    </Col>
+                    <Col className="gutter-row" span={6}>
+                        <DisciplineCard />
+                    </Col>
+                </Row>
+                <Row>
+                    <div>Recommended</div>
+                    <div>
+                        <Col span={12}>
+                            <RoadmapCard />
+                        </Col>
+                        <Col span={12}>
+                            <RoadmapCard />
+                        </Col>
+                    </div>
+                </Row>
+
+                <Row>
+                    <div>Popular Roadmaps</div>
+                    <div>
+                        <Col span={12}>
+                            <RoadmapCard />
+                        </Col>
+                        <Col span={12}>
+                            <RoadmapCard />
+                        </Col>
+                    </div>
                 </Row>
             </div>
         )
-  }
+    }
 }
 
-export default Dashboard
+const mapStateToProps = state => {
+    return {
+        
+    };
+  };
+
+export default connect(mapStateToProps)(Dashboard)

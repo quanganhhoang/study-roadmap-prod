@@ -12,13 +12,13 @@ const RoadmapCard = props => {
         <Card style={ styles }>
             <Row type="flex">
                 <Col span={18}>
-                    <p clasName="roadmap-card-title">{props.title}</p>
+                    <p className="roadmap-card-title">{props.title}</p>
                     <p className="roadmap-card-author">{props.author}</p>
                     <p>{props.content}</p>    
                 </Col>
                 <Col span={6}>
                     <div className="roadmap-card-thumbnail">
-                        {props.thumbnail}
+                        <img src={props.thumbnail} width='40' height='40'></img>
                     </div>
                 </Col>
             </Row>

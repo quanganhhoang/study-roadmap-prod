@@ -53,7 +53,7 @@ class LandingPage extends Component {
                 </Col>
             </Row>
             <Row>
-                <p id="user-experience-landing-page">Trai Nghiem Tu Cac Ban Tre</p>
+                <p id="user-experience-landing-page">User Testimonial</p>
             </Row>
             <Row>
                 <Col span={8}>
