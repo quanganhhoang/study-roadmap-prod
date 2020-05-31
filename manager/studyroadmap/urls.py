@@ -17,7 +17,8 @@ class NestedDefaultRouter(NestedRouterMixin, routers.DefaultRouter):
 router = NestedDefaultRouter()
 
 users_router = router.register('api/users', views.UserViewSet, 'user')
-router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
+roadmaps_router = router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
+router.register('api/roadmapstep', views.RoadmapStepViewSet, 'step')
 router.register('api/userprofile', views.CustomProfileViewSet, 'profile')
 router.register('api/disciplines', views.DisciplineViewSet, 'discipline')
 
@@ -27,6 +28,14 @@ users_router.register(
     viewset=views.RoadmapViewSet,
     basename="user-roadmaps",
     parents_query_lookups=['author_id']
+)
+
+# retrieve steps in a roadmap
+roadmaps_router.register(
+    prefix="steps",
+    viewset=views.RoadmapStepViewSet,
+    basename="roadmap-steps",
+    parents_query_lookups=['roadmap_id']
 )
 
 # Wire up our API using automatic URL routing.

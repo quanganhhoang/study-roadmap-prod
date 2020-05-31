@@ -54,12 +54,21 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
+class RoadmapStepViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = RoadmapStep.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = RoadmapStepSerializer
+
+
 class DisciplineViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Discipline.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
     serializer_class = DisciplineSerializer
+
 
 ### Iteration 4 ###
 

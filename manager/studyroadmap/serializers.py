@@ -6,6 +6,7 @@ from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -21,6 +22,12 @@ class CustomProfileSerializer(serializers.ModelSerializer):
 class RoadmapSerializer(serializers.ModelSerializer):
     class Meta:
         model = Roadmap
+        fields = '__all__'
+
+
+class RoadmapStepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoadmapStep
         fields = '__all__'
 
 
