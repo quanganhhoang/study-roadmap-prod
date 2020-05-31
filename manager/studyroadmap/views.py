@@ -12,22 +12,15 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 from .models import *
 from .serializers import *
 
-### Iteration 4 ###
 
+# Iteration 4
 # User Viewset
 class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = [
-    permissions.AllowAny
+        permissions.AllowAny
     ]
     serializer_class = UserSerializer
-
-    @action(detail=True, methods=['GET'])
-    def get_roadmaps(self, request, user_id):
-        roadmaps_by_user = Roadmap.objects.get(user_id=user_id)
-        serializer = RoadmapSerializer(roadmaps_by_user, many=True)
-        return Response(serializer.data, status=200)
-        
 
 
 class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
@@ -40,11 +33,25 @@ class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 
 # Roadmap Viewset
 class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
-  queryset = Roadmap.objects.all()
-  permission_classes = [
-    permissions.AllowAny
-  ]
-  serializer_class = RoadmapSerializer
+    queryset = Roadmap.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = RoadmapSerializer
+
+    @action(methods=['get'], detail=False, url_path='most-popular')
+    def most_popular(self, request):
+        most_popular = self.get_queryset().order_by('num_views')
+        serializer = self.get_serializer_class()(most_popular, many=True)
+
+        return Response(serializer.data)
+
+    @action(methods=['get'], detail=False, url_path='highest-rated')
+    def highest_rated(self, request):
+        highest_rated = self.get_queryset().order_by('num_votes')
+        serializer = self.get_serializer_class()(highest_rated, many=True)
+
+        return Response(serializer.data)
 
 
 class DisciplineViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
@@ -139,7 +146,7 @@ class DisciplineViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 #   def delete(self, request, pk, format=None):
 #     user = self.get_object(pk)
 #     user.delete()
-    
+
 #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 ### Iteration 2 ###

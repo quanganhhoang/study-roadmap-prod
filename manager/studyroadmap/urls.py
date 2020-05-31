@@ -16,11 +16,12 @@ class NestedDefaultRouter(NestedRouterMixin, routers.DefaultRouter):
 
 router = NestedDefaultRouter()
 
-users_router = router.register('api/users', views.UserViewSet, 'users')
+users_router = router.register('api/users', views.UserViewSet, 'user')
 router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
 router.register('api/userprofile', views.CustomProfileViewSet, 'profile')
-router.register('api/disciplines', views.DisciplineViewSet, 'disciplines')
+router.register('api/disciplines', views.DisciplineViewSet, 'discipline')
 
+# retrieve roadmaps followed by a user
 users_router.register(
     prefix="roadmaps",
     viewset=views.RoadmapViewSet,
@@ -32,6 +33,8 @@ users_router.register(
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = router.urls
 
+for url in router.urls:
+    print(url)
 # urlpatterns = [
 #     path('api/users', views.user_list),
 #     path('api/users/<int:pk>/', views.user_detail),

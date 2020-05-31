@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # User model
 class CustomProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # username = models.CharField(max_length=100, unique=True)
     # password = models.CharField(max_length=100)
-    first_name = models.CharField(max_length = 100)
-    last_name = models.CharField(max_length = 100)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     # email = models.CharField(max_length = 100)
     dob = models.DateTimeField()
     creation_date = models.DateTimeField(auto_now=True)
-    profile_image = models.CharField(max_length = 100, default="")
+    profile_image = models.CharField(max_length=100, default="")
     user_latitude = models.IntegerField()
     user_longitude = models.IntegerField()
     credential = models.CharField(max_length=100)
@@ -44,7 +45,7 @@ class DisciplineEnum(models.IntegerChoices):
 
 class Discipline(models.Model):
     discipline = models.IntegerField(
-        choices = [
+        choices=[
             (DisciplineEnum.ENGINEERING, 'ENGINEERING'),
             (DisciplineEnum.BUSINESS, 'BUSINESS'),
             (DisciplineEnum.FINANCE, 'FINANCE'),
@@ -56,9 +57,9 @@ class Discipline(models.Model):
             (DisciplineEnum.HEALTH, 'HEALTH'),
             (DisciplineEnum.OTHER, 'OTHER')
         ],
-        default = DisciplineEnum.OTHER,
+        default=DisciplineEnum.OTHER,
     )
-    
+
     num_roadmaps = models.IntegerField(default=0)
     thumbnail = models.CharField(max_length=100, default="")
 
@@ -68,7 +69,7 @@ class Discipline(models.Model):
 # Each roadmap contains multiple RoadmapNodes and comments
 class Roadmap(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
-    title = models.CharField(max_length = 100)
+    title = models.CharField(max_length=100)
     level = models.IntegerField(
         choices=LevelCategory.choices,
         default=LevelCategory.BEGINNER
@@ -87,8 +88,8 @@ class Roadmap(models.Model):
 # Each step of a roadmap
 class RoadmapNode(models.Model):
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
-    title = models.CharField(max_length = 100)
-    link = models.CharField(max_length = 100)
+    title = models.CharField(max_length=100)
+    link = models.CharField(max_length=100)
     content = models.TextField(default="")
     order_num = models.IntegerField()
 
@@ -96,7 +97,7 @@ class RoadmapNode(models.Model):
 # Only for analysis - users do not see this
 # Links are cleaned up and aggregated for data analysis
 class LinkStat(models.Model):
-    link = models.CharField(max_length = 100)
+    link = models.CharField(max_length=100)
     frequency = models.IntegerField(default=0)
 
 
@@ -119,4 +120,3 @@ class Comment(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     creation_date = models.DateTimeField(auto_now=True)
-
