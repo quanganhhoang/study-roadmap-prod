@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import RoadmapList from "./RoadmapList";
-import CustomForm from './Form';
-
 
 class RoadmapListView extends Component {
 	state = {
@@ -32,7 +30,6 @@ class RoadmapListView extends Component {
 	render() {
 		return (
 			<div>
-                HELLO WORLD
 				<RoadmapList data={this.state.roadmaps} /> <br />
 				{/* <h2> Create an article </h2> */}
 				{/* <CustomForm requestType="post" roadmapId={null} btnText="Create" /> */}

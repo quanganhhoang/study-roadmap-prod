@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import { Row, Col, Card, Avatar } from 'antd';
 import axios from 'axios'
 import { connect } from 'react-redux';
 
-import RoadmapCard from './RoadmapCard';
+import { Row, Col } from 'antd';
+
 import DisciplineCard from './DisciplineCard';
+import DashboardRoadmapList from './DashboardRoadmapList';
+
+const NUM_DISCIPLINES_TO_SHOW = 4;
 
 class Dashboard extends Component {
     state = {
@@ -25,7 +28,8 @@ class Dashboard extends Component {
     }
 
     fetchExistingDisciplines = () => {
-        axios.get("http://localhost:8000/api/disciplines/" + this.state.user_id).then(res => {
+        axios.get("http://localhost:8000/api/disciplines/").then(res => {
+            console.log(res)
 			this.setState({
 			    existingDisciplines: res.data.results
             });
@@ -35,20 +39,24 @@ class Dashboard extends Component {
     // TODO(qahoang)
     fetchHighestRatedRoadmaps = () => {
         const url = "http://localhost:8000/api/roadmaps/highest-rated/"
-        console.log(url)
         axios.get(url).then(res => {
 			this.setState({
-			    highestRatedRoadmaps: res.data.results
+			    highestRatedRoadmaps: res.data
             });
 		});
     }
 
     // TODO(qahoang)
     fetchMostPopularRoadmaps = () => {
-        axios.get("http://localhost:8000/api/roadmaps/most-popular/").then(res => {
+        const url = "http://localhost:8000/api/roadmaps/most-popular/"
+        console.log(url)
+        axios.get(url).then(res => {
+            console.log(res)
 			this.setState({
-			    mostPopularRoadmaps: res.data.results
+			    mostPopularRoadmaps: res.data
             });
+            
+            console.log(this.state.mostPopularRoadmaps)
 		});
     }
 
@@ -66,68 +74,54 @@ class Dashboard extends Component {
     // }
     
     render() {
-        let userRoadmaps = [];
-        let numResults = Math.min(2, this.state.userExistingRoadmaps.length)
-        for (let i = 0; i < numResults; i++) {
-            let roadmap = this.state.userExistingRoadmaps[i]
-            userRoadmaps.push(
-                <Col span={12}>
-                    <RoadmapCard 
-                        title={roadmap.title}
-                        author={roadmap.author}
-                        content={roadmap.content}
-                        thumbnail={roadmap.thumbnail}
+        const disciplines = [];
+        
+        this.state.existingDisciplines.forEach(elem => {
+            disciplines.push(
+                <Col className="gutter-row" span={6}>
+                    <DisciplineCard 
+                        discipline={elem.discipline}
+                        thumbnail={elem.thumbnail}
                     />
                 </Col>
             )
-        }    
-        
+        })
+
         return (
             <div className="container-fluid">
-                <p>Welcome back, let's continue our studies?</p>
-                <Row type="flex">
-                    {userRoadmaps}
-                </Row>
-                <Row>
+                <div>
+                    <p>Welcome back, let's continue our studies?</p>
+                </div>
+                <div>
+                    <DashboardRoadmapList
+                        data={this.state.userExistingRoadmaps}
+                    />
+                </div>
+                
+                <div>
                     <p>Disciplines</p>
+                </div>
+                <Row gutter={16}>
+                    {disciplines}
                 </Row>
-                <Row type="flex" gutter={32}>
-                    <Col className="gutter-row" span={6}>
-                        <DisciplineCard />
-                    </Col>
-                    <Col className="gutter-row" span={6}>
-                        <DisciplineCard />
-                    </Col>
-                    <Col className="gutter-row" span={6}>
-                        <DisciplineCard />
-                    </Col>
-                    <Col className="gutter-row" span={6}>
-                        <DisciplineCard />
-                    </Col>
-                </Row>
-                <Row>
-                    <div>Recommended</div>
-                    <div>
-                        <Col span={12}>
-                            <RoadmapCard />
-                        </Col>
-                        <Col span={12}>
-                            <RoadmapCard />
-                        </Col>
-                    </div>
-                </Row>
-
-                <Row>
-                    <div>Popular Roadmaps</div>
-                    <div>
-                        <Col span={12}>
-                            <RoadmapCard />
-                        </Col>
-                        <Col span={12}>
-                            <RoadmapCard />
-                        </Col>
-                    </div>
-                </Row>
+                
+                <div>
+                    <p>Highest Rated Roadmaps</p>
+                </div>
+                <div>
+                    <DashboardRoadmapList
+                        data={this.state.highestRatedRoadmaps}
+                    />
+                </div>
+            
+                <div>
+                    <p>Popular Roadmaps</p>
+                </div>
+                <div>
+                    <DashboardRoadmapList
+                        data={this.state.mostPopularRoadmaps}
+                    />
+                </div>
             </div>
         )
     }

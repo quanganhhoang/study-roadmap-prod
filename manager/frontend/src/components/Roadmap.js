@@ -20,20 +20,20 @@ class Roadmap extends Component {
     });
   }
 
-  handleDelete = event => {
-    event.preventDefault();
-    const roadmapId = this.props.match.params.roadmapId;
-    axios.defaults.headers = {
-      "Content-Type": "application/json",
-      Authorization: `Token ${this.props.token}`
+    handleDelete = event => {
+        event.preventDefault();
+        const roadmapId = this.props.match.params.roadmapId;
+        axios.defaults.headers = {
+            "Content-Type": "application/json",
+            Authorization: `Token ${this.props.token}`
+        };
+        axios.delete(`http://127.0.0.1:8000/api/roadmaps/${roadmapId}/delete/`)
+        .then(res => {
+            if (res.status === 204) {
+            this.props.history.push(`/`);
+            }
+        })
     };
-    axios.delete(`http://127.0.0.1:8000/api/roadmaps/${roadmapId}/delete/`)
-    .then(res => {
-      if (res.status === 204) {
-        this.props.history.push(`/`);
-      }
-    })
-  };
 
     fetchAuthor = (user_id) => {
         axios.get(`http://localhost:8000/api/users/${user_id}/`).then(res => {

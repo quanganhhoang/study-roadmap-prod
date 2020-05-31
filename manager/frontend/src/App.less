@@ -165,8 +165,18 @@
 }
 
 .dashboard-discipline-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     position: relative;
     text-align: center;
+}
+
+.dashboard-discipline-thumbnail {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
 }
 
 .text_over_image {
@@ -175,4 +185,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
+}
+
+.gutter-row {
+    border: 1px solid red;
+    padding: 8px 0;
 }

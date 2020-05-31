@@ -7,15 +7,15 @@ class CustomProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # username = models.CharField(max_length=100, unique=True)
     # password = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     # email = models.CharField(max_length = 100)
     dob = models.DateTimeField()
     creation_date = models.DateTimeField(auto_now=True)
-    profile_image = models.CharField(max_length=100, default="")
+    profile_image = models.CharField(max_length=200, default="")
     user_latitude = models.IntegerField()
     user_longitude = models.IntegerField()
-    credential = models.CharField(max_length=100)
+    credential = models.CharField(max_length=200)
     description = models.TextField()
     is_admin = models.BooleanField(default=False)
 
@@ -58,10 +58,11 @@ class Discipline(models.Model):
             (DisciplineEnum.OTHER, 'OTHER')
         ],
         default=DisciplineEnum.OTHER,
+        unique=True,
     )
 
     num_roadmaps = models.IntegerField(default=0)
-    thumbnail = models.CharField(max_length=100, default="")
+    thumbnail = models.CharField(max_length=200, default="")
 
 
 # Roadmap model
@@ -81,7 +82,7 @@ class Roadmap(models.Model):
     num_shares = models.IntegerField(default=0)
     num_views = models.IntegerField(default=0)
     num_votes = models.IntegerField(default=0)
-    thumbnail = models.CharField(max_length=100, default="")
+    thumbnail = models.CharField(max_length=200, default="")
     description = models.TextField()
 
 
@@ -89,7 +90,7 @@ class Roadmap(models.Model):
 class RoadmapStep(models.Model):
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    link = models.CharField(max_length=100, default="")
+    link = models.CharField(max_length=200, default="")
     content = models.TextField(default="")
     order_num = models.IntegerField()
 
@@ -97,7 +98,7 @@ class RoadmapStep(models.Model):
 # Only for analysis - users do not see this
 # Links are cleaned up and aggregated for data analysis
 class LinkStat(models.Model):
-    link = models.CharField(max_length=100)
+    link = models.CharField(max_length=200)
     frequency = models.IntegerField(default=0)
 
 

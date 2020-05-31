@@ -42,8 +42,6 @@ roadmaps_router.register(
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = router.urls
 
-for url in router.urls:
-    print(url)
 # urlpatterns = [
 #     path('api/users', views.user_list),
 #     path('api/users/<int:pk>/', views.user_detail),

@@ -20,7 +20,7 @@ class CustomLayout extends Component {
                     <Header className="navbar">
                         <Row justify="space-between" type="flex">
                             <Col span={6} className="navbar-brand">
-                                <Link to="/">
+                                <Link to={this.props.isAuthenticated ? "/dashboard" : "/"}>
                                     <img id="nav-logo" src={"/static/frontend/logo.svg"} alt="logo"></img>
                                 </Link>
                             </Col>
