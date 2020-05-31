@@ -73,7 +73,7 @@ class Roadmap(models.Model):
         choices=LevelCategory.choices,
         default=LevelCategory.BEGINNER
     )
-    displine = models.IntegerField(
+    discipline = models.IntegerField(
         choices=DisciplineEnum.choices,
         default=DisciplineEnum.OTHER
     )

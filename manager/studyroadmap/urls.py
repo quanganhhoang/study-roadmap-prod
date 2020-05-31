@@ -5,12 +5,28 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 # from .views import UserViewSet, RoadmapViewSet
+from rest_framework_extensions.routers import NestedRouterMixin
+
 from . import views
 
-router = routers.DefaultRouter()
-router.register('api/users', views.UserViewSet, 'users')
+
+class NestedDefaultRouter(NestedRouterMixin, routers.DefaultRouter):
+    pass
+
+
+router = NestedDefaultRouter()
+
+users_router = router.register('api/users', views.UserViewSet, 'users')
 router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
 router.register('api/userprofile', views.CustomProfileViewSet, 'profile')
+router.register('api/disciplines', views.DisciplineViewSet, 'disciplines')
+
+users_router.register(
+    prefix="roadmaps",
+    viewset=views.RoadmapViewSet,
+    basename="user-roadmaps",
+    parents_query_lookups=['author_id']
+)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

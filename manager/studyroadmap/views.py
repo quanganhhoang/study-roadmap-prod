@@ -2,11 +2,12 @@ from django.http import HttpResponse, JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, permissions, status, generics
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.reverse import reverse
 
-from rest_framework.views import APIView
+# from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from .models import *
 from .serializers import *
@@ -14,15 +15,22 @@ from .serializers import *
 ### Iteration 4 ###
 
 # User Viewset
-class UserViewSet(viewsets.ModelViewSet):
-  queryset = User.objects.all()
-  permission_classes = [
+class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    permission_classes = [
     permissions.AllowAny
-  ]
-  serializer_class = UserSerializer
+    ]
+    serializer_class = UserSerializer
+
+    @action(detail=True, methods=['GET'])
+    def get_roadmaps(self, request, user_id):
+        roadmaps_by_user = Roadmap.objects.get(user_id=user_id)
+        serializer = RoadmapSerializer(roadmaps_by_user, many=True)
+        return Response(serializer.data, status=200)
+        
 
 
-class CustomProfileViewSet(viewsets.ModelViewSet):
+class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = CustomProfile.objects.all()
     permission_classes = [
         permissions.AllowAny
@@ -31,12 +39,20 @@ class CustomProfileViewSet(viewsets.ModelViewSet):
 
 
 # Roadmap Viewset
-class RoadmapViewSet(viewsets.ModelViewSet):
+class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
   queryset = Roadmap.objects.all()
   permission_classes = [
     permissions.AllowAny
   ]
   serializer_class = RoadmapSerializer
+
+
+class DisciplineViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = Discipline.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = DisciplineSerializer
 
 ### Iteration 4 ###
 
