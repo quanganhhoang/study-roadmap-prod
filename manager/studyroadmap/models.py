@@ -86,10 +86,10 @@ class Roadmap(models.Model):
 
 
 # Each step of a roadmap
-class RoadmapNode(models.Model):
+class RoadmapStep(models.Model):
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
-    link = models.CharField(max_length=100)
+    link = models.CharField(max_length=100, default="")
     content = models.TextField(default="")
     order_num = models.IntegerField()
 
