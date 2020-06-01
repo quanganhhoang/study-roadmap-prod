@@ -17,12 +17,12 @@ class RegistrationForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.props.onAuth(
-            values.userName,
+            values.username,
             values.email,
             values.password,
             values.confirm
         );
-        this.props.history.push('/');
+        this.props.history.push('/dashboard');
       }
     });
   }
@@ -56,7 +56,7 @@ class RegistrationForm extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem>
-            {getFieldDecorator('userName', {
+            {getFieldDecorator('username', {
                 rules: [{ required: true, message: 'Please input your username!' }],
             })(
                 <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
@@ -64,50 +64,50 @@ class RegistrationForm extends React.Component {
         </FormItem>
         
         <FormItem>
-          {getFieldDecorator('email', {
+            {getFieldDecorator('email', {
             rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
+                type: 'email', message: 'The input is not valid E-mail!',
             }, {
-              required: true, message: 'Please input your E-mail!',
+                required: true, message: 'Please input your E-mail!',
             }],
-          })(
-            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-          )}
+            })(
+                <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
+            )}
         </FormItem>
 
         <FormItem>
-          {getFieldDecorator('password', {
+            {getFieldDecorator('password', {
             rules: [{
-              required: true, message: 'Please input your password!',
+                required: true, message: 'Please input your password!',
             }, {
-              validator: this.validateToNextPassword,
+                validator: this.validateToNextPassword,
             }],
-          })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-          )}
+            })(
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+            )}
         </FormItem>
 
         <FormItem>
-          {getFieldDecorator('confirm', {
+            {getFieldDecorator('confirm', {
             rules: [{
-              required: true, message: 'Please confirm your password!',
+                required: true, message: 'Please confirm your password!',
             }, {
-              validator: this.compareToFirstPassword,
+                validator: this.compareToFirstPassword,
             }],
-          })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm password" onBlur={this.handleConfirmBlur} />
-          )}
+            })(
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm password" onBlur={this.handleConfirmBlur} />
+            )}
         </FormItem>
 
         <FormItem>
-        <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
-            Signup
-        </Button>
-        Or 
-        <NavLink 
-            style={{marginRight: '10px'}} 
-            to='/login/'> login
-        </NavLink>
+            <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
+                Signup
+            </Button>
+            Or 
+            <NavLink 
+                style={{marginRight: '10px'}} 
+                to='/login/'> login
+            </NavLink>
         </FormItem>
 
       </Form>
@@ -126,7 +126,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username, email, password1, password2) => dispatch(actions.authSignup(username, email, password1, password2)) 
+        onAuth: (username, email, password, confirm) => dispatch(actions.authSignup(username, email, password, confirm)) 
     }
 }
 
