@@ -59,8 +59,26 @@ const DashboardRoadmapList = props => {
                     // }
                 >
                     <List.Item.Meta
-                        title={<a href={`/roadmaps/${item.id}/`}> {item.title} </a>}
-                        description={item.description}
+                        title={
+                            <div>
+                                <div>
+                                    <a className="dashboard-roadmap-card-title" href={`/roadmaps/${item.id}/`}> 
+                                        {item.title} 
+                                    </a>
+                                </div>
+                                <div>
+                                    <a className="dashboard-roadmap-card-author" href={`/users/${item.author}/`}> 
+                                        {item.author} 
+                                    </a>
+                                </div> 
+                            </div>
+                        }
+                        description={(
+                            <div>
+                                <p className="dashboard-roadmap-card-description">{item.description}</p>
+                            </div>
+                            
+                        )}
                     />
                     {item.content}
                 </List.Item>

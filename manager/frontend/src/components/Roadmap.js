@@ -6,19 +6,19 @@ import { Button, Card } from "antd";
 
 
 class Roadmap extends Component {
-  state = {
-    roadmap: {}
-  };
+    state = {
+        roadmap: {}
+    };
 
-  componentDidMount() {
-    console.log(`Roadmap props: ${JSON.stringify(this.props)}`)
-    const roadmapId = this.props.match.params.roadmapId;
-    axios.get(`http://localhost:8000/api/roadmaps/${roadmapId}/`).then(res => {
-      this.setState({
-        roadmap: res.data
-      });
-    });
-  }
+    componentDidMount() {
+        console.log(`Roadmap props: ${JSON.stringify(this.props)}`)
+        const roadmapId = this.props.match.params.roadmapId;
+        axios.get(`http://localhost:8000/api/roadmaps/${roadmapId}/`).then(res => {
+            this.setState({
+            roadmap: res.data
+            });
+        });
+    }
 
     handleDelete = event => {
         event.preventDefault();
@@ -42,30 +42,26 @@ class Roadmap extends Component {
     }
 
   render() {
-    const title = this.state.roadmap.name || 'title'
-    // fetch author's name from user_id
-    // const author = fetchAuthor(this.state.roadmap.author) || 'author'
-    const author = 'author'
-    const description = this.state.roadmap.description || 'This is a roadmap'
+    const roadmap = this.state.roadmap;
     return (
-      <div>
-        <Card title={title}>
-            <p> {author} </p>
-            <p> {description} </p>
-        </Card>
-        {/* <CustomForm
-          {...this.props}
-          token={this.props.token}
-          requestType="put"
-          articleID={this.props.match.params.roadmapID}
-          btnText="Update"
-        /> */}
-        <form onSubmit={this.handleDelete}>
-          <Button type="danger" htmlType="submit">
-            Delete
-          </Button>
-        </form>
-      </div>
+        <div>
+            <Card title={roadmap.title}>
+                <p> {roadmap.author} </p>
+                <p> {roadmap.description} </p>
+            </Card>
+            {/* <CustomForm
+                {...this.props}
+                token={this.props.token}
+                requestType="put"
+                articleID={this.props.match.params.roadmapID}
+                btnText="Update"
+            /> */}
+            {/* <form onSubmit={this.handleDelete}>
+                <Button type="danger" htmlType="submit">
+                Delete
+                </Button>
+            </form> */}
+        </div>
     );
   }
 }
