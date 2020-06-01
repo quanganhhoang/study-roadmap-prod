@@ -20,7 +20,6 @@ users_router = router.register('api/users', views.UserViewSet, 'user')
 roadmaps_router = router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
 router.register('api/roadmapstep', views.RoadmapStepViewSet, 'step')
 router.register('api/userprofile', views.CustomProfileViewSet, 'profile')
-router.register('api/disciplines', views.DisciplineViewSet, 'discipline')
 
 # retrieve roadmaps followed by a user
 users_router.register(

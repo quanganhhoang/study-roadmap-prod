@@ -53,6 +53,13 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
+    @action(methods=['get'], detail=False, url_path='disciplines')
+    def get_disciplines(self, request):
+        disciplines = self.get_queryset().order_by().values_list('discipline').distinct()
+        
+
+        return JsonResponse({'data': list(disciplines)})
+
 
 class RoadmapStepViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = RoadmapStep.objects.all()
@@ -60,14 +67,6 @@ class RoadmapStepViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = RoadmapStepSerializer
-
-
-class DisciplineViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
-    queryset = Discipline.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = DisciplineSerializer
 
 
 ### Iteration 4 ###

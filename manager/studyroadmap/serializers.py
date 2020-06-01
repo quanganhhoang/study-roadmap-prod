@@ -29,9 +29,3 @@ class RoadmapStepSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoadmapStep
         fields = '__all__'
-
-
-class DisciplineSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Discipline
-        fields = '__all__'

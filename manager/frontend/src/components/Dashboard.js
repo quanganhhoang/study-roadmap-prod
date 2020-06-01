@@ -28,10 +28,9 @@ class Dashboard extends Component {
     }
 
     fetchExistingDisciplines = () => {
-        axios.get("http://localhost:8000/api/disciplines/").then(res => {
-            console.log(res)
+        axios.get("http://localhost:8000/api/roadmaps/disciplines/").then(res => {
 			this.setState({
-			    existingDisciplines: res.data.results
+			    existingDisciplines: res.data
             });
 		});
     }
@@ -49,14 +48,10 @@ class Dashboard extends Component {
     // TODO(qahoang)
     fetchMostPopularRoadmaps = () => {
         const url = "http://localhost:8000/api/roadmaps/most-popular/"
-        console.log(url)
         axios.get(url).then(res => {
-            console.log(res)
 			this.setState({
 			    mostPopularRoadmaps: res.data
             });
-            
-            console.log(this.state.mostPopularRoadmaps)
 		});
     }
 
@@ -75,22 +70,23 @@ class Dashboard extends Component {
     
     render() {
         const disciplines = [];
-        
-        this.state.existingDisciplines.forEach(elem => {
-            disciplines.push(
-                <Col className="gutter-row" span={6}>
-                    <DisciplineCard 
-                        discipline={elem.discipline}
-                        thumbnail={elem.thumbnail}
-                    />
-                </Col>
-            )
-        })
+        if (this.state.existingDisciplines.length != 0) {
+            this.state.existingDisciplines.data.forEach(elem => {
+                let discipline = elem[0]
+                disciplines.push(
+                    <Col key={discipline} className="gutter-row" span={6}>
+                        <DisciplineCard 
+                            discipline={discipline}
+                        />
+                    </Col>
+                )
+            })
+        }
 
         return (
             <div className="container-fluid">
                 <div>
-                    <p>Welcome back, let's continue our studies?</p>
+                    <h3>Welcome back, let's continue our studies?</h3>
                 </div>
                 <div>
                     <DashboardRoadmapList
@@ -99,14 +95,14 @@ class Dashboard extends Component {
                 </div>
                 
                 <div>
-                    <p>Disciplines</p>
+                    <h3>Disciplines</h3>
                 </div>
-                <Row gutter={16}>
+                <Row className="dashboard-disciplines" gutter={16}>
                     {disciplines}
                 </Row>
                 
                 <div>
-                    <p>Highest Rated Roadmaps</p>
+                    <h3>Highest Rated</h3>
                 </div>
                 <div>
                     <DashboardRoadmapList
@@ -115,7 +111,7 @@ class Dashboard extends Component {
                 </div>
             
                 <div>
-                    <p>Popular Roadmaps</p>
+                    <h3>Most Popular</h3>
                 </div>
                 <div>
                     <DashboardRoadmapList

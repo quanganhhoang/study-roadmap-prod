@@ -46,7 +46,7 @@ const DashboardRoadmapList = props => {
             }}
             renderItem={item => (
                 <List.Item
-                    style={{border: "1px solid", padding: "5px"}}
+                    style={{padding: "5px", border: "1px solid"}}
                     key={item.title}
                     actions={[
                         <IconText type="star" text="156" />,

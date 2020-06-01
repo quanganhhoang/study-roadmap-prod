@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from enum import Enum
+
 
 
 # User model
@@ -30,39 +32,17 @@ class LevelCategory(models.IntegerChoices):
     ADVANCE = 2
 
 
-class DisciplineEnum(models.IntegerChoices):
-    ENGINEERING = 0,
-    BUSINESS = 1,
-    FINANCE = 2,
-    SPORTS = 3,
-    LIFE_HACK = 4,
-    CULINARY = 5,
-    ENTREPRENEURSHIP = 6,
-    EDUCATION = 7,
-    HEALTH = 8,
-    OTHER = 9,
-
-
-class Discipline(models.Model):
-    discipline = models.IntegerField(
-        choices=[
-            (DisciplineEnum.ENGINEERING, 'ENGINEERING'),
-            (DisciplineEnum.BUSINESS, 'BUSINESS'),
-            (DisciplineEnum.FINANCE, 'FINANCE'),
-            (DisciplineEnum.SPORTS, 'SPORTS'),
-            (DisciplineEnum.LIFE_HACK, 'LIFE_HACK'),
-            (DisciplineEnum.CULINARY, 'CULINARY'),
-            (DisciplineEnum.ENTREPRENEURSHIP, 'ENTREPRENEURSHIP'),
-            (DisciplineEnum.EDUCATION, 'EDUCATION'),
-            (DisciplineEnum.HEALTH, 'HEALTH'),
-            (DisciplineEnum.OTHER, 'OTHER')
-        ],
-        default=DisciplineEnum.OTHER,
-        unique=True,
-    )
-
-    num_roadmaps = models.IntegerField(default=0)
-    thumbnail = models.CharField(max_length=200, default="")
+class DisciplineEnum(Enum):
+    ENGINEERING = "Engineering"
+    BUSINESS = "Business"
+    FINANCE = "Finance"
+    SPORTS = "Sports"
+    LIFE_HACK = "Life Hack"
+    CULINARY = "Culinary"
+    ENTREPRENEURSHIP = "Entrepreneurship"
+    EDUCATION = "Education"
+    HEALTH = "Health"
+    OTHER = "Other"
 
 
 # Roadmap model
@@ -75,8 +55,9 @@ class Roadmap(models.Model):
         choices=LevelCategory.choices,
         default=LevelCategory.BEGINNER
     )
-    discipline = models.IntegerField(
-        choices=DisciplineEnum.choices,
+    discipline = models.CharField(
+        max_length=50,
+        choices=[(tag.name, tag.value) for tag in DisciplineEnum],
         default=DisciplineEnum.OTHER
     )
     num_shares = models.IntegerField(default=0)
