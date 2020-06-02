@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from 'react-redux';
 
 import RoadmapList from "./RoadmapList";
 
@@ -10,7 +11,6 @@ class RoadmapListView extends Component {
 
 	fetchRoadmapList = () => {
 		axios.get("http://localhost:8000/api/roadmaps/").then(res => {
-            console.log(`roadmaps fetch result: ${res.data.results}`)
 			this.setState({
 			    roadmaps: res.data.results
             });
@@ -22,6 +22,7 @@ class RoadmapListView extends Component {
 	}
 
 	componentWillReceiveProps(newProps) {
+        console.log('RoadmapListView NewProps', newProps)
 		if (newProps.token) {
 			this.fetchRoadmapList();      
 		}
@@ -38,4 +39,11 @@ class RoadmapListView extends Component {
     }
 }
 
-export default RoadmapListView;
+const mapStateToProps = state => {
+    return {
+        token: state.token,
+        username: state.username,
+    };
+  };
+
+export default connect(mapStateToProps)(RoadmapListView);

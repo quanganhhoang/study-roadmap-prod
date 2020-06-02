@@ -25,6 +25,8 @@ class CreateRoadmap extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            username: null,
+            authorId: null,
             roadmapDescription: '',
             // tags
             tags: ['software', 'engineer', 'hobby'],
@@ -38,7 +40,7 @@ class CreateRoadmap extends Component {
             // roadmap
             roadmapTitle: '',
             roadmapDescription: '',
-            roadmapCategory: 9,
+            roadmapCategory: "OTHER",
             roadmapLevel: 0,
             // roadmap
 
@@ -108,8 +110,7 @@ class CreateRoadmap extends Component {
             return {
                 inputValue: e.target.value
             }
-        }
-        );
+        });
     };
 
     // functions for handling tags
@@ -138,7 +139,7 @@ class CreateRoadmap extends Component {
     onChangeRoadmapCategory = (value) => {
         this.setState(() => {
             return {
-                roadmapCategory: CategoryEnum[value]
+                roadmapCategory: value.toUpperCase()
             }
         })
     }
@@ -182,33 +183,70 @@ class CreateRoadmap extends Component {
         })
     }
     // functions for adding roadmap steps
-
+    
     // save and publish roadmap
+    fetchAuthorId = (username) => {
+        axios.get(`http://localhost:8000/api/users/username/${username}/`)
+            .then(res => {
+                this.setState({
+                    authorId: res.data.id
+                });
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
     handleSave = (e) => {
-        e.prenventDefault();
-        // let roadmap_id;
-        console.log(localStorage.getItem('username'))
-        // axios.post('http://localhost:8000/api/roadmaps/', {
-        //     "author": localStorage.getItem('username'),
-        //     "title": this.state.roadmapTitle,
-        //     "description": this.state.roadmapDescription,
-        //     "level": this.state.roadmapLevel,
-        //     "discipline": this.state.roadmapCategory,
-        // }).then(res => {
-        //     console.log(res)
-        // })
+        e.preventDefault();
+        
+        axios.post('http://localhost:8000/api/roadmaps/', {
+            "author": this.state.authorId,
+            "title": this.state.roadmapTitle,
+            "description": this.state.roadmapDescription,
+            "level": this.state.roadmapLevel,
+            "discipline": this.state.roadmapCategory,
+        }).then(res => {
+            const roadmapId = res.data.id
 
-        // for (let i = 0; i < this.state.numMilestones; i++) {
-        //     let milestone = this.state.milestones[i];
+            for (let i = 0; i < this.state.numMilestones; i++) {
+                let milestone = this.state.milestones[i];
+    
+                axios.post('http://localhost:8000/api/roadmapstep/', {
+                    "title": milestone.title,
+                    "link": milestone.link,
+                    "content": milestone.content,
+                    "order_num": milestone.id,
+                    "roadmap_id": roadmapId
+                }).then(res => {
+                    console.log(res)
+                }).catch(err => {
+                    console.log(err)
+                })
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
-        //     axios.post('http://localhost:8000/api/roadmapstep/', {
-        //         "title": milestone.title,
-        //         "link": milestone.link,
-        //         "content": milestone.content,
-        //         "order_num": milestone.id,
-        //         "roadmap_id": roadmap_id 
-        //     })
-        // }
+    componentWillReceiveProps(newProps) {
+        if (newProps.username) {
+            const username = newProps.username
+            this.setState({
+                username: username
+            })
+            this.fetchAuthorId(username)
+        }
+        if (newProps.token) {
+            axios.defaults.headers = {
+                "Content-Type": "application/json",
+                "Authorization": newProps.token
+            }
+        }
+    }
+
+    componentDidMount() {
+        
     }
 
     render() {
@@ -423,7 +461,8 @@ class CreateRoadmap extends Component {
 
 const mapStateToProps = state => {
     return {
-        
+        token: state.token,
+        username: state.username
     };
 };
 

@@ -4,6 +4,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.decorators import api_view, action
 from rest_framework.reverse import reverse
+from django.shortcuts import get_object_or_404
 
 # from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,6 +22,12 @@ class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = UserSerializer
+
+    @action(methods=['get'], detail=False, url_path='username/(?P<username>\w+)')
+    def getUserByUsername(self, request, username):
+        user = get_object_or_404(User, username=username)
+        serializer = self.get_serializer_class()(user, many=False)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
@@ -57,7 +64,6 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     def get_disciplines(self, request):
         disciplines = self.get_queryset().order_by().values_list('discipline').distinct()
         
-
         return JsonResponse({'data': list(disciplines)})
 
 

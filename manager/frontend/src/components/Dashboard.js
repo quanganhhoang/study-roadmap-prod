@@ -62,11 +62,12 @@ class Dashboard extends Component {
         this.fetchMostPopularRoadmaps();
 	}
 
-	// componentWillReceiveProps(newProps) {
-	// 	if (newProps.token) {
-	// 		this.fetchRoadmapList();      
-	// 	}
-    // }
+	componentWillReceiveProps(newProps) {
+        console.log('Dashboard NewProps', newProps)
+		// if (newProps.token) {
+		// 	this.fetchRoadmapList();      
+		// }
+    }
     
     render() {
         const disciplines = [];
@@ -124,8 +125,10 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log('Dashboard state', state)
     return {
-        
+        token: state.token,
+        username: state.username,
     };
   };
 

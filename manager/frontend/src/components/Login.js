@@ -77,9 +77,11 @@ class NormalLoginForm extends React.Component {
 const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 const mapStateToProps = (state) => {
+    console.log('Login State', state)
     return {
         loading: state.loading,
-        error: state.error
+        error: state.error,
+        username: state.username
     }
 }
 
