@@ -52,7 +52,7 @@ const RoadmapList = props => {
         >
           <List.Item.Meta
             // avatar={<Avatar src={item.avatar} />}
-            title={<a href={`/RoadmapList/${item.id}/`}> {item.title} </a>}
+            title={<a href={`/roadmaps/${item.id}/`}> {item.title} </a>}
             // description={item.description}
             description="FAKE DESCRIPTION"
           />
