@@ -6,43 +6,29 @@ import RoadmapList from "./RoadmapList";
 
 class RoadmapListView extends Component {
 	state = {
-        roadmaps: [],
-        user_id: null,  
+        roadmaps: [],  
     };
 
-    fetchAuthorId = (username) => {
-        axios.get(`http://localhost:8000/api/users/username/${username}/`)
-            .then(res => {
-                this.setState({
-                    user_id: res.data.id
-                });
-            })
-            .catch(err => {
-                console.log(err)
-            })
+    fetchAuthorId = async (username) => {
+        return axios.get(`http://localhost:8000/api/users/username/${username}/`)
     }
 
-	fetchRoadmapList = () => {
-		axios.get(`http://localhost:8000/api/users/${this.state.user_id}/roadmaps/`).then(res => {
-			this.setState({
-			    roadmaps: res.data.results
-            });
-		});
+	fetchRoadmapList = (username) => {
+        this.fetchAuthorId(username)
+            .then(res => {
+                axios.get(`http://localhost:8000/api/users/${res.data.id}/roadmaps/`).then(res => {
+                    this.setState({
+                        roadmaps: res.data.results
+                    });
+                });
+            })
 	}
 
 	componentDidMount() {
-		
-	}
-
-	componentWillReceiveProps(newProps) {
-        console.log('RoadmapListView NewProps', newProps)
-        if (newProps.username) {
-            const username = newProps.username
-            this.setState({
-                username: username
-            })
-            this.fetchAuthorId(username)
-        }
+        // console.log('store token:', this.props.token)
+        // console.log('store username:', this.props.username)
+        // console.log('store username:', localStorage.getItem('username'))
+        this.fetchRoadmapList(localStorage.getItem('username'))
 	}
 
 	render() {
@@ -63,4 +49,4 @@ const mapStateToProps = state => {
     };
   };
 
-export default connect(mapStateToProps)(RoadmapListView);
+export default connect(mapStateToProps, null)(RoadmapListView);

@@ -38,9 +38,9 @@ const RoadmapList = props => {
         <List.Item
           key={item.title}
           actions={[
-            <IconText type="star" text="156" />,
-            <IconText type="like" text="156" />,
-            <IconText type="comment" text="2" />
+            <IconText type="star" text={item.num_shares} />,
+            <IconText type="like" text={item.num_votes} />,
+            <IconText type="comment" text={item.num_shares} />
           ]}
           extra={
             <img
@@ -54,7 +54,7 @@ const RoadmapList = props => {
             // avatar={<Avatar src={item.avatar} />}
             title={<a href={`/roadmaps/${item.id}/`}> {item.title} </a>}
             // description={item.description}
-            description="FAKE DESCRIPTION"
+            description={item.description}
           />
           {item.content}
         </List.Item>
