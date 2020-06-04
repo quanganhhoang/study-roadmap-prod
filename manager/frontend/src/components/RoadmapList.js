@@ -1,5 +1,5 @@
 import React from "react";
-import { List } from "antd";
+import { List, Avatar } from "antd";
 import { StarOutlined, LikeOutlined, CommentOutlined } from '@ant-design/icons' 
 
 const IconComponent = (type) => {
@@ -23,44 +23,43 @@ const IconText = ({ type, text }) => (
 );
 
 const RoadmapList = props => {
-  return (
-    <List
-      itemLayout="vertical"
-      size="large"
-      pagination={{
-        onChange: page => {
-          console.log(page);
-        },
-        pageSize: 3
-      }}
-      dataSource={props.data}
-      renderItem={item => (
-        <List.Item
-          key={item.title}
-          actions={[
-            <IconText type="star" text={item.num_shares} />,
-            <IconText type="like" text={item.num_votes} />,
-            <IconText type="comment" text={item.num_shares} />
-          ]}
-          extra={
-            <img
-              width={272}
-              alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-            />
-          }
-        >
-          <List.Item.Meta
-            // avatar={<Avatar src={item.avatar} />}
-            title={<a href={`/roadmaps/${item.id}/`}> {item.title} </a>}
-            // description={item.description}
-            description={item.description}
-          />
-          {item.content}
-        </List.Item>
-      )}
-    />
-  );
+    return (
+        <List
+            itemLayout="vertical"
+            size="large"
+            pagination={{
+                onChange: page => {
+                    console.log(page);
+                },
+                pageSize: 5
+            }}
+            dataSource={props.data}
+            renderItem={item => (
+                <List.Item
+                    key={item.title}
+                    actions={[
+                        <IconText type="star" text={item.num_shares} />,
+                        <IconText type="like" text={item.num_votes} />,
+                        <IconText type="comment" text={item.num_shares} />
+                    ]}
+                    extra={
+                        <img
+                            width={272}
+                            alt="logo"
+                            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                        />
+                    }
+                >
+                    <List.Item.Meta
+                        // avatar={<Avatar src={item.avatar} />}
+                        title={<a href={`/roadmaps/${item.id}/`}> {item.title} </a>}
+                        description={item.author}
+                    />
+                    {item.description}
+                </List.Item>
+            )}
+        />
+    );
 };
 
 export default RoadmapList;
