@@ -63,12 +63,13 @@ class Roadmap(models.Model):
     num_shares = models.IntegerField(default=0)
     num_views = models.IntegerField(default=0)
     num_votes = models.IntegerField(default=0)
+    num_milestones = models.IntegerField(default=0)
     thumbnail = models.CharField(max_length=200, default="")
     description = models.TextField()
 
 
 # Each step of a roadmap
-class RoadmapStep(models.Model):
+class Milestone(models.Model):
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     link = models.CharField(max_length=200, default="")

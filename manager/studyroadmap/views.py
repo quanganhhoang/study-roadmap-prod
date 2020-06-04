@@ -67,12 +67,12 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
         return JsonResponse({'data': list(disciplines)})
 
 
-class RoadmapStepViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
-    queryset = RoadmapStep.objects.all()
+class MilestoneViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = Milestone.objects.all()
     permission_classes = [
         permissions.AllowAny
     ]
-    serializer_class = RoadmapStepSerializer
+    serializer_class = MilestoneSerializer
 
 
 ### Iteration 4 ###

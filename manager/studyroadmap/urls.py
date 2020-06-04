@@ -18,7 +18,7 @@ router = NestedDefaultRouter()
 
 users_router = router.register('api/users', views.UserViewSet, 'user')
 roadmaps_router = router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
-router.register('api/roadmapstep', views.RoadmapStepViewSet, 'step')
+router.register('api/milestones', views.MilestoneViewSet, 'milestone')
 router.register('api/userprofile', views.CustomProfileViewSet, 'profile')
 
 # retrieve roadmaps followed by a user
@@ -29,11 +29,11 @@ users_router.register(
     parents_query_lookups=['author_id']
 )
 
-# retrieve steps in a roadmap
+# retrieve milestones in a roadmap
 roadmaps_router.register(
-    prefix="steps",
-    viewset=views.RoadmapStepViewSet,
-    basename="roadmap-steps",
+    prefix="milestones",
+    viewset=views.MilestoneViewSet,
+    basename="roadmap-milestones",
     parents_query_lookups=['roadmap_id']
 )
 

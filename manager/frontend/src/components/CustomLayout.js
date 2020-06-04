@@ -42,7 +42,7 @@ class CustomLayout extends Component {
                                     {    
                                     this.props.isAuthenticated ?
                                     <React.Fragment>
-                                        <Button className="nav-btn">My Roadmaps</Button>
+                                        <Button className="nav-btn" href="/roadmaps">My Roadmaps</Button>
                                         <Button className="nav-btn" onClick={this.props.logout} type="primary">Logout</Button>
                                     </React.Fragment>
                         

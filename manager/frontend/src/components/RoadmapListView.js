@@ -6,11 +6,24 @@ import RoadmapList from "./RoadmapList";
 
 class RoadmapListView extends Component {
 	state = {
-		roadmaps: []
-	};
+        roadmaps: [],
+        user_id: null,  
+    };
+
+    fetchAuthorId = (username) => {
+        axios.get(`http://localhost:8000/api/users/username/${username}/`)
+            .then(res => {
+                this.setState({
+                    user_id: res.data.id
+                });
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
 	fetchRoadmapList = () => {
-		axios.get("http://localhost:8000/api/roadmaps/").then(res => {
+		axios.get(`http://localhost:8000/api/users/${this.state.user_id}/roadmaps/`).then(res => {
 			this.setState({
 			    roadmaps: res.data.results
             });
@@ -18,14 +31,18 @@ class RoadmapListView extends Component {
 	}
 
 	componentDidMount() {
-		this.fetchRoadmapList();
+		
 	}
 
 	componentWillReceiveProps(newProps) {
         console.log('RoadmapListView NewProps', newProps)
-		if (newProps.token) {
-			this.fetchRoadmapList();      
-		}
+        if (newProps.username) {
+            const username = newProps.username
+            this.setState({
+                username: username
+            })
+            this.fetchAuthorId(username)
+        }
 	}
 
 	render() {
