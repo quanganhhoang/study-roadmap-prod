@@ -258,3 +258,52 @@ h3 {
 #add-new-milestone-btn {
     margin-bottom: 20px;
 }
+
+// Styling milestones in roadmap
+@border-color: rgba(black, .3);
+
+.timeline-item {
+	padding: 10px;
+	position: relative;
+	color: rgba(black, .7);
+	border-left: 2px solid @border-color;
+	
+	p {
+		font-size: 1rem;
+	}
+	
+	&::before {
+		// content: attr(date-is);
+		position: absolute;
+		left: 2em;
+		font-weight: bold;
+		top: 1em;
+		display: block;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 700;
+		font-size: .785rem;
+	}
+
+	&::after {
+		width: 10px;
+		height: 10px;
+		display: block;
+		top: 1em;
+		position: absolute;
+		left: -7px;
+		border-radius: 10px;
+		content: '';
+		border: 2px solid @border-color;
+		background: white;
+	}
+
+	&:last-child {
+		border-image: linear-gradient(
+			to bottom,
+			rgba(black, .3) 60%,
+			rgba(rgba(black, .3), 0)) 1 100%
+		;
+	}
+}
+
+// Styling milestones in roadmap
