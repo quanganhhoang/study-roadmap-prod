@@ -200,6 +200,7 @@ class CreateRoadmap extends Component {
     handleSave = (e) => {
         e.preventDefault();
         
+        // TODO(qahoang): rollback transaction if anything fails here
         axios.post('http://localhost:8000/api/roadmaps/', {
             "author": this.state.authorId,
             "title": this.state.roadmapTitle,
@@ -212,7 +213,7 @@ class CreateRoadmap extends Component {
             for (let i = 0; i < this.state.numMilestones; i++) {
                 let milestone = this.state.milestones[i];
     
-                axios.post('http://localhost:8000/api/roadmapstep/', {
+                axios.post('http://localhost:8000/api/milestones/', {
                     "title": milestone.title,
                     "link": milestone.link,
                     "content": milestone.content,
@@ -224,6 +225,7 @@ class CreateRoadmap extends Component {
                     console.log(err)
                 })
             }
+            this.props.history.push('/roadmaps');
         }).catch(err => {
             console.log(err)
         })
@@ -258,15 +260,15 @@ class CreateRoadmap extends Component {
                 <div className="container-fluid" key={i}>
                     <Row>
                         <Col span={16}>
-                            <Row className="roadmapstep-card">
+                            <Row className="milestone-card">
                                 <Col span={2}>
-                                    <h4 className="roadmapstep-id">
+                                    <h4 className="milestone-id">
                                         {this.state.milestones[i].id}
                                     </h4>
                                 </Col>
                                 <Col span={22}>
                                     <Input
-                                        className="roadmapstep-title"
+                                        className="milestone-title"
                                         placeholder="Title"
                                         onChange={(e) => {
                                             this.state.milestones[i].title = e.target.value
@@ -280,7 +282,7 @@ class CreateRoadmap extends Component {
                                         }}/>
                                     </div> */}
                                     <TextArea
-                                        className="roadmapstep-content"
+                                        className="milestone-content"
                                         value={this.state.milestones[i].content}
                                         onChange={(e) => {
                                             this.onChangeMilestoneContent(e, i)
@@ -290,7 +292,7 @@ class CreateRoadmap extends Component {
                                         autoSize={{ minRows: 3, maxRows: 5 }}
                                     />
                                     <Input
-                                        className="roadmapstep-link"
+                                        className="milestone-link"
                                         placeholder="Link"
                                         onChange={(e) => {
                                             this.state.milestones[i].link = e.target.value
@@ -306,7 +308,7 @@ class CreateRoadmap extends Component {
         }
 
         let levelOptions = []
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 3; i++) {
             levelOptions.push(
                 <Option key={i} value={i}>{i}</Option>
             )

@@ -10,8 +10,8 @@ from allauth.account.utils import setup_user_email
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'id')
-        # fields = '__all__'
+        # fields = ('username', 'email', 'id')
+        fields = '__all__'
 
 
 class CustomProfileSerializer(serializers.ModelSerializer):

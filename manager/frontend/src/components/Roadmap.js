@@ -7,7 +7,8 @@ import { Button, Card } from "antd";
 
 class Roadmap extends Component {
     state = {
-        roadmap: {}
+        roadmap: {},
+        milestones: [],
     };
 
     componentDidMount() {
@@ -15,9 +16,17 @@ class Roadmap extends Component {
         const roadmapId = this.props.match.params.roadmapId;
         axios.get(`http://localhost:8000/api/roadmaps/${roadmapId}/`).then(res => {
             this.setState({
-            roadmap: res.data
+                roadmap: res.data
             });
         });
+
+        axios.get(`http://localhost:8000/api/roadmaps/${roadmapId}/milestones/`)
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    milestones: res.data
+                })
+            })
     }
 
     handleDelete = event => {

@@ -116,12 +116,12 @@ WSGI_APPLICATION = 'manager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'studyroadmaps',
         'USER': "qa",
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
-        'URI': 'postgres://qa@localhost:5432/postgres',
+        'URI': 'postgres://qa@localhost:5432/studyroadmaps',
     }
 }
 
