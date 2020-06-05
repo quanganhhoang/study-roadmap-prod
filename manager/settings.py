@@ -101,29 +101,29 @@ WSGI_APPLICATION = 'manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'ddkuci9u7ieme5',
-#         'USER': 'swityourapljnb',
-#         'PASSWORD': '7e8bf48211c8a73685be7c76f85d9074b33bad99bbfd7591d4e900508b7c89ed',
-#         'HOST': 'ec2-18-235-20-228.compute-1.amazonaws.com',
-#         'PORT': '5432',
-#         'URI': 'postgres://swityourapljnb:7e8bf48211c8a73685be7c76f85d9074b33bad99bbfd7591d4e900508b7c89ed@ec2-18-235-20-228.compute-1.amazonaws.com:5432/ddkuci9u7ieme5',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'studyroadmaps',
-        'USER': "qa",
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'ddkuci9u7ieme5',
+        'USER': 'swityourapljnb',
+        'PASSWORD': '7e8bf48211c8a73685be7c76f85d9074b33bad99bbfd7591d4e900508b7c89ed',
+        'HOST': 'ec2-18-235-20-228.compute-1.amazonaws.com',
         'PORT': '5432',
-        'URI': 'postgres://qa@localhost:5432/studyroadmaps',
+        'URI': 'postgres://swityourapljnb:7e8bf48211c8a73685be7c76f85d9074b33bad99bbfd7591d4e900508b7c89ed@ec2-18-235-20-228.compute-1.amazonaws.com:5432/ddkuci9u7ieme5',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'studyroadmaps',
+#         'USER': "qa",
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#         'URI': 'postgres://qa@localhost:5432/studyroadmaps',
+#     }
+# }
 
 
 # Password validation
