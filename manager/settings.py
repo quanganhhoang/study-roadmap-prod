@@ -25,7 +25,7 @@ SECRET_KEY = '9=#@pkjcwswp-8h@^0(*dn&m+x)-eii9%5fqide7iq-e4sizc#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['studyroadmap.herokuapp.com']
 
 
 # Application definition
@@ -163,11 +163,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static'),
+]
 
-STATIC_FILES_URL = (
-  os.path.join(BASE_DIR, 'assets'),
-  os.path.join(BASE_DIR, 'resources'),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# STATIC_FILES_URL = (
+#   os.path.join(BASE_DIR, 'assets'),
+#   os.path.join(BASE_DIR, 'resources'),
+# )
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
