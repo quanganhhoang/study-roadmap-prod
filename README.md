@@ -12,25 +12,49 @@ These instructions will get you a copy of the project up and running on your loc
 What you need to install and how to install them
 
 1. [NPM](#)
-  ```
+    ```
     brew install npm
-  ```
+    ```
 
 2. Install npm modules in server and client directory
     
-  ```
+    ```
     rm -rf node_modules/
     npm install
-  ``` 
+    ``` 
 
-### Local Dev
+3. Create a virtual python environment and install everything in requirements.txt
 
-  ```
-      npm run dev
-      cd manager
-      python manage.py runserver
-  ```
+    ```
+    virtualenv env
+    pip install -r requirements.txt
+
+    ```
+
+4. [Postgres](#)
+    ```
     
+
+    ```
+
+### How to start dev server
+
+    
+    ```
+
+    ```
+
+    ```
+        cd manager
+        python manage.py 
+    ```
+
+    ```
+        npm run dev
+        cd manager
+        python manage.py runserver
+    ```
+
 
 ## Deployment on Heroku
 

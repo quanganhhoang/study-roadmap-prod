@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from enum import Enum
 
 
-
 # User model
 class CustomProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
