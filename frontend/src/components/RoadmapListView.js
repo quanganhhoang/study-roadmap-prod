@@ -6,7 +6,7 @@ import { Button, Row } from 'antd';
 
 import RoadmapList from "./RoadmapList";
 
-const BASE_URL = 'http://localhost:8000/'
+const BASE_URL = 'https://studyroadmap.herokuapp.com/'
 
 class RoadmapListView extends Component {
 	state = {

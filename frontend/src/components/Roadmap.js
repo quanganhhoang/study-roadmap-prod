@@ -5,7 +5,7 @@ import { Row, Col, Button, Card, Avatar, Divider } from "antd";
 // import CustomForm from "./Form";
 const { Meta } = Card;
 
-const BASE_URL = 'http://localhost:8000/'
+const BASE_URL = 'https://studyroadmap.herokuapp.com/'
 
 class Roadmap extends Component {
     state = {

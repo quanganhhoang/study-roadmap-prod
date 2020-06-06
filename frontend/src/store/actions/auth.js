@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
+const BASE_URL = 'https://studyroadmap.herokuapp.com/'
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
@@ -43,7 +44,7 @@ export const checkAuthTimeout = expirationTime => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart())
-        axios.post('http://localhost:8000/rest-auth/login/', {
+        axios.post(`${BASE_URL}rest-auth/login/`, {
             username: username,
             password: password
         })
@@ -68,7 +69,7 @@ export const authLogin = (username, password) => {
 export const authSignup = (username, email, password, passwordConfirmed) => {
   return dispatch => {
     dispatch(authStart())
-    axios.post('http://localhost:8000/rest-auth/registration/', {
+    axios.post(`${BASE_URL}rest-auth/registration/`, {
       username: username,
       email: email,
       password1: password,
