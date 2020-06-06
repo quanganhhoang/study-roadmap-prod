@@ -25,7 +25,7 @@ SECRET_KEY = '9=#@pkjcwswp-8h@^0(*dn&m+x)-eii9%5fqide7iq-e4sizc#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['studyroadmap.herokuapp.com']
+ALLOWED_HOSTS = ['studyroadmap.herokuapp.com', 'localhost:5000', 'localhost:8000', 'localhost']
 
 
 # Application definition
