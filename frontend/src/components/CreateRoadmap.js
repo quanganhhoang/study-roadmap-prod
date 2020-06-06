@@ -21,6 +21,8 @@ const CategoryEnum = {
     "Other": 9
 }
 
+const BASE_URL = 'https://studyroadmap.herokuapp.com/'
+
 class CreateRoadmap extends Component {
     constructor(props) {
         super(props)
@@ -186,7 +188,7 @@ class CreateRoadmap extends Component {
     
     // save and publish roadmap
     fetchAuthorId = (username) => {
-        axios.get(`http://localhost:8000/api/users/username/${username}/`)
+        axios.get(`${BASE_URL}api/users/username/${username}/`)
             .then(res => {
                 this.setState({
                     authorId: res.data.id
@@ -201,7 +203,7 @@ class CreateRoadmap extends Component {
         e.preventDefault();
         
         // TODO(qahoang): rollback transaction if anything fails here
-        axios.post('http://localhost:8000/api/roadmaps/', {
+        axios.post(`${BASE_URL}api/roadmaps/`, {
             "author": this.state.authorId,
             "title": this.state.roadmapTitle,
             "description": this.state.roadmapDescription,
@@ -213,7 +215,7 @@ class CreateRoadmap extends Component {
             for (let i = 0; i < this.state.numMilestones; i++) {
                 let milestone = this.state.milestones[i];
     
-                axios.post('http://localhost:8000/api/milestones/', {
+                axios.post(`${BASE_URL}api/milestones/`, {
                     "title": milestone.title,
                     "link": milestone.link,
                     "content": milestone.content,

@@ -6,19 +6,21 @@ import { Button, Row } from 'antd';
 
 import RoadmapList from "./RoadmapList";
 
+const BASE_URL = 'http://localhost:8000/'
+
 class RoadmapListView extends Component {
 	state = {
         roadmaps: [],  
     };
 
     fetchAuthorId = async (username) => {
-        return axios.get(`http://localhost:8000/api/users/username/${username}/`)
+        return axios.get(`${BASE_URL}api/users/username/${username}/`)
     }
 
 	fetchCreatedRoadmapsByUser = (username) => {
         this.fetchAuthorId(username)
             .then(res => {
-                axios.get(`http://localhost:8000/api/users/${res.data.id}/roadmaps/`).then(res => {
+                axios.get(`${BASE_URL}api/users/${res.data.id}/roadmaps/`).then(res => {
                     this.setState({
                         roadmaps: res.data.results
                     });
