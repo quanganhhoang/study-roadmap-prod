@@ -1,7 +1,9 @@
 # studyroadmap
 A web app to post/upvote/downvote on study roadmaps for any disciplines or hobbies.
 
-Technology stack: Django, React
+Technology stack: Django, Django Rest Framework & React
+
+Sneak peek: https://studyroadmap.herokuapp.com/
 
 ## Getting Started
 
@@ -32,46 +34,63 @@ What you need to install and how to install them
     ```
 
 4. [Postgres](#)
-    ```
-    
+
+    Make sure you have a postgres server running locally for dev environment:
 
     ```
+    brew install postgresql
+    ```
+
 
 ### How to start dev server
 
+Start postgres server
+
+    pg_ctl -D /usr/local/var/postgres start
     
-    ```
 
-    ```
-
-    ```
-        cd manager
-        python manage.py 
-    ```
-
-    ```
-        npm run dev
-        cd manager
-        python manage.py runserver
-    ```
+Migrate DB to postgres
+    
+    python manage.py makemigrations
+    python manage.py migrate
 
 
-## Deployment on Heroku
+Start our back-end server
+    
+    python manage.py runserver
+    
 
+Start our front-end server
+    
+    npm run dev
+    
 
-## Built With
-- Django REST framework, Flask, React
 
 ## TODO:
+- ~~Deploy to Heroku~~
+- ~~Update API documentation~~
+- Implement Roadmap Component
+- Implement MyRoadmap Component
+- Implement search functionality
 - Implement a recommender system
 
 
 ## Contributing
 
-Please read [CONTRIBUTING.md]() for details on our code of conduct, and the process for submitting pull requests to us.
+- Unit & integration testing
+- Load testing
+- Mobile responsive design
+
+
+## Deployment on Heroku
+
+
+## Docker Containerization
+
+
 
 ## Versioning
- 
+
 
 ## Authors
 
@@ -80,6 +99,7 @@ Please read [CONTRIBUTING.md]() for details on our code of conduct, and the proc
 * **Hien Le**
 * **Dean Tan**
 * **Hang Nguyen**
+* **Che Nhat Vy**
 
 See also the list of [contributors]() who participated in this project.
 
