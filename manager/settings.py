@@ -25,7 +25,7 @@ SECRET_KEY = '9=#@pkjcwswp-8h@^0(*dn&m+x)-eii9%5fqide7iq-e4sizc#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['studyroadmap.herokuapp.com']
+ALLOWED_HOSTS = ['studyroadmap.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -82,7 +82,7 @@ ROOT_URLCONF = 'manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
