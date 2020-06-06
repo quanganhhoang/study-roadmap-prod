@@ -5,6 +5,8 @@ Technology stack: Django, Django Rest Framework & React
 
 Sneak peek: https://studyroadmap.herokuapp.com/
 
+Youtube:
+
 [![App Walkthrough](https://img.youtube.com/vi/qOQQJRNF9P4/0.jpg)](https://youtu.be/qOQQJRNF9P4)
 
 ## Getting Started
