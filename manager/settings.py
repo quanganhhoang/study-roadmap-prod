@@ -177,7 +177,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # You don't generally see this error in development because when DEBUG == True, ManifestStaticFilesStorage switches to non-hashed urls.
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # ====== Fix for deploying to heroku ======
 
