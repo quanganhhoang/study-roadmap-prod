@@ -88,6 +88,34 @@ Start our front-end server
 
 ## Deployment on Heroku
 
+[WhiteNoise](http://whitenoise.evans.io/en/stable/)
+
+> WhiteNoise allows web app to serve its own static files, making it a self-contained unit 
+    that can be dployed anywhere without relying on nginx, Amazon S3 or any other external service. (Especially useful on Heroku, OpenShift and other PaaS providers.)
+
+Follow WhiteNoise documentation to get it working before we deploy to heroku.
+
+Create Heroku app
+
+    heroku create <name_of_your_app>
+
+Add git remote for Heroku to local repository
+
+    git remote add heroku <heroku_git_url>
+
+Add postgresql add on for your database
+
+    heroku addons:create heroku-postgresql:hobby-dev --app <name_of_your_application>
+
+Check configuration
+
+    heroku config --app <name_of_your_application>
+
+Push it!
+
+    git push heroku master
+
+
 
 ## Docker Containerization
 
