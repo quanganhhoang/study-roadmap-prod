@@ -19,7 +19,7 @@ from .serializers import *
 class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = UserSerializer
 
@@ -33,7 +33,7 @@ class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = CustomProfile.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = CustomProfileSerializer
 
@@ -42,7 +42,7 @@ class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Roadmap.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = RoadmapSerializer
 
@@ -70,7 +70,7 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 class MilestoneViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Milestone.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = MilestoneSerializer
 

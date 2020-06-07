@@ -11,11 +11,11 @@ from . import views
 
 # routers.DefaultRouter exposes API view
 # use routers.SimpleRouter to hide this
-class NestedDefaultRouter(NestedRouterMixin, routers.SimpleRouter):
+class NestedSimpleRouter(NestedRouterMixin, routers.SimpleRouter):
     pass
 
 
-router = NestedDefaultRouter()
+router = NestedSimpleRouter()
 
 users_router = router.register('api/users', views.UserViewSet, 'user')
 roadmaps_router = router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
