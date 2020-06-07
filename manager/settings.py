@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9=#@pkjcwswp-8h@^0(*dn&m+x)-eii9%5fqide7iq-e4sizc#'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['studyroadmap.herokuapp.com', 'localhost:5000', 'localhost:8000', 'localhost']
 
@@ -69,7 +70,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-      'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -105,12 +106,12 @@ WSGI_APPLICATION = 'manager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8f2ov3pgakgo0',
-        'USER': 'mbwzbiututhiwj',
-        'PASSWORD': '4e046bcf273b109cb5fd4c4dde841b574e5faf58b88280a236c2fc6b14bb6eb7',
-        'HOST': 'ec2-35-169-254-43.compute-1.amazonaws.com',
-        'PORT': '5432',
-        'URI': 'postgres://mbwzbiututhiwj:4e046bcf273b109cb5fd4c4dde841b574e5faf58b88280a236c2fc6b14bb6eb7@ec2-35-169-254-43.compute-1.amazonaws.com:5432/d8f2ov3pgakgo0',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', cast=int),
+        'URI': config('DB_URI')
     }
 }
 
