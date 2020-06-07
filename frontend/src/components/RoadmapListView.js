@@ -6,7 +6,6 @@ import { Button, Row } from 'antd';
 
 import RoadmapList from "./RoadmapList";
 
-const BASE_URL = 'https://studyroadmap.herokuapp.com/'
 
 class RoadmapListView extends Component {
 	state = {
@@ -14,13 +13,13 @@ class RoadmapListView extends Component {
     };
 
     fetchAuthorId = async (username) => {
-        return axios.get(`${BASE_URL}api/users/username/${username}/`)
+        return axios.get(`api/users/username/${username}/`)
     }
 
 	fetchCreatedRoadmapsByUser = (username) => {
         this.fetchAuthorId(username)
             .then(res => {
-                axios.get(`${BASE_URL}api/users/${res.data.id}/roadmaps/`).then(res => {
+                axios.get(`api/users/${res.data.id}/roadmaps/`).then(res => {
                     this.setState({
                         roadmaps: res.data.results
                     });

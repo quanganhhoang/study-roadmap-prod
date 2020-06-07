@@ -8,7 +8,6 @@ import DisciplineCard from './DisciplineCard';
 import DashboardRoadmapList from './DashboardRoadmapList';
 
 const NUM_DISCIPLINES_TO_SHOW = 4;
-const BASE_URL = 'https://studyroadmap.herokuapp.com/'
 
 class Dashboard extends Component {
     state = {
@@ -20,7 +19,7 @@ class Dashboard extends Component {
     };
     
     fetchUserExistingRoadmaps = () => {
-        const url = `${BASE_URL}api/users/${this.state.user_id}/roadmaps/`
+        const url = `api/users/${this.state.user_id}/roadmaps/`
         axios.get(url).then(res => {
 			this.setState({
 			    userExistingRoadmaps: res.data.results
@@ -29,7 +28,7 @@ class Dashboard extends Component {
     }
 
     fetchExistingDisciplines = () => {
-        axios.get(`${BASE_URL}api/roadmaps/disciplines/`).then(res => {
+        axios.get('api/roadmaps/disciplines/').then(res => {
 			this.setState({
 			    existingDisciplines: res.data
             });
@@ -38,7 +37,7 @@ class Dashboard extends Component {
 
     // TODO(qahoang)
     fetchHighestRatedRoadmaps = () => {
-        const url = `${BASE_URL}api/roadmaps/highest-rated/`
+        const url = 'api/roadmaps/highest-rated/'
         axios.get(url).then(res => {
 			this.setState({
 			    highestRatedRoadmaps: res.data
@@ -48,7 +47,7 @@ class Dashboard extends Component {
 
     // TODO(qahoang)
     fetchMostPopularRoadmaps = () => {
-        const url = `${BASE_URL}api/roadmaps/most-popular/`
+        const url = 'api/roadmaps/most-popular/'
         axios.get(url).then(res => {
 			this.setState({
 			    mostPopularRoadmaps: res.data
