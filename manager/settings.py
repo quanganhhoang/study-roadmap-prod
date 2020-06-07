@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['studyroadmap.herokuapp.com', 'localhost:5000', 'localhost:8000', 'localhost']
 
@@ -170,7 +170,16 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# ====== Fix for deploying to heroku ======
+# 500 Server Error possibly due to ManifestStaticFilesStorage expecting staticfiles.json to exist and containing the file asked. 
+# confirm this by running ./manage.py collectstatic and trying again.
+# You don't generally see this error in development because when DEBUG == True, ManifestStaticFilesStorage switches to non-hashed urls.
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# ====== Fix for deploying to heroku ======
 
 # STATIC_FILES_URL = (
 #   os.path.join(BASE_DIR, 'assets'),
