@@ -9,8 +9,9 @@ from rest_framework_extensions.routers import NestedRouterMixin
 
 from . import views
 
-
-class NestedDefaultRouter(NestedRouterMixin, routers.DefaultRouter):
+# routers.DefaultRouter exposes API view
+# use routers.SimpleRouter to hide this
+class NestedDefaultRouter(NestedRouterMixin, routers.SimpleRouter):
     pass
 
 
