@@ -1,5 +1,10 @@
 module.exports = {
     entry: ['babel-polyfill', './manager/frontend/src/static/frontend/main.js'],
+    output: {
+        path: path.join(__dirname, 'public'),
+        filename: 'main.js',
+        publicPath: '/'
+    },
     module: {
         rules: [
             {
