@@ -1,7 +1,9 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-const BASE_URL = 'https://studyroadmap.herokuapp.com/'
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
@@ -44,7 +46,7 @@ export const checkAuthTimeout = expirationTime => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart())
-        axios.post(`${BASE_URL}rest-auth/login/`, {
+        axios.post('rest-auth/login/', {
             username: username,
             password: password
         })
@@ -61,6 +63,7 @@ export const authLogin = (username, password) => {
             dispatch(checkAuthTimeout(3600))
         })
         .catch(err => {
+            console.log(err)
             dispatch(authFail(err))
         })
     }
@@ -69,7 +72,7 @@ export const authLogin = (username, password) => {
 export const authSignup = (username, email, password, passwordConfirmed) => {
   return dispatch => {
     dispatch(authStart())
-    axios.post(`${BASE_URL}rest-auth/registration/`, {
+    axios.post('rest-auth/registration/', {
       username: username,
       email: email,
       password1: password,

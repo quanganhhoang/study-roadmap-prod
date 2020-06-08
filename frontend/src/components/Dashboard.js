@@ -11,26 +11,34 @@ const NUM_DISCIPLINES_TO_SHOW = 4;
 
 
 class Dashboard extends Component {
-    state = {
-        user_id: 1,
-        userExistingRoadmaps: [],
-        existingDisciplines: [],
-        highestRatedRoadmaps: [],
-        mostPopularRoadmaps: [],
-    };
-
-    
-    fetchUserExistingRoadmaps = (token) => {
-        const url = `api/users/${this.state.user_id}/roadmaps/`
-        axios.get(url).then(res => {
-            console.log('fetch user roadmaps', res)
-			this.setState({
-			    userExistingRoadmaps: res.data.results
-            });
-		});
+    constructor(props) {
+        super(props)
+        this.state = {
+            user_id: null,
+            userExistingRoadmaps: [],
+            existingDisciplines: [],
+            highestRatedRoadmaps: [],
+            mostPopularRoadmaps: [],
+        };
     }
 
-    fetchExistingDisciplines = (token) => {
+
+    fetchAuthorId = async (username) => {
+        return axios.get(`api/users/username/${username}/`)
+    }
+
+	fetchCreatedRoadmapsByUser = (username) => {
+        this.fetchAuthorId(username)
+            .then(res => {
+                axios.get(`api/users/${res.data.id}/roadmaps/`).then(res => {
+                    this.setState({
+                        userExistingRoadmaps: res.data.results
+                    });
+                });
+            })
+    }
+
+    fetchExistingDisciplines = () => {
         const url = `api/roadmaps/disciplines/`
         axios.get(url).then(res => {
             console.log(res)
@@ -41,7 +49,7 @@ class Dashboard extends Component {
     }
 
     // TODO(qahoang)
-    fetchHighestRatedRoadmaps = (token) => {
+    fetchHighestRatedRoadmaps = () => {
         const url = 'api/roadmaps/highest-rated/'
         axios.get(url).then(res => {
 			this.setState({
@@ -51,7 +59,7 @@ class Dashboard extends Component {
     }
 
     // TODO(qahoang)
-    fetchMostPopularRoadmaps = (token) => {
+    fetchMostPopularRoadmaps = () => {
         const url = 'api/roadmaps/most-popular/'
         axios.get(url).then(res => {
                 this.setState({
@@ -62,16 +70,20 @@ class Dashboard extends Component {
 
     configureAxios = () => {
         const token = localStorage.getItem('token')
+        axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+        axios.defaults.xsrfCookieName = "csrftoken";
         axios.defaults.headers = {
-            Authorization: `Token ${token}`
-        }
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+        };
     }
+
     componentWillMount() {
         this.configureAxios()
     }
 
 	componentDidMount() {        
-        this.fetchUserExistingRoadmaps();
+        this.fetchCreatedRoadmapsByUser(localStorage.getItem('username'));
         this.fetchExistingDisciplines();
         this.fetchHighestRatedRoadmaps();
         this.fetchMostPopularRoadmaps();
