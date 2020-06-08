@@ -5,6 +5,13 @@ import { Row, Col, Button, Card, Avatar, Divider } from "antd";
 // import CustomForm from "./Form";
 const { Meta } = Card;
 
+axios.defaults.baseURL = "https://studyroadmap.herokuapp.com/"
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: `Token ${localStorage.getItem('token')}`,
+};
 
 class Roadmap extends Component {
     state = {
@@ -14,7 +21,10 @@ class Roadmap extends Component {
 
     componentDidMount() {
         const roadmapId = this.props.match.params.roadmapId;
+        
+        console.log(localStorage.getItem('token'))
         axios.get(`api/roadmaps/${roadmapId}/`).then(res => {
+            console.log(res)
             this.setState({
                 roadmap: res.data
             });
@@ -22,6 +32,7 @@ class Roadmap extends Component {
 
         axios.get(`api/roadmaps/${roadmapId}/milestones/`)
             .then(res => {
+                console.log(res)
                 this.setState({
                     milestones: res.data.results
                 })
@@ -35,7 +46,7 @@ class Roadmap extends Component {
             "Content-Type": "application/json",
             Authorization: `Token ${this.props.token}`
         };
-        axios.delete(`${BASE_URL}api/roadmaps/${roadmapId}/delete/`)
+        axios.delete(`api/roadmaps/${roadmapId}/delete/`)
         .then(res => {
             if (res.status === 204) {
             this.props.history.push(`/`);
@@ -55,10 +66,10 @@ class Roadmap extends Component {
 
     this.state.milestones.forEach(item => {
         milestoneDiv.push(
-            <div className="timeline-item">
+            <div className="timeline-item" key={item.order_num}>
                 <h4>{item.title}</h4>
                 <p>
-                {item.content}
+                    {item.content}
                 </p>
             </div>
         )
