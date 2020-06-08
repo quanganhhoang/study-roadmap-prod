@@ -31,6 +31,16 @@ class RoadmapListView extends Component {
         
     }
 
+    configureAxios = () => {
+        const token = localStorage.getItem('token')
+        axios.defaults.headers = {
+            Authorization: `Token ${token}`
+        }
+    }
+    componentWillMount() {
+        this.configureAxios()
+    }
+
 	componentDidMount() {
         // console.log('store token:', this.props.token)
         // console.log('store username:', this.props.username)

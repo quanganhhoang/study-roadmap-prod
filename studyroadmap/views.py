@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.decorators import api_view, action
@@ -12,6 +13,7 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 
 from .models import *
 from .serializers import *
+from .permissions import *
 
 
 # Iteration 4
@@ -19,9 +21,17 @@ from .serializers import *
 class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.IsAuthenticated,
     ]
+    authentication_classes = (TokenAuthentication,)
     serializer_class = UserSerializer
+
+    def get_permissions(self):
+        if self.action == 'list':
+            self.permission_classes = [IsSuperUser, ]
+        # elif self.action == 'retrieve':
+        #     self.permission_classes = [IsOwner, ]
+        return super(self.__class__, self).get_permissions()
 
     @action(methods=['get'], detail=False, url_path='username/(?P<username>\w+)')
     def getUserByUsername(self, request, username):
@@ -35,6 +45,7 @@ class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
+    authentication_classes = (TokenAuthentication,)
     serializer_class = CustomProfileSerializer
 
 
@@ -44,6 +55,7 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
+    authentication_classes = (TokenAuthentication,)
     serializer_class = RoadmapSerializer
 
     @action(methods=['get'], detail=False, url_path='most-popular')
@@ -72,6 +84,7 @@ class MilestoneViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAuthenticated
     ]
+    authentication_classes = (TokenAuthentication,)
     serializer_class = MilestoneSerializer
 
 
