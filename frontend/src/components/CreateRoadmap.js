@@ -344,8 +344,14 @@ class CreateRoadmap extends Component {
                             onChange={this.onChangeRoadmapCategory}
                         >
                             <Option key="Engineering" value="Engineering">Enginering</Option>
-                            <Option key="Finance" value="Finance">Finance</Option>
-                            <Option key="Sports" value="Sports">Sports</Option>
+                            <Option key="Business" value="Business">Finance</Option>
+                            <Option key="Finance" value="Finance">Sports</Option>
+                            <Option key="Life Hack" value="Life Hack">Sports</Option>
+                            <Option key="Culinary" value="Culinary">Sports</Option>
+                            <Option key="Entrepreneurship" value="Entrepreneurship">Sports</Option>
+                            <Option key="Education" value="Education">Sports</Option>
+                            <Option key="Health" value="Health">Sports</Option>
+                            <Option key="Other" value="Other">Sports</Option>
                         </Select>
 
                         <Select

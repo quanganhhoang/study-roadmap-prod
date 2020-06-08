@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from 'react-redux';
 
-import { Button, Row } from 'antd';
+import { Button } from 'antd';
 
 import RoadmapList from "./RoadmapList";
 
@@ -42,9 +42,6 @@ class RoadmapListView extends Component {
     }
 
 	componentDidMount() {
-        // console.log('store token:', this.props.token)
-        // console.log('store username:', this.props.username)
-        // console.log('store username:', localStorage.getItem('username'))
         this.fetchCreatedRoadmapsByUser(localStorage.getItem('username'))
 	}
 
