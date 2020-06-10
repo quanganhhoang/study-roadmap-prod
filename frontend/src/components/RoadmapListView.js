@@ -89,8 +89,8 @@ class RoadmapListView extends Component {
 
 const mapStateToProps = state => {
     return {
-        token: state.token,
-        username: state.username,
+        token: state.auth.token,
+        username: state.auth.username,
     };
   };
 

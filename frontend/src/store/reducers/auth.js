@@ -1,55 +1,55 @@
 import * as actionTypes from '../actions/actionTypes'
 import { updateObject } from '../util'
 
-const initialState = {
-  token: null,
-  error: null,
-  loading: false,
-  username: null,
+const INITIAL_STATE = {
+    token: null,
+    error: null,
+    loading: false,
+    username: null,
 }
 
 const authStart = (state, action) => {
-  return updateObject(state, {
-    error: null,
-    loading: true
-  })
+    return updateObject(state.auth, {
+        error: null,
+        loading: true
+    })
 }
 
 const authSuccess = (state, action) => {
-  return updateObject(state, {
-    token: action.token,
-    error: null,
-    loading: false,
-    username: action.username,
-  })
+    return updateObject(state.auth, {
+        token: action.token,
+        error: null,
+        loading: false,
+        username: action.username,
+    })
 }
 
 const authFail = (state, action) => {
-  return updateObject(state, {
-    error: action.error,
-    loading: false
-  })
+    return updateObject(state.auth, {
+        error: action.error,
+        loading: false
+    })
 }
 
 const authLogout = (state, action) => {
-  return updateObject(state, {
-    token: null
-  })
+    return updateObject(state.auth, {
+        token: null
+    })
 }
 
-const reducer = (state=initialState, action) => {
-  switch (action.type) {
-    case actionTypes.AUTH_START:
-      return authStart(state, action)
-    case actionTypes.AUTH_FAIL:
-      return authFail(state, action)
-    case actionTypes.AUTH_SUCCESS:
-      return authSuccess(state, action)
-    case actionTypes.AUTH_LOGOUT:
-      return authLogout(state, action)
-    default:
-      return state
-  }
+const authReducer = (state=INITIAL_STATE, action) => {
+    switch (action.type) {
+        case actionTypes.AUTH_START:
+            return authStart(state, action)
+        case actionTypes.AUTH_FAIL:
+            return authFail(state, action)
+        case actionTypes.AUTH_SUCCESS:
+            return authSuccess(state, action)
+        case actionTypes.AUTH_LOGOUT:
+            return authLogout(state, action)
+        default:
+            return state
+    }
 }
 
-export default reducer
+export default authReducer;

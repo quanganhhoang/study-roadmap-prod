@@ -12,7 +12,6 @@ const { Search } = Input;
 
 
 class CustomLayout extends Component {
-
     render() {
         return (
             <div>
@@ -126,10 +125,16 @@ class CustomLayout extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token
+    };
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		logout: () => dispatch(actions.logout())
 	}
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(CustomLayout));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomLayout));

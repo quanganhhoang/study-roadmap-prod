@@ -79,15 +79,21 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
+        console.log('dashboard componentWillMount', this.props.username)
         this.configureAxios()
     }
 
-	componentDidMount() {        
+	componentDidMount() {    
+        console.log('dashboard componentDidMount', this.props.username)    
         this.fetchCreatedRoadmapsByUser(localStorage.getItem('username'));
         this.fetchExistingDisciplines();
         this.fetchHighestRatedRoadmaps();
         this.fetchMostPopularRoadmaps();
-	}
+    }
+    
+    componentDidUpdate() {
+        console.log('dashboard componentDidUpdate', this.props.username)
+    }
     
     render() {
         const disciplines = [];
@@ -145,11 +151,10 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('Dashboard state', state)
     return {
-        token: state.token,
-        username: state.username,
+        token: state.auth.token,
+        username: state.auth.username,
     };
-  };
+};
 
 export default connect(mapStateToProps)(Dashboard)

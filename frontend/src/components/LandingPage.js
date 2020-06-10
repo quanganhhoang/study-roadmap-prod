@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Row, Col, Card, Avatar } from 'antd';
 
 const { Meta } = Card;
@@ -113,4 +114,10 @@ class LandingPage extends Component {
   }
 }
 
-export default LandingPage
+const mapStateToProps = (state) => {
+    return {
+        token: state.auth.token
+    }    
+}
+
+export default connect(mapStateToProps)(LandingPage)
