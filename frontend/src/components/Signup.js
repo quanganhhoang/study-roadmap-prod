@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd';
 import Icon from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import * as actions from '../store/actions/auth';
+import * as actions from '../store/actions/authActions';
 
 const FormItem = Form.Item;
 
@@ -61,7 +61,9 @@ class RegistrationForm extends React.Component {
                     {getFieldDecorator('username', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                        <Input 
+                            prefix={ <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} /> } 
+                            placeholder="Username" />
                     )}
                 </FormItem>
                 

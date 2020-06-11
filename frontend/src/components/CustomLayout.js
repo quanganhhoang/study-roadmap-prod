@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { FacebookOutlined, GoogleOutlined, TwitterOutlined } from '@ant-design/icons';
 
-import * as actions from '../store/actions/auth';
+import * as actions from '../store/actions/authActions';
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;

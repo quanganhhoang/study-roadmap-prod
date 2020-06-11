@@ -3,7 +3,7 @@ import { Form, Input, Button, Spin } from 'antd';
 import Icon from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import * as actions from '../store/actions/auth';
+import * as actions from '../store/actions/authActions';
 
 const FormItem = Form.Item;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
@@ -15,10 +15,8 @@ class NormalLoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.onAuth(values.username, values.password);
-                this.props.history.push('/dashboard');
             } else {
                 console.log(err)
-                this.props.history.push('/login')
             }
         });
     }

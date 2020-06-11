@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import * as actions from './store/actions/auth'
+import { authCheckState } from './store/actions/authActions'
 
 import CustomLayout from './components/CustomLayout'
 import BaseRouter from './routes'
@@ -36,7 +36,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState())
+    onTryAutoSignup: () => dispatch(authCheckState())
   }
 }
 
