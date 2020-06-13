@@ -6,9 +6,10 @@ import LandingPage from './components/LandingPage'
 import Roadmap from './components/Roadmap'
 import Login from './components/Login'
 import Signup from './components/Signup'
-import RoadmapListView from './components/RoadmapListView'
+import MyRoadmap from './components/MyRoadmap'
 import CreateRoadmap from './components/CreateRoadmap';
 import Dashboard from './components/Dashboard';
+import SearchResult from './components/SearchResult';
 
 class BaseRouter extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class BaseRouter extends Component {
     }
 
     render() {
-        console.log('base router props', this.props)
+        // console.log('base router props', this.props)
         return (
             <div>
                 <Switch>
@@ -26,8 +27,13 @@ class BaseRouter extends Component {
                         path="/login/"
                         render= { () => this.props.isAuthenticated ? (<Redirect to="/dashboard/"/>) : (<Login />) }
                     />
-                    <Route exact path="/signup/" component={Signup} />
-                    <Route exact path="/roadmaps/" component={RoadmapListView} />
+                    <Route 
+                        exact 
+                        path="/signup/"
+                        render= { () => this.props.isAuthenticated ? (<Redirect to="/dashboard/"/>) : (<Signup />) }
+                    />
+                    <Route exact path="/search/" component={SearchResult} />
+                    <Route exact path="/roadmaps/" component={MyRoadmap} />
                     <Route exact path="/roadmaps/create/" exact component={CreateRoadmap} />
                     <Route exact path="/roadmaps/:roadmapId" component={Roadmap} />
                     <Route exact path="/dashboard/" component={Dashboard} />

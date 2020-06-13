@@ -5,13 +5,18 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { FacebookOutlined, GoogleOutlined, TwitterOutlined } from '@ant-design/icons';
 
-import * as actions from '../store/actions/authActions';
+import * as authActions from '../store/actions/authActions';
+import { searchRoadmaps } from '../store/actions/roadmapActions'
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
 
 
 class CustomLayout extends Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         return (
             <div>
@@ -27,7 +32,12 @@ class CustomLayout extends Component {
                                 <Search
                                     id="nav-searchbar"
                                     placeholder="Search..."
-                                    onSearch={value => console.log(value)}
+                                    onSearch={
+                                        value => {
+                                            this.props.searchRoadmaps(value)
+                                            this.props.history.push('/search/')
+                                        }                                        
+                                    }
                                 />
                             </Col>
                             <Col span={6}>
@@ -133,7 +143,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		logout: () => dispatch(actions.logout())
+        logout: () => dispatch(authActions.logout()),
+        searchRoadmaps: (value) => dispatch(searchRoadmaps(value)),
 	}
 }
 

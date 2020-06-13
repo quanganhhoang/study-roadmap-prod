@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 
 import { Input, Tag, Tooltip, Button, Row, Col, Select } from 'antd';
@@ -26,9 +25,6 @@ class CreateRoadmap extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: null,
-            authorId: null,
-            roadmapDescription: '',
             // tags
             tags: ['software', 'engineer', 'hobby'],
             visible: true,
@@ -59,7 +55,7 @@ class CreateRoadmap extends Component {
     // functions for handling tags
     handleClose = removedTag => {
         const tags = this.state.tags.filter(tag => tag !== removedTag);
-        console.log(tags);
+        
         this.setState({ tags });
     };
     
@@ -77,7 +73,7 @@ class CreateRoadmap extends Component {
         if (inputValue && tags.indexOf(inputValue) === -1) {
             tags = [...tags, inputValue];
         }
-        console.log(tags);
+        
         this.setState({
             tags,
             inputVisible: false,
@@ -186,24 +182,12 @@ class CreateRoadmap extends Component {
     // functions for adding roadmap steps
     
     // save and publish roadmap
-    fetchAuthorId = (username) => {
-        axios.get(`api/users/username/${username}/`)
-            .then(res => {
-                this.setState({
-                    authorId: res.data.id
-                });
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-
     handleSave = (e) => {
         e.preventDefault();
         
         // TODO(qahoang): rollback transaction if anything fails here
-        axios.post(`api/roadmaps/`, {
-            "author": this.state.authorId,
+        api.post(`api/roadmaps/`, {
+            "author": this.props.authorId,
             "title": this.state.roadmapTitle,
             "description": this.state.roadmapDescription,
             "level": this.state.roadmapLevel,
@@ -214,7 +198,7 @@ class CreateRoadmap extends Component {
             for (let i = 0; i < this.state.numMilestones; i++) {
                 let milestone = this.state.milestones[i];
     
-                axios.post(`api/milestones/`, {
+                api.post(`api/milestones/`, {
                     "title": milestone.title,
                     "link": milestone.link,
                     "content": milestone.content,
@@ -230,22 +214,6 @@ class CreateRoadmap extends Component {
         }).catch(err => {
             console.log(err)
         })
-    }
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.username) {
-            const username = newProps.username
-            this.setState({
-                username: username
-            })
-            this.fetchAuthorId(username)
-        }
-        if (newProps.token) {
-            axios.defaults.headers = {
-                "Content-Type": "application/json",
-                "Authorization": newProps.token
-            }
-        }
     }
 
     componentDidMount() {
@@ -471,7 +439,8 @@ class CreateRoadmap extends Component {
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
-        username: state.auth.username
+        username: state.auth.username,
+        authorId: state.auth.userId,
     };
 };
 

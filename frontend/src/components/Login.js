@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, Input, Button, Spin } from 'antd';
 import Icon from '@ant-design/icons';
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ const FormItem = Form.Item;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 
-class NormalLoginForm extends React.Component {
+class NormalLoginForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
