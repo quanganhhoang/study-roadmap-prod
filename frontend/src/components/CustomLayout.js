@@ -35,7 +35,7 @@ class CustomLayout extends Component {
                                     onSearch={
                                         value => {
                                             this.props.searchRoadmaps(value)
-                                            this.props.history.push('/search/')
+                                            this.props.history.push('/search')
                                         }                                        
                                     }
                                 />

@@ -11,6 +11,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework_extensions.mixins import NestedViewSetMixin
 
+# filter backend
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+
 from .models import *
 from .serializers import *
 from .permissions import *
@@ -24,7 +28,7 @@ class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
         permissions.IsAuthenticated,
     ]
     authentication_classes = (TokenAuthentication,)
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer 
 
     def get_permissions(self):
         if self.action == 'list':
@@ -57,6 +61,9 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     ]
     authentication_classes = (TokenAuthentication,)
     serializer_class = RoadmapSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filterset_fields = ['discipline', 'level']
+    search_fields = ['author__id', 'title', 'description']
 
     @action(methods=['get'], detail=False, url_path='most-popular')
     def most_popular(self, request):

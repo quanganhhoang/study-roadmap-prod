@@ -118,15 +118,16 @@ export const fetchHighestRatedRoadmaps = () => {
 export const searchRoadmaps = (searchTerm) => {
     return (dispatch, getState) => {
         const token = getState().auth.token
-        api.get('api/roadmaps/highest-rated/', {
+        api.get(`api/roadmaps?search=${searchTerm}`, {
             headers: {
                 Authorization: `Token ${token}`
             }
         })
         .then(res => {
+            console.log('res', res)
             dispatch({
                 type: SEARCH_ROADMAPS_SUCCESS,
-                data: res.data,
+                searchResult: res.data.results,
                 searchTerm: searchTerm
             })
             

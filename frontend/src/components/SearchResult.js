@@ -6,12 +6,10 @@ import { Row, Col } from 'antd'
 import RoadmapList from '../components/RoadmapList'
 
 class SearchResult extends Component {
-    shouldComponentUpdate(nextProps) {
-        return nextProps.roadmap.searchTerm !== this.props.roadmap.searchTerm
-    }
 
     render() {
         const { searchTerm, searchResult } = this.props;
+        const numResults = searchResult.length
         console.log('searchResult', searchResult)
         return (
             <div className="search-result-container">
@@ -20,7 +18,7 @@ class SearchResult extends Component {
                         <p>FILTER RESULTS</p>
                     </Col>
                     <Col span={18} className="search-result">
-                        <p>120 results for '{searchTerm}'</p>
+                        <p>{numResults} results for '{searchTerm}'</p>
                         <RoadmapList data={ searchResult } /> 
                     </Col>
                 </Row>
@@ -30,6 +28,7 @@ class SearchResult extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log('search result state', state)
     return {
         searchTerm: state.roadmap.searchTerm,
         searchResult: state.roadmap.searchResult

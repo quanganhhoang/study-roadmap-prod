@@ -9,14 +9,17 @@ from rest_framework_extensions.routers import NestedRouterMixin
 
 from . import views
 
+class OptionalSlashRouter(routers.SimpleRouter):
+    def __init__(self):
+        self.trailing_slash = '/?'
+        super(routers.SimpleRouter, self).__init__()
+
 # routers.DefaultRouter exposes API view
 # use routers.SimpleRouter to hide this
-class NestedSimpleRouter(NestedRouterMixin, routers.SimpleRouter):
+class NestedSimpleRouter(NestedRouterMixin, OptionalSlashRouter):
     pass
 
-
 router = NestedSimpleRouter()
-
 users_router = router.register('api/users', views.UserViewSet, 'user')
 roadmaps_router = router.register('api/roadmaps', views.RoadmapViewSet, 'roadmaps')
 router.register('api/milestones', views.MilestoneViewSet, 'milestone')

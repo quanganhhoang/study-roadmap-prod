@@ -52,15 +52,15 @@ const fetchHighestRatedRoadmaps = (state, action) => {
 const fetchHighestRatedRoadmapsFail = (state, action) => {
     return {
         ...state,
-        searchTerm: action.searchTerm,
         error: action.error
     }
 }
 
 const searchRoadmapsSuccess = (state, action) => {
+    console.log('SEARCH ROADMAP REDUCER', action.searchResult)
     return {
         ...state,
-        searchResult: action.data,
+        searchResult: action.searchResult,
         searchTerm: action.searchTerm,
     }
 }
