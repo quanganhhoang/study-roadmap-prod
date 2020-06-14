@@ -1,13 +1,14 @@
-import React from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { Component } from 'react';
+import { Form, Input, Button, Spin } from 'antd';
 import Icon from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../store/actions/authActions';
 
 const FormItem = Form.Item;
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-class RegistrationForm extends React.Component {
+class RegistrationForm extends Component {
     state = {
         confirmDirty: false,
     };
@@ -52,67 +53,92 @@ class RegistrationForm extends React.Component {
 
 
     render() {
+        let errorMessage = null;
+        if (this.props.error) {
+            errorMessage = (
+                <div>
+                    <p>{this.props.error.message}</p>
+                    <ul className="noindent"> Your password must have at least:
+                        <li>8 characters long</li>
+                        <li>1 uppercase & 1 lowercase character</li>
+                        <li>1 number</li>
+                    </ul>
+                </div>
+            );
+        }
         const { getFieldDecorator } = this.props.form;
-
+        
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormItem>
-                    {getFieldDecorator('username', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
-                    })(
-                        <Input 
-                            prefix={ <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} /> } 
-                            placeholder="Username" />
-                    )}
-                </FormItem>
-                
-                <FormItem>
-                    {getFieldDecorator('email', {
-                    rules: [{
-                        type: 'email', message: 'Invalid email',
-                    }, {
-                        required: true, message: 'Please input your email!',
-                    }],
-                    })(
-                        <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-                    )}
-                </FormItem>
+            <div>
+                {errorMessage}
 
-                <FormItem>
-                    {getFieldDecorator('password', {
-                    rules: [{
-                        required: true, message: 'Please input your password!',
-                    }, {
-                        validator: this.validateToNextPassword,
-                    }],
-                    })(
-                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                    )}
-                </FormItem>
+                {
+                this.props.loading ?
 
-                <FormItem>
-                    {getFieldDecorator('confirm', {
-                    rules: [{
-                        required: true, message: 'Please confirm your password!',
-                    }, {
-                        validator: this.compareToFirstPassword,
-                    }],
-                    })(
-                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm password" onBlur={this.handleConfirmBlur} />
-                    )}
-                </FormItem>
+                <Spin indicator={antIcon} />
 
-                <FormItem>
-                    <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
-                        SignUp
-                    </Button>
-                    Or 
-                    <NavLink 
-                        style={{marginRight: '10px'}} 
-                        to='/login/'> Login
-                    </NavLink>
-                </FormItem>
-            </Form>
+                :
+
+                <Form onSubmit={this.handleSubmit}>
+                    <FormItem>
+                        {getFieldDecorator('username', {
+                            rules: [{ required: true, message: 'Please input your username!' }],
+                        })(
+                            <Input 
+                                prefix={ <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} /> } 
+                                placeholder="Username" />
+                        )}
+                    </FormItem>
+                    
+                    <FormItem>
+                        {getFieldDecorator('email', {
+                        rules: [{
+                            type: 'email', message: 'Invalid email',
+                        }, {
+                            required: true, message: 'Please input your email!',
+                        }],
+                        })(
+                            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
+                        )}
+                    </FormItem>
+
+                    <FormItem>
+                        {getFieldDecorator('password', {
+                        rules: [{
+                            required: true, message: 'Please input your password!',
+                        }, {
+                            validator: this.validateToNextPassword,
+                        }],
+                        })(
+                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                        )}
+                    </FormItem>
+
+                    <FormItem>
+                        {getFieldDecorator('confirm', {
+                        rules: [{
+                            required: true, message: 'Please confirm your password!',
+                        }, {
+                            validator: this.compareToFirstPassword,
+                        }],
+                        })(
+                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Confirm password" onBlur={this.handleConfirmBlur} />
+                        )}
+                    </FormItem>
+
+                    <FormItem>
+                        <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
+                            Sign Up
+                        </Button>
+                        Or 
+                        <NavLink 
+                            style={{marginRight: '10px'}} 
+                            to='/login/'> Log in
+                        </NavLink>
+                    </FormItem>
+                </Form>
+                }
+            </div>
         );
     }
 }

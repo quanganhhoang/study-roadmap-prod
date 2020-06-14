@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Layout, Menu, Button, Input } from 'antd';
+import { Row, Col, Layout, Menu, Button, Input, Dropdown, message } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 
-import { FacebookOutlined, GoogleOutlined, TwitterOutlined } from '@ant-design/icons';
+import { FacebookOutlined, GoogleOutlined, TwitterOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
 
 import * as authActions from '../store/actions/authActions';
 import { searchRoadmaps } from '../store/actions/roadmapActions'
@@ -17,7 +17,43 @@ class CustomLayout extends Component {
         super(props)
     }
 
+    handleButtonClick = (e) => {
+        message.info('Click on left button.');
+        console.log('click left button', e);
+    }
+      
+    handleMenuClick = (e) => {
+
+        switch (e.key) {
+            case 'MyRoadmap':
+                this.props.history.push('/roadmaps')
+                break;
+            case 'CreateNewRoadmap':
+                this.props.history.push('/roadmaps/create')
+                break;
+            case 'Logout':
+                this.props.logout()
+                break;
+            default:
+                
+        }
+    }
+
     render() {
+        const menu = (
+            <Menu onClick={this.handleMenuClick}>
+                <Menu.Item key="MyRoadmap" icon={<UserOutlined />}>
+                    My Roadmaps
+                </Menu.Item>
+                <Menu.Item key="CreateNewRoadmap" icon={<UserOutlined />}>
+                    Create new roadmap
+                </Menu.Item>
+                <Menu.Item key="Logout" icon={<UserOutlined />}>
+                    Logout
+                </Menu.Item>
+            </Menu>
+        );
+
         return (
             <div>
                 <Layout className="layout">
@@ -51,23 +87,18 @@ class CustomLayout extends Component {
                                     {    
                                     this.props.isAuthenticated ?
                                     <React.Fragment>
-                                        <Button 
-                                            className="nav-btn" 
-                                            href="/roadmaps"
-                                        >
-                                                My Roadmaps
-                                        </Button>
-                                        <Button 
-                                            className="nav-btn" 
-                                            href="/"
-                                            onClick={this.props.logout} 
-                                            type="primary"
-                                        >
-                                                Logout
-                                        </Button>
+                                        <Dropdown overlay={menu} placement='bottomCenter'>
+                                            <Button
+                                                className="nav-btn"
+                                                type="primary"
+                                            >
+                                                Profile <UserOutlined />
+                                            </Button>
+                                        </Dropdown>
                                     </React.Fragment>
                         
                                     :
+                                    
                                     <React.Fragment>
                                         <Button className="nav-btn" href="/login" type="primary">Login</Button>
                                         <Button className="nav-btn" href="/signup" type="primary">Register</Button>

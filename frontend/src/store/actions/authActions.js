@@ -90,7 +90,7 @@ export const authLogin = (username, password) => {
             dispatch(checkAuthTimeout(3600))
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
             dispatch(authFail(err))
         })
     }
@@ -117,6 +117,7 @@ export const authSignup = (username, email, password, passwordConfirmed) => {
             dispatch(checkAuthTimeout(3600))
         })
         .catch(err => {
+            console.log('err', err)
             dispatch(authFail(err))
         })
     }
