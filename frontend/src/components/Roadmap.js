@@ -1,63 +1,72 @@
 import React, { Component } from "react";
-import axios from "axios";
+
 import { connect } from "react-redux";
 import { Row, Col, Button, Card, Avatar, Divider } from "antd";
+import { ShareAltOutlined, SaveOutlined } from '@ant-design/icons'
 // import CustomForm from "./Form";
 const { Meta } = Card;
 
-axios.defaults.baseURL = "https://studyroadmap.herokuapp.com/"
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: `Token ${localStorage.getItem('token')}`,
-};
+import api from '../api'
 
 class Roadmap extends Component {
     state = {
         roadmap: {},
         milestones: [],
+        author: {},
+        authorProfile: {},
     };
 
     componentDidMount() {
         const roadmapId = this.props.match.params.roadmapId;
-        
-        console.log(localStorage.getItem('token'))
-        axios.get(`api/roadmaps/${roadmapId}/`).then(res => {
-            console.log(res)
+        const token = this.props.token;
+        console.log('token', token)
+        api.get(`api/roadmaps/${roadmapId}`, {
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        })
+        .then(res => {    
+            this.fetchAuthor(res.data.id)
             this.setState({
                 roadmap: res.data
             });
         });
 
-        axios.get(`api/roadmaps/${roadmapId}/milestones/`)
-            .then(res => {
-                console.log(res)
-                this.setState({
-                    milestones: res.data.results
-                })
-            })
-    }
-
-    handleDelete = event => {
-        event.preventDefault();
-        const roadmapId = this.props.match.params.roadmapId;
-        axios.defaults.headers = {
-            "Content-Type": "application/json",
-            Authorization: `Token ${this.props.token}`
-        };
-        axios.delete(`api/roadmaps/${roadmapId}/delete/`)
-        .then(res => {
-            if (res.status === 204) {
-            this.props.history.push(`/`);
+        api.get(`api/roadmaps/${roadmapId}/milestones`,{
+            headers: {
+                Authorization: `Token ${token}`
             }
         })
-    };
+        .then(res => {        
+            this.setState({
+                milestones: res.data.results
+            })
+        })
+    }
+
+    // handleDelete = event => {
+    //     event.preventDefault();
+    //     const roadmapId = this.props.match.params.roadmapId;
+  
+    //     api.delete(`api/roadmaps/${roadmapId}/delete/`)
+    //     .then(res => {
+    //         if (res.status === 204) {
+    //         this.props.history.push(`/`);
+    //         }
+    //     })
+    // };
 
     fetchAuthor = (user_id) => {
-        axios.get(`api/users/${user_id}/`).then(res => {
-                return res.data.firstname
-            });
+        api.get(`api/users/${user_id}`, {
+            headers: {
+                Authorization: `Token ${this.props.token}`
+            }
+        })
+        .then(res => {
+            this.setState({
+                author: res.data
+            })
+        });
     }
 
   render() {
@@ -67,25 +76,33 @@ class Roadmap extends Component {
     this.state.milestones.forEach(item => {
         milestoneDiv.push(
             <div className="timeline-item" key={item.order_num}>
-                <h4>{item.title}</h4>
-                <p>
-                    {item.content}
+                <h4 className="milestone-title">{item.title}</h4>
+                <p className="milestone-content">
+                    { item.content }
                 </p>
             </div>
         )
     })
 
+    const author = this.state.author.username;
     return (
         <div>
             <Row type="flex">
                 <Col span={16}>
-                    <h1>{roadmap.title}</h1>
-                    <p>{roadmap.author}</p>
-                    <p>{roadmap.description}</p>
-                    <Button>
+                    <h1 className="roadmap-title">{ roadmap.title }</h1>
+                    <p className="roadmap-author">{ author }</p>
+                    <p className="roadmap-description">
+                        { roadmap.description }
+                    </p>
+                    <Button 
+                        style={{marginRight: '10px'}}
+                        // icon={<ShareAltOutlined />}
+                    >
                         Share
                     </Button>
-                    <Button>
+                    <Button
+                        // icon={<SaveOutlined />}
+                    >
                         Save
                     </Button>
                 </Col>
@@ -101,8 +118,8 @@ class Roadmap extends Component {
                     >
                         <Meta
                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                            title="Author"
-                            description="Author Credential"
+                            title={this.state.author.username}
+                            description="Credential"
                         />
                     </Card>
                 </Col>
@@ -112,7 +129,7 @@ class Roadmap extends Component {
             </Divider>
             <Row gutter={32}>
                 <Col span={16}>
-                    <h2>Milestones</h2>
+                    <h2 style={{marginBottom: '40px'}}>Milestones</h2>
                     <div>
                         {milestoneDiv}
                     </div>

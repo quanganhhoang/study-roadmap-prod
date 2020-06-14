@@ -34,30 +34,32 @@ const RoadmapList = props => {
                 pageSize: 5
             }}
             dataSource={props.data}
-            renderItem={item => (
-                <List.Item
-                    key={item.title}
-                    actions={[
-                        <IconText type="star" text={item.num_shares} />,
-                        <IconText type="like" text={item.num_votes} />,
-                        <IconText type="comment" text={item.num_shares} />
-                    ]}
-                    extra={
-                        <img
-                            width={272}
-                            alt="logo"
-                            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+            renderItem={item => {
+                return (
+                    <List.Item
+                        key={item.title}
+                        actions={[
+                            <IconText type="star" text={item.num_shares} />,
+                            <IconText type="like" text={item.num_votes} />,
+                            <IconText type="comment" text={item.num_shares} />
+                        ]}
+                        extra={
+                            <img
+                                width={272}
+                                alt="logo"
+                                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                            />
+                        }
+                    >
+                        <List.Item.Meta
+                            // avatar={<Avatar src={item.avatar} />}
+                            title={<a href={`/roadmaps/${item.id}`}> {item.title} </a>}
+                            description={item.author}
                         />
-                    }
-                >
-                    <List.Item.Meta
-                        // avatar={<Avatar src={item.avatar} />}
-                        title={<a href={`/roadmaps/${item.id}/`}> {item.title} </a>}
-                        description={item.author}
-                    />
-                    {item.description}
-                </List.Item>
-            )}
+                        {item.description}
+                    </List.Item>
+                )
+            }}
         />
     );
 };

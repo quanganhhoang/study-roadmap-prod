@@ -46,7 +46,7 @@ export const checkAuthTimeout = expirationTime => {
 }
 
 export const fetchUser = (token, username) => {
-    console.log('FETCH_USER ACTION CALLED', username)
+    // console.log('FETCH_USER ACTION CALLED', username)
     
     return dispatch => {
         api.get(`api/users/username/${username}/`, {
@@ -124,7 +124,7 @@ export const authSignup = (username, email, password, passwordConfirmed) => {
 
 export const authCheckState = () => {
     return (dispatch, getState) => {
-        const token = localStorage.getItem('token')
+        const token = getState().auth.token
         if (token === undefined) {
             dispatch(logout)
         } else {

@@ -44,45 +44,47 @@ const DashboardRoadmapList = props => {
                 },
                 pageSize: 2,
             }}
-            renderItem={item => (
-                <List.Item
-                    style={{padding: "5px", border: "1px solid"}}
-                    key={item.title}
-                    actions={[
-                        <IconText type="star" text="156" />,
-                        <IconText type="like" text="156" />,
-                        <IconText type="comment" text="2" />
-                    ]}
-                    // extra itemLayout does not work with grid
-                    // extra={
-                    //     <p>This is extra</p>
-                    // }
-                >
-                    <List.Item.Meta
-                        title={
-                            <div>
+            renderItem={item => {
+                return (
+                    <List.Item
+                        style={{padding: "5px", border: "1px solid"}}
+                        key={item.title}
+                        actions={[
+                            <IconText type="star" text="156" />,
+                            <IconText type="like" text="156" />,
+                            <IconText type="comment" text="2" />
+                        ]}
+                        // extra itemLayout does not work with grid
+                        // extra={
+                        //     <p>This is extra</p>
+                        // }
+                    >
+                        <List.Item.Meta
+                            title={
                                 <div>
-                                    <a className="dashboard-roadmap-card-title" href={`/roadmaps/${item.id}/`}> 
-                                        {item.title} 
-                                    </a>
+                                    <div>
+                                        <a className="dashboard-roadmap-card-title" href={`/roadmaps/${item.id}/`}> 
+                                            {item.title} 
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a className="dashboard-roadmap-card-author" href={`/users/${item.author}/`}> 
+                                            {item.author} 
+                                        </a>
+                                    </div> 
                                 </div>
+                            }
+                            description={(
                                 <div>
-                                    <a className="dashboard-roadmap-card-author" href={`/users/${item.author}/`}> 
-                                        {item.author} 
-                                    </a>
-                                </div> 
-                            </div>
-                        }
-                        description={(
-                            <div>
-                                <p className="dashboard-roadmap-card-description">{item.description}</p>
-                            </div>
-                            
-                        )}
-                    />
-                    {item.content}
-                </List.Item>
-            )}
+                                    <p className="dashboard-roadmap-card-description">{item.description}</p>
+                                </div>
+                                
+                            )}
+                        />
+                        {item.content}
+                    </List.Item>
+                )
+            }}
         />
     )
 }

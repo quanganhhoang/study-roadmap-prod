@@ -37,17 +37,18 @@ class Dashboard extends Component {
             existingDisciplines } = this.props;
      
         const disciplines = [];
-        existingDisciplines.data.forEach(elem => {
-            let discipline = elem[0]
-            disciplines.push(
-                <Col key={discipline} className="gutter-row" span={6}>
-                    <DisciplineCard 
-                        discipline={discipline}
-                    />
-                </Col>
-            )
-        })
-        
+        if (existingDisciplines.length != 0) {
+            existingDisciplines.data.forEach(elem => {
+                let discipline = elem[0]
+                disciplines.push(
+                    <Col key={discipline} className="gutter-row" span={6}>
+                        <DisciplineCard 
+                            discipline={discipline}
+                        />
+                    </Col>
+                )
+            })
+        }
         
         return (
             <div className="container-fluid">

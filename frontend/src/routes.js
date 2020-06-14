@@ -16,8 +16,7 @@ class BaseRouter extends Component {
         super(props)
     }
 
-    render() {
-        // console.log('base router props', this.props)
+    render() {        
         return (
             <div>
                 <Switch>
