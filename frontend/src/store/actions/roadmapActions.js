@@ -41,10 +41,7 @@ export const fetchAllRoadmaps = () => {
 
 export const fetchRoadmapByUser = () => {
     return (dispatch, getState) => {
-        console.log('fetchRoadmapByUser action called')
-        
         const { token, userId } = getState().auth
-        console.log('fetchRoadmapByUser current state', getState())
  
         api.get(`api/users/${userId}/roadmaps/`, {
             headers: {
@@ -52,7 +49,6 @@ export const fetchRoadmapByUser = () => {
             }
         })
         .then(res => {
-            console.log('roadmap action', res)
             dispatch({
                 type: FETCH_ROADMAP_BY_USER,
                 payload: res.data.results,

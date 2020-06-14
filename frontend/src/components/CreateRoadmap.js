@@ -7,6 +7,8 @@ import { PlusOutlined } from '@ant-design/icons';
 const { Option } = Select;
 const { TextArea } = Input;
 
+import api from '../api'
+
 const CategoryEnum = {
     "Engineering": 0,
     "Business": 1,
@@ -312,14 +314,14 @@ class CreateRoadmap extends Component {
                             onChange={this.onChangeRoadmapCategory}
                         >
                             <Option key="Engineering" value="Engineering">Enginering</Option>
-                            <Option key="Business" value="Business">Finance</Option>
+                            <Option key="Business" value="Business">Business</Option>
                             <Option key="Finance" value="Finance">Sports</Option>
-                            <Option key="Life Hack" value="Life Hack">Sports</Option>
-                            <Option key="Culinary" value="Culinary">Sports</Option>
-                            <Option key="Entrepreneurship" value="Entrepreneurship">Sports</Option>
-                            <Option key="Education" value="Education">Sports</Option>
-                            <Option key="Health" value="Health">Sports</Option>
-                            <Option key="Other" value="Other">Sports</Option>
+                            <Option key="Life Hack" value="Life Hack">Life Hack</Option>
+                            <Option key="Culinary" value="Culinary">Culinary</Option>
+                            <Option key="Entrepreneurship" value="Entrepreneurship">Entrepreneurship</Option>
+                            <Option key="Education" value="Education">Education</Option>
+                            <Option key="Health" value="Health">Health</Option>
+                            <Option key="Other" value="Other">Other</Option>
                         </Select>
 
                         <Select
