@@ -186,7 +186,8 @@ class CreateRoadmap extends Component {
     // save and publish roadmap
     handleSave = (e) => {
         e.preventDefault();
-        
+        const token = this.props.token;
+
         // TODO(qahoang): rollback transaction if anything fails here
         api.post(`api/roadmaps/`, {
             "author": this.props.authorId,
@@ -194,7 +195,12 @@ class CreateRoadmap extends Component {
             "description": this.state.roadmapDescription,
             "level": this.state.roadmapLevel,
             "discipline": this.state.roadmapCategory,
+        }, {
+            headers: {
+                'Authorization': `Token ${token}`
+            }
         }).then(res => {
+            console.log(res)
             const roadmapId = res.data.id
 
             for (let i = 0; i < this.state.numMilestones; i++) {
@@ -205,14 +211,19 @@ class CreateRoadmap extends Component {
                     "link": milestone.link,
                     "content": milestone.content,
                     "order_num": milestone.id,
-                    "roadmap_id": roadmapId
+                    "roadmap_id": roadmapId,
+                }, {
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    }
                 }).then(res => {
                     console.log(res)
+                    this.props.history.push('/roadmaps');
                 }).catch(err => {
                     console.log(err)
+                    alert(`ERROR: ${err}`);
                 })
             }
-            this.props.history.push('/roadmaps');
         }).catch(err => {
             console.log(err)
         })
