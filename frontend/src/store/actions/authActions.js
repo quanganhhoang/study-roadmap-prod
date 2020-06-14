@@ -97,7 +97,7 @@ export const authLogin = (username, password) => {
 }
 
 export const authSignup = (username, email, password, passwordConfirmed) => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(authStart())
         api.post('rest-auth/registration/', {
             username: username,
