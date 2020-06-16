@@ -15,8 +15,6 @@ import { Row, Col } from 'antd';
 import DisciplineCard from './DisciplineCard';
 import DashboardRoadmapList from './DashboardRoadmapList';
 
-const NUM_DISCIPLINES_TO_SHOW = 4;
-
 
 class Dashboard extends Component {
 
@@ -53,7 +51,7 @@ class Dashboard extends Component {
         return (
             <div className="container-fluid">
                 <div>
-                    <h3>Welcome back, let's continue our studies?</h3>
+                    <h3>Welcome back, let&apos;s continue our studies?</h3>
                 </div>
                 <div>
                     <DashboardRoadmapList
@@ -99,7 +97,8 @@ const mapStateToProps = state => ({
     existingDisciplines: state.discipline.disciplines
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+// (dispatch, ownProps)
+const mapDispatchToProps = (dispatch) => {
     return ({
         fetchAllRoadmaps: () => {
             dispatch(fetchAllRoadmaps())

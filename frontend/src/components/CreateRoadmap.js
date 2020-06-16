@@ -9,19 +9,6 @@ const { TextArea } = Input;
 
 import api from '../api'
 
-const CategoryEnum = {
-    "Engineering": 0,
-    "Business": 1,
-    "Finance": 2,
-    "Sports": 3,
-    "Life Hack": 4,
-    "Culinary": 5,
-    "Entrepreneurship": 6,
-    "Education": 7,
-    "Health": 8,
-    "Other": 9
-}
-
 
 class CreateRoadmap extends Component {
     constructor(props) {
@@ -55,7 +42,7 @@ class CreateRoadmap extends Component {
     }
 
     // functions for handling tags
-    handleClose = removedTag => {
+    handleClose = (removedTag) => {
         const tags = this.state.tags.filter(tag => tag !== removedTag);
         
         this.setState({ tags });
@@ -253,7 +240,12 @@ class CreateRoadmap extends Component {
                                         className="milestone-title"
                                         placeholder="Title"
                                         onChange={(e) => {
-                                            this.state.milestones[i].title = e.target.value
+                                            this.setState(prevState => ({
+                                                milestones: {
+                                                    ...prevState.milestones,
+                                                    [prevState.milestones[i].value]: e.target.value
+                                                }
+                                            }))
                                         }}
                                     />
                                     {/* <div className="form-group">
@@ -277,7 +269,12 @@ class CreateRoadmap extends Component {
                                         className="milestone-link"
                                         placeholder="Link"
                                         onChange={(e) => {
-                                            this.state.milestones[i].link = e.target.value
+                                            this.setState(prevState => ({
+                                                milestones: {
+                                                    ...prevState.milestones,
+                                                    [prevState.milestones[i].link]: e.target.value
+                                                }
+                                            }))
                                         }}
                                     />
                                 </Col>

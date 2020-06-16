@@ -50,9 +50,9 @@ const DashboardRoadmapList = props => {
                         style={{padding: "5px", border: "1px solid"}}
                         key={item.title}
                         actions={[
-                            <IconText type="star" text="156" />,
-                            <IconText type="like" text="156" />,
-                            <IconText type="comment" text="2" />
+                            <IconText key="star" type="star" text="156" />,
+                            <IconText key="like" type="like" text="156" />,
+                            <IconText key="comment" type="comment" text="2" />
                         ]}
                         // extra itemLayout does not work with grid
                         // extra={

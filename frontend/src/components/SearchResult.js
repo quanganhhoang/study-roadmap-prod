@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { Row, Col, Radio, Input } from 'antd'
+import { Row, Col, Radio } from 'antd'
 
 import RoadmapList from '../components/RoadmapList'
 
@@ -82,7 +82,7 @@ class SearchResult extends Component {
                         </div>
                     </Col>
                     <Col span={18} className="search-result">
-                        <p>{numResults} results for '{searchTerm}'</p>
+                        <p>{numResults} results for &apos;{searchTerm}&apos;</p>
                         <RoadmapList data={ searchResult } /> 
                     </Col>
                 </Row>

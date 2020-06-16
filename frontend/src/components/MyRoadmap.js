@@ -63,10 +63,5 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return ({
 
-    })
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyRoadmap);
+export default connect(mapStateToProps)(MyRoadmap);

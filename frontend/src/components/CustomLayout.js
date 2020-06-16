@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Layout, Menu, Button, Input, Dropdown, message } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 
-import { FacebookOutlined, GoogleOutlined, TwitterOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
+import { FacebookOutlined, GoogleOutlined, TwitterOutlined, UserOutlined } from '@ant-design/icons';
 
 import * as authActions from '../store/actions/authActions';
 import { searchRoadmaps } from '../store/actions/roadmapActions'
@@ -26,16 +26,22 @@ class CustomLayout extends Component {
 
         switch (e.key) {
             case 'MyRoadmap':
-                this.props.history.push('/roadmaps')
+                this.props.history.push('/roadmaps');
+                break;
+            case 'AccountSettings':
+                this.props.history.push("/profile");
                 break;
             case 'CreateNewRoadmap':
-                this.props.history.push('/roadmaps/create')
+                this.props.history.push('/roadmaps/create');
+                break;
+            case 'Help':
+                this.props.history.push('/help');
                 break;
             case 'Logout':
-                this.props.logout()
+                this.props.logout();
+                this.props.history.push('/')
                 break;
             default:
-                
         }
     }
 
@@ -45,8 +51,14 @@ class CustomLayout extends Component {
                 <Menu.Item key="MyRoadmap" icon={<UserOutlined />}>
                     My Roadmaps
                 </Menu.Item>
+                <Menu.Item key="AccountSettings" icon={<UserOutlined />}>
+                    Account Settings
+                </Menu.Item>
                 <Menu.Item key="CreateNewRoadmap" icon={<UserOutlined />}>
                     Create new roadmap
+                </Menu.Item>
+                <Menu.Item key="Help" icon={<UserOutlined />}>
+                    Help
                 </Menu.Item>
                 <Menu.Item key="Logout" icon={<UserOutlined />}>
                     Logout
@@ -116,7 +128,7 @@ class CustomLayout extends Component {
                     <Footer>
                         <div className="container-fluid">
                             <Row>
-                                <Col span={9}>
+                                <Col span={8}>
                                     <img id="footer-logo" src={"/static/frontend/logo-footer.svg"} alt="logo"></img>
                                     <p>A social platform for you to start a new hobby.</p>
                                     <div>
@@ -125,31 +137,38 @@ class CustomLayout extends Component {
                                         <TwitterOutlined className="footer-social-media-btn"/>
                                     </div>
                                 </Col>
-                                <Col span={5}>
-                                    <h5 className="title mb-3">Home</h5>
-                                    <ul>
-                                        <li><a href="#!">Link 1</a></li>
-                                        <li><a href="#!">Link 2</a></li>
-                                        <li><a href="#!">Link 3</a></li>
-                                        <li><a href="#!">Link 4</a></li>
+                                <Col span={4}>
+                                    <h5 className="title mb-3">LEARN</h5>
+                                    <ul className="footer-list">
+                                        <li><a href="#!">Disciplines</a></li>
+                                        <li><a href="#!">Blog</a></li>
+                                        <li><a href="#!">For Teams</a></li>
+                                        <li><a href="#!">Subscriptions</a></li>
                                     </ul>
                                 </Col>
-                                <Col span={5}>
-                                    <h5 className="title mb-3">About</h5>
-                                    <ul>
-                                        <li><a href="#!">Link 1</a></li>
-                                        <li><a href="#!">Link 2</a></li>
-                                        <li><a href="#!">Link 3</a></li>
-                                        <li><a href="#!">Link 4</a></li>
+                                <Col span={4}>
+                                    <h5 className="title mb-3">CONTRIBUTE</h5>
+                                    <ul className="footer-list">
+                                        <li><a href="#!">Become an Author</a></li>
+                                        <li><a href="#!">Published Authors</a></li>
+                                        <li><a href="#!">Become a Tutor</a></li>
+                                        <li><a href="#!">Accredited Tutors</a></li>
                                     </ul>
                                 </Col>
-                                <Col span={5}>
-                                    <h5 className="title mb-3">About Us</h5>
-                                    <ul>
-                                        <li><a href="#!">Link 1</a></li>
-                                        <li><a href="#!">Link 2</a></li>
-                                        <li><a href="#!">Link 3</a></li>
-                                        <li><a href="#!">Link 4</a></li>
+                                <Col span={4}>
+                                    <h5 className="title mb-3">LEGAL</h5>
+                                    <ul className="footer-list">
+                                        <li><a href="#!">Privacy Policy</a></li>
+                                        <li><a href="#!">Terms of Service</a></li>
+                                    </ul>
+                                </Col>
+                                <Col span={4}>
+                                    <h5 className="title mb-3">MORE</h5>
+                                    <ul className="footer-list">
+                                        <li><a href="#!">Team</a></li>
+                                        <li><a href="#!">Careers</a></li>
+                                        <li><a href="#!">FAQ</a></li>
+                                        <li><a href="#!">Contact Us</a></li>
                                     </ul>
                                 </Col>
                             </Row>

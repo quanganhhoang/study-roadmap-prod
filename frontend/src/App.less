@@ -10,6 +10,8 @@
     flex: 1;
 }
 
+// custom layout 
+
 .navbar {
     background-color: white;
 }
@@ -37,6 +39,37 @@
     border: solid 1px #e6e6e6;
 }
 
+
+.user-auth-nav {
+    text-align: right;
+    right: 0;
+    // border: 1px solid red;
+}
+
+.nav-btn {
+    margin: 0px 5px;
+    border-radius: 24px;
+}
+
+.footer-copyright {
+    text-align: center;
+}
+
+.footer-social-media-btn {
+    margin: 0px 5px;
+    font-size: 20px;
+}
+
+.footer-list {
+    list-style: none;
+    text-indent: 0;
+    padding-left: 0;
+}
+
+// custom layout 
+
+// styling landing page
+
 #landing-pic-1 {
     width: 460px;
     height: 326px;
@@ -51,7 +84,7 @@
 
 #slogan-1 {
     width: 570px;
-    height: 240px;
+    height: auto;
     font-family: Inter-Regular_;
     font-size: 72px;
     font-weight: bold;
@@ -65,7 +98,7 @@
 
 #slogan1-description {
     width: 570px;
-    height: 96px;
+    height: 72px;
     font-family: OpenSans;
     font-size: 20px;
     font-weight: normal;
@@ -79,7 +112,13 @@
 
 #slogan-2 {
     width: 470px;
-    height: 128px;
+    height: auto;
+    // border: 1px solid red;
+}
+
+#slogan-2 ul {
+    list-style: none;
+    padding-left: 0;
     font-family: Inter-Regular_;
     font-size: 48px;
     font-weight: bold;
@@ -104,14 +143,14 @@
 }
 
 #slogan-3 {
-    width: 570px;
-    height: 128px;
+    margin-top: 50px;
+    width: auto;
     font-family: Inter-Regular_;
-    font-size: 48px;
+    font-size: 24px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.33;
+    // line-height: 1.33;
     letter-spacing: normal;
     text-align: center;
     color: #212b36;
@@ -144,25 +183,27 @@
     color: #212b36;
 }
 
-.user-auth-nav {
-    text-align: right;
-    right: 0;
+#landingpage-values {
+    margin-top: 30px;
     // border: 1px solid red;
 }
 
-.nav-btn {
-    margin: 0px 5px;
-    border-radius: 24px;
+#view-roadmaps-btn {
+    font-family: Inter-Regular_;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    color: #212b36;
 }
 
-.footer-copyright {
-    text-align: center;
+#view-roadmaps-btn :hover {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    transition-duration: 0.3s;
 }
 
-.footer-social-media-btn {
-    margin: 0px 5px;
-    font-size: 20px;
-}
+// styling landing page
+
 
 .dashboard-discipline-container {
     display: flex;
@@ -364,3 +405,4 @@ ul.noindent {
 ul.noindent li {
     text-indent: 50px;
 }
+

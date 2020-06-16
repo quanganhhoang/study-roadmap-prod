@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Card, Avatar } from 'antd';
+import { Row, Col, Button } from 'antd';
 
-const { Meta } = Card;
 
 class LandingPage extends Component {
   render() {
@@ -11,104 +10,74 @@ class LandingPage extends Component {
             <Row>
                 <Col span={12}>
                     <Row type="flex">
-                        <p id="slogan-1">This is a slogan. This is a slogan. This is a slogan</p>
+                        <p id="slogan-1">Study plans for in-demand skills</p>
                     </Row>
                     <Row type="flex">
-                        <p id="slogan1-description">Lorem ipsum dolor sit amet, hincvix. Purto dissentiesse tempor tincidunt. Cum utinam virtute qualisque ad. Duo maiorum antiopam voluptatum id.</p>
+                        <p id="slogan1-description">Polaris is a platform that aims to give you a clear and personalized path to learning new skills.</p>
                     </Row>
                 </Col>
                 <Col span={12}>
                     <img id="landing-pic-1" src={"/static/frontend/landing-page-1.svg"} alt="todo"></img>
                 </Col>
             </Row>
-            <Row>
-                <Col span={12}>
-                    <img id="landing-pic-2" src={"/static/frontend/landing-page-2.svg"} alt="todo"></img>
-                </Col>
-                <Col span={12}>
-                    <Row>
-                        <p id="slogan-2">This is a slogan. This is a slogan</p>
-                    </Row>
-                    <Row>
-                        <p id="slogan2-description">Lorem ipsum dolor sit amet, hincvix. Purto dissentiesse tempor tincidunt. Cum utinam virtute qualisque ad. Duo maiorum antiopam voluptatum id.</p>
-                    </Row>
-                </Col>
-            </Row>
+
             <Row align="middle">
-                <p id="slogan-3">This is a slogan. This is a slogan</p>
-            </Row>
-            <Row align="middle">
-                <p id="slogan3-description">Lorem ipsum dolor sit amet, hincvix. Cum utinam virtute qualisque ad.</p>
-            </Row>
-            <Row>
-                <Col span={12}>
-                    <Row>
-                        <p id="slogan-2">This is a slogan. This is a slogan</p>
-                    </Row>
-                    <Row>
-                        <p id="slogan2-description">Lorem ipsum dolor sit amet, hincvix. Purto dissentiesse tempor tincidunt. Cum utinam virtute qualisque ad. Duo maiorum antiopam voluptatum id.</p>
-                    </Row>
-                </Col>
-                <Col span={12}>
-                    <img id="landing-pic-2" src={"/static/frontend/landing-page-2.svg"} alt="todo"></img>
-                </Col>
-            </Row>
-            <Row>
-                <p id="user-experience-landing-page">User Testimonial</p>
-            </Row>
-            <Row>
-                <Col span={8}>
-                    <Card
-                        style={{ width: 300 }}
-                        cover={
-                        <img
-                            alt="example"
-                            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        />
-                        }
+                <Col span={12} offset={6} align="middle">
+                    <Button
+                        id="view-roadmaps-btn"
+                        href="/roadmaps"
+                        shape="omitted"
                     >
-                        <Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                        title="Card title"
-                        description="This is the description"
-                        />
-                    </Card>
-                </Col>
-                <Col span={8}>
-                    <Card
-                        style={{ width: 300 }}
-                        cover={
-                        <img
-                            alt="example"
-                            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        />
-                        }
-                    >
-                        <Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                        title="Card title"
-                        description="This is the description"
-                        />
-                    </Card>
-                </Col>
-                <Col span={8}>
-                    <Card
-                        style={{ width: 300 }}
-                        cover={
-                        <img
-                            alt="example"
-                            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        />
-                        }
-                    >
-                        <Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                        title="Card title"
-                        description="This is the description"
-                        />
-                    </Card>
+                        View all roadmaps
+                    </Button>
+                    <p id="slogan-3">Join 1,000+ learners, working at companies such as:</p>
+                    <div>
+                        INSERT COMPANY LOGOS HERE
+                    </div>
                 </Col>
             </Row>
+
+            <div id="landingpage-values">
+                <Row>
+                    <Col span={12}>
+                        <Row type="flex">
+                            <p id="value-proposition">Personalized</p>
+                        </Row>
+                        <Row type="flex">
+                            <p id="value-description">Polaris is a platform that aims to give you a clear and personalized path to learning new skills.</p>
+                        </Row>
+                    </Col>
+                    <Col span={12}>
+                        <img id="landing-pic-1" src={"/static/frontend/landing-page-1.svg"} alt="todo"></img>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={12}>
+                        <img id="landing-pic-1" src={"/static/frontend/landing-page-1.svg"} alt="todo"></img>
+                    </Col>
+                    <Col span={12}>
+                        <Row type="flex">
+                            <p id="value-proposition">Simple</p>
+                        </Row>
+                        <Row type="flex">
+                            <p id="value-description">Polaris is a platform that aims to give you a clear and personalized path to learning new skills.</p>
+                        </Row>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={12}>
+                        <Row type="flex">
+                            <p id="value-proposition">Effective</p>
+                        </Row>
+                        <Row type="flex">
+                            <p id="value-description">Polaris is a platform that aims to give you a clear and personalized path to learning new skills.</p>
+                        </Row>
+                    </Col>
+                    <Col span={12}>
+                        <img id="landing-pic-1" src={"/static/frontend/landing-page-1.svg"} alt="todo"></img>
+                    </Col>
+                </Row>
+            </div>
         </div>
     )
   }

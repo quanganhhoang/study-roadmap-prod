@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Avatar } from "antd";
+import { List } from "antd";
 import { StarOutlined, LikeOutlined, CommentOutlined } from '@ant-design/icons' 
 
 const IconComponent = (type) => {
@@ -39,9 +39,9 @@ const RoadmapList = props => {
                     <List.Item
                         key={item.title}
                         actions={[
-                            <IconText type="star" text={item.num_shares} />,
-                            <IconText type="like" text={item.num_votes} />,
-                            <IconText type="comment" text={item.num_shares} />
+                            <IconText key="star" type="star" text={item.num_shares} />,
+                            <IconText key="like" type="like" text={item.num_votes} />,
+                            <IconText key="comment" type="comment" text={item.num_shares} />
                         ]}
                         extra={
                             <img

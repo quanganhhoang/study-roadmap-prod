@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { Row, Col, Button, Card, Avatar, Divider } from "antd";
-import { ShareAltOutlined, SaveOutlined } from '@ant-design/icons'
+
 // import CustomForm from "./Form";
 const { Meta } = Card;
 
