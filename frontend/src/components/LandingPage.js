@@ -26,7 +26,6 @@ class LandingPage extends Component {
                     <Button
                         id="view-roadmaps-btn"
                         href="/roadmaps"
-                        shape="omitted"
                     >
                         View all roadmaps
                     </Button>
