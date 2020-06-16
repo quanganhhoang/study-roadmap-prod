@@ -6,7 +6,11 @@ import reduxLogger from 'redux-logger';
 import reducers from './reducers'
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const middlewares = [reduxThunk, reduxLogger]
+
+let middlewares = [reduxThunk]
+if (process.env.NODE_ENV !== 'production') {
+    middlewares=[...middlewares, reduxLogger]
+} 
 
 export const store = createStore(reducers, composeEnhancer(
     applyMiddleware(...middlewares)

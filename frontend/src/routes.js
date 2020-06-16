@@ -33,7 +33,7 @@ class BaseRouter extends Component {
                     />
                     <Route exact path="/search/" component={SearchResult} />
                     <Route exact path="/roadmaps/" component={MyRoadmap} />
-                    <Route exact path="/roadmaps/create/" exact component={CreateRoadmap} />
+                    <Route exact path="/roadmaps/create/" component={CreateRoadmap} />
                     <Route exact path="/roadmaps/:roadmapId" component={Roadmap} />
                     <Route exact path="/dashboard/" component={Dashboard} />
                 </Switch>
@@ -43,7 +43,6 @@ class BaseRouter extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('routes state', state)
     return {
         isAuthenticated: state.auth.token !== null
     }

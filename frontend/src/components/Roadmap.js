@@ -19,7 +19,7 @@ class Roadmap extends Component {
     componentDidMount() {
         const roadmapId = this.props.match.params.roadmapId;
         const token = this.props.token;
-        console.log('token', token)
+        
         api.get(`api/roadmaps/${roadmapId}`, {
             headers: {
                 Authorization: `Token ${token}`

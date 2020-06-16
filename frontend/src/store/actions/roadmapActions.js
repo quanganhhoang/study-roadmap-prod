@@ -17,8 +17,6 @@ import {
 
 export const fetchAllRoadmaps = () => {
     return (dispatch, getState) => {
-        console.log('fetchAllRoadmaps action called')
-        console.log('state', getState())
         const token = getState().auth.token
         
         api.get('api/roadmaps/', {
@@ -27,7 +25,6 @@ export const fetchAllRoadmaps = () => {
             }
         })
         .then(res => {
-            console.log('roadmap action', res)
             dispatch({
                 type: FETCH_ALL_ROADMAP,
                 payload: res.data.results,

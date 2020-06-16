@@ -174,7 +174,7 @@ class CreateRoadmap extends Component {
     handleSave = (e) => {
         e.preventDefault();
         const token = this.props.token;
-
+        let transactionSuccess = true;
         // TODO(qahoang): rollback transaction if anything fails here
         api.post(`api/roadmaps/`, {
             "author": this.props.authorId,
@@ -187,7 +187,6 @@ class CreateRoadmap extends Component {
                 'Authorization': `Token ${token}`
             }
         }).then(res => {
-            console.log(res)
             const roadmapId = res.data.id
 
             for (let i = 0; i < this.state.numMilestones; i++) {
@@ -205,15 +204,21 @@ class CreateRoadmap extends Component {
                     }
                 }).then(res => {
                     console.log(res)
-                    this.props.history.push('/roadmaps');
+                    // TODO(qahoang): wrap in a transaction, rollback if any error 
                 }).catch(err => {
+                    transactionSuccess = false;
                     console.log(err)
-                    alert(`ERROR: ${err}`);
                 })
             }
+            
         }).catch(err => {
             console.log(err)
+            transactionSuccess = false;
         })
+
+        if (transactionSuccess) {
+            this.props.history.push('/roadmaps');
+        }
     }
 
     componentDidMount() {
@@ -280,7 +285,6 @@ class CreateRoadmap extends Component {
                                 </Col>
                             </Row>
                         </Col>
-                        
                     </Row>
                 </div>
             )

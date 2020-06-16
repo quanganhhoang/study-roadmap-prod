@@ -7,7 +7,6 @@ import { store, persistor } from './store/store'
 
 import App from './App'
 
-console.log('REDUX STORE', store.getState())
 
 ReactDOM.render(
     <Provider store={store}>

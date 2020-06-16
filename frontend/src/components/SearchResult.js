@@ -92,7 +92,6 @@ class SearchResult extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('search result state', state)
     return {
         searchTerm: state.roadmap.searchTerm,
         searchResult: state.roadmap.searchResult

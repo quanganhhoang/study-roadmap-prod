@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     userId: null,
 }
 
-const authStart = (state, action) => {
+const authStart = (state) => {
     return {
         ...state,
         error: null,
@@ -41,7 +41,7 @@ const authFail = (state, action) => {
     }
 }
 
-const authLogout = (state, action) => {
+const authLogout = (state) => {
     return {
         ...state,
         token: null

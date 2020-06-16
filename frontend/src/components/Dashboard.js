@@ -27,7 +27,6 @@ class Dashboard extends Component {
     }
     
     render() {
-        // console.log('dashboard redux', this.props)
         const { 
             roadmapsByUser,
             mostPopularRoadmaps,

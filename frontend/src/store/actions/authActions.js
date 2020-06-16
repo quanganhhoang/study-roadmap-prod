@@ -78,7 +78,6 @@ export const authLogin = (username, password) => {
             password: password
         })
         .then(res => {
-            console.log('login res', res);
             const token = res.data.key
             
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000) // 1 hour
@@ -90,7 +89,7 @@ export const authLogin = (username, password) => {
             dispatch(checkAuthTimeout(3600))
         })
         .catch(err => {
-            // console.log(err)
+            console.log(err)
             dispatch(authFail(err))
         })
     }
