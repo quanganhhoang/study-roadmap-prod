@@ -66,7 +66,6 @@ export const fetchMostPopularRoadmaps = () => {
             }
         })
         .then(res => {
-            console.log(res)
             dispatch({
                 type: FETCH_MOST_POPULAR_ROADMAPS,
                 payload: res.data,
