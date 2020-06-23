@@ -5,8 +5,8 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { FacebookOutlined, GoogleOutlined, TwitterOutlined, UserOutlined } from '@ant-design/icons';
 
-import * as authActions from '../store/actions/authActions';
-import { searchRoadmaps } from '../store/actions/roadmapActions'
+import * as authActions from '../redux/auth/auth.action';
+import { searchRoadmaps } from '../redux/roadmap/roadmap.action'
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;

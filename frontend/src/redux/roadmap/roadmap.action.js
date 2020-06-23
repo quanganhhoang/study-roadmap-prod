@@ -12,7 +12,7 @@ import {
     SEARCH_ROADMAPS_SUCCESS,
     SEARCH_ROADMAPS_FAIL,
     // SEARCH BAR
-} from './roadmapTypes'
+} from './roadmap.types'
 
 
 export const fetchAllRoadmaps = () => {

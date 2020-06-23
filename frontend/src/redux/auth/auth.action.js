@@ -4,9 +4,10 @@ import {
     AUTH_FAIL,
     AUTH_LOGOUT,
     FETCH_USER_SUCCESS
-} from './authTypes';
+} from './auth.types';
 
 import api from '../../api';
+import storage from 'redux-persist/lib/storage'; // local storage
 
 export const authStart = () => {
     return {
@@ -32,6 +33,8 @@ export const authFail = error => {
 
 export const logout = () => {
     localStorage.removeItem('expirationDate')
+    // clear storage used by redux-persist
+    storage.removeItem('persist:root')
     return {
         type: AUTH_LOGOUT
     }

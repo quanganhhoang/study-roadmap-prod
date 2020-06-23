@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { authCheckState } from './store/actions/authActions'
+import { authCheckState } from './redux/auth/auth.action'
 
 import CustomLayout from './components/CustomLayout'
 import BaseRouter from './routes'

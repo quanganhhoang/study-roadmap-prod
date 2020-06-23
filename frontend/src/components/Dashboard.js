@@ -6,9 +6,9 @@ import {
     fetchRoadmapByUser,
     fetchMostPopularRoadmaps,
     fetchHighestRatedRoadmaps
-} from '../store/actions/roadmapActions'
+} from '../redux/roadmap/roadmap.action'
 
-import { fetchAllDisciplines } from '../store/actions/disciplineActions'
+import { fetchAllDisciplines } from '../redux/discipline/discipline.action'
 
 import { Row, Col } from 'antd';
 

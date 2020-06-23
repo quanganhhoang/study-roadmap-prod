@@ -1,7 +1,7 @@
 import {
     FETCH_ALL_DISCIPLINE_SUCCESS,
     FETCH_ALL_DISCIPLINE_FAIL
-} from './disciplineTypes';
+} from './discipline.type';
 
 import api from '../../api';
 

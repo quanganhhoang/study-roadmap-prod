@@ -4,7 +4,7 @@ import {
     AUTH_FAIL,
     AUTH_LOGOUT,
     FETCH_USER_SUCCESS
-} from '../actions/authTypes'
+} from './auth.types'
 
 
 const INITIAL_STATE = {
@@ -44,7 +44,9 @@ const authFail = (state, action) => {
 const authLogout = (state) => {
     return {
         ...state,
-        token: null
+        token: null,
+        username: null,
+        userId: null
     }
 }
 

@@ -1,7 +1,7 @@
 import {
     FETCH_ALL_DISCIPLINE_SUCCESS,
     FETCH_ALL_DISCIPLINE_FAIL,
-} from '../actions/disciplineTypes';
+} from './discipline.type'
 
 const INITIAL_STATE = {
     disciplines: [],

@@ -1,4 +1,4 @@
-import * as roadmapActions from '../actions/roadmapTypes'
+import * as roadmapActions from './roadmap.types'
 
 const INITIAL_STATE = {
     error: null,
