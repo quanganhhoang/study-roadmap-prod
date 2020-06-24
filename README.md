@@ -73,9 +73,13 @@ Start our front-end server
 ## TODO:
 - ~~Deploy to Heroku~~
 - ~~Update API documentation~~
-- Implement Roadmap Component
-- Implement MyRoadmap Component
-- Implement search functionality
+- ~~Implement Roadmap Component~~
+- ~~Implement MyRoadmap Component~~
+- ~~Implement search functionality~~
+- Mobile responsive (Material UI or react-strap)
+- MyProfile component
+- AccountSetting component
+- Implement save/follow roadmap feature
 - Implement a recommender system
 
 
