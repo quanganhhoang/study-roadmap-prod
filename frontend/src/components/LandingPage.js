@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Divider } from 'antd';
 
 
 class LandingPage extends Component {
@@ -13,7 +13,7 @@ class LandingPage extends Component {
                             <p id="slogan">Study plans for in-demand skills</p>
                         </Row>
                         <Row type="flex">
-                            <p id="slogan-description">Polaris is a platform that aims to give you a clear and personalized path to learning new skills.</p>
+                            <p id="slogan-description">Polaris is a community-based platform that curates roadmaps for any skills/hobbies. Users start their learning journey from a search query and pay it forward by sharing their own.</p>
                         </Row>
                     </Col>
                     <Col span={12}>
@@ -30,7 +30,7 @@ class LandingPage extends Component {
                             View all roadmaps
                         </Button>
                         <p id="call-to-action">Join 1,000+ learners, working at companies such as:</p>
-                        <div>
+                        <div id="logo-section">
                             <img className="brand-logo" src={"/static/frontend/brand-logos/amazon.png"} alt="brand-logo"></img>
                             <img className="brand-logo" src={"/static/frontend/brand-logos/google.png"} alt="brand-logo"></img>
                             <img className="brand-logo" src={"/static/frontend/brand-logos/microsoft.png"} alt="brand-logo"></img>
@@ -38,7 +38,7 @@ class LandingPage extends Component {
                         </div>
                     </Col>
                 </Row>
-
+                <Divider></Divider>
                 <div id="landingpage-values">
                     <Row>
                         <Col span={12}>
@@ -46,7 +46,7 @@ class LandingPage extends Component {
                                 <p className="value-proposition">Personalized</p>
                             </Row>
                             <Row type="flex">
-                                <p className="value-description">Roadmaps are personalized based on user profile.</p>
+                                <p className="value-description">Roadmaps are personalized based on user profile. Let us know what you are looking for, your current skillset and goals and we will optimize your search results.</p>
                             </Row>
                         </Col>
                         <Col span={12}>
@@ -62,7 +62,7 @@ class LandingPage extends Component {
                                 <p className="value-proposition">Simple</p>
                             </Row>
                             <Row type="flex">
-                                <p className="value-description">Start your learning journey from a search.</p>
+                                <p className="value-description">Start your learning journey from a search. Think of Polaris not as a book but an appendix. Our users contribute to our resource catalogs based on their learning journeys and we help spread the word!</p>
                             </Row>
                         </Col>
                     </Row>
@@ -72,12 +72,26 @@ class LandingPage extends Component {
                                 <p className="value-proposition">Effective</p>
                             </Row>
                             <Row type="flex">
-                                <p className="value-description">Upvote a roadmap if you think it is effective. Polaris relies on our community to make the platform better over time.</p>
+                                <p className="value-description">Upvote a roadmap if you think it is effective. A <b>trusted</b>, <b>concise</b>, <b>simple</b> yet <b>effective</b> roadmap outperforms others. Polaris relies on our community to make the platform better over time.</p>
                             </Row>
                         </Col>
                         <Col span={12}>
                             <img id="landing-pic-1" src={"/static/frontend/effective.png"} alt="effective"></img>
                         </Col>
+                    </Row>
+                    <Row>
+                        <Col span={12}>
+                            <img id="landing-pic-1" src={"/static/frontend/sharing.jpg"} alt="reinforced-learning"></img>
+                        </Col>
+                        <Col span={12}>
+                            <Row type="flex">
+                                <p className="value-proposition">Reinforced Learning</p>
+                            </Row>
+                            <Row type="flex">
+                                <p className="value-description">We believe learning by teaching is the most effective way of mastering your craft. Distill your learning into simple steps and help pay it forward to others like you.</p>
+                            </Row>
+                        </Col>
+                
                     </Row>
                 </div>
             </div>
