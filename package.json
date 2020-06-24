@@ -1,5 +1,6 @@
 {
   "name": "data-mining-project",
+  "homepage": "https://studyroadmap.herokuapp.com/",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -23,7 +24,6 @@
   "bugs": {
     "url": "https://github.com/quanganhhoang/data-mining-project/issues"
   },
-  "homepage": "https://github.com/quanganhhoang/data-mining-project#readme",
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
