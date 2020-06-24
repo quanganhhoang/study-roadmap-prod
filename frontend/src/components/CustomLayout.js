@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Layout, Menu, Button, Input, Dropdown, message } from 'antd';
+import { Row, Col, Layout, Menu, Button, Input, Dropdown } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 
 import { FacebookOutlined, GoogleOutlined, TwitterOutlined, UserOutlined } from '@ant-design/icons';
@@ -16,14 +16,8 @@ class CustomLayout extends Component {
     constructor(props) {
         super(props)
     }
-
-    handleButtonClick = (e) => {
-        message.info('Click on left button.');
-        console.log('click left button', e);
-    }
       
     handleMenuClick = (e) => {
-
         switch (e.key) {
             case 'MyRoadmap':
                 this.props.history.push('/roadmaps');
