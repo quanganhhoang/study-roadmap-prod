@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "webpack --mode development --watch ./frontend/src/index.js --output ./static/frontend/main.js",
     "build": "webpack --mode production ./frontend/src/index.js --output ./static/frontend/main.js",
-    "postinstall": "npm run build",
     "lint": "eslint frontend/src/**/*.js"
   },
   "engines": {
