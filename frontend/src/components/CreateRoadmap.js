@@ -158,6 +158,17 @@ class CreateRoadmap extends Component {
         })
     }
 
+    onChangeMilestoneTitle = (e, milestoneId) => {
+        e.preventDefault();
+        const { value } = e.target;
+        const { milestones } = this.state;
+        milestones[milestoneId].title = value;
+
+        this.setState({
+            milestones
+        })
+    }
+
     onChangeMilestoneContent = (e, milestoneId) => {
         e.preventDefault();
         const { value } = e.target
@@ -244,22 +255,10 @@ class CreateRoadmap extends Component {
                                     <Input
                                         className="milestone-title"
                                         placeholder="Title"
-                                        onChange={(e) => {
-                                            this.setState(prevState => ({
-                                                milestones: {
-                                                    ...prevState.milestones,
-                                                    [prevState.milestones[i].value]: e.target.value
-                                                }
-                                            }))
+                                        onChange={e => {
+                                            this.onChangeMilestoneTitle(e, i)
                                         }}
                                     />
-                                    {/* <div className="form-group">
-                                        <label>Existing milestones Id (contribute to a published milestone):</label>
-                                        <input type="text" className="form-control"  onChange={(e) => {
-                                            this.milestones[i].id = e.target.value;
-                                            this.milestones[i].id = this.milestones[i].milestonesId === "" ? null : this.milestones[i].milestonesId;
-                                        }}/>
-                                    </div> */}
                                     <TextArea
                                         className="milestone-content"
                                         value={this.state.milestones[i].content}
