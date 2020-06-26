@@ -76,6 +76,7 @@ Start our front-end server
 - ~~Implement Roadmap Component~~
 - ~~Implement MyRoadmap Component~~
 - ~~Implement search functionality~~
+- Implement a Spinner HOC for when data is being fetched
 - Mobile responsive (Material UI or react-strap)
 - MyProfile component
 - AccountSetting component

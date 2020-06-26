@@ -9,8 +9,8 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 let middlewares = [reduxThunk]
 if (process.env.NODE_ENV !== 'production') {
-    middlewares=[...middlewares, reduxLogger]
-} 
+    middlewares.push(reduxLogger)
+}
 
 export const store = createStore(reducers, composeEnhancer(
     applyMiddleware(...middlewares)

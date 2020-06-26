@@ -49,8 +49,6 @@ export const checkAuthTimeout = expirationTime => {
 }
 
 export const fetchUser = (token, username) => {
-    // console.log('FETCH_USER ACTION CALLED', username)
-    
     return dispatch => {
         api.get(`api/users/username/${username}/`, {
             headers: {
