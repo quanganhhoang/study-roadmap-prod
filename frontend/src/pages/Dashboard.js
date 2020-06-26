@@ -12,8 +12,8 @@ import { fetchAllDisciplines } from '../redux/discipline/discipline.action'
 
 import { Row, Col } from 'antd';
 
-import DisciplineCard from './DisciplineCard';
-import DashboardRoadmapList from './DashboardRoadmapList';
+import DisciplineCard from '../components/DisciplineCard';
+import DashboardRoadmapList from '../components/DashboardRoadmapList';
 
 
 class Dashboard extends Component {

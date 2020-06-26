@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Button } from 'antd';
 
-import RoadmapList from "./RoadmapList";
+import RoadmapList from "../components/RoadmapList";
 
 
 class MyRoadmap extends Component {

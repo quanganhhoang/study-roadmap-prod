@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import LandingPage from './components/LandingPage'
+import LandingPage from './pages/LandingPage'
 import Roadmap from './components/Roadmap'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import MyRoadmap from './components/MyRoadmap'
-import CreateRoadmap from './components/CreateRoadmap';
-import Dashboard from './components/Dashboard';
-import SearchResult from './components/SearchResult';
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import MyRoadmap from './pages/MyRoadmap'
+import CreateRoadmap from './pages/CreateRoadmap';
+import Dashboard from './pages/Dashboard';
+import SearchResult from './pages/SearchResult';
 
 class BaseRouter extends Component {
     constructor(props) {
