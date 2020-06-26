@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development --watch ./frontend/src/index.js --output ./static/frontend/main.js",
-    "build": "echo RUNNING BUILD SCRIPT && webpack --mode production ./frontend/src/index.js --output ./static/frontend/main.js",
+    "build": "echo RUNNING BUILD SCRIPT",
     "lint": "eslint frontend/src/**/*.js"
   },
   "engines": {
