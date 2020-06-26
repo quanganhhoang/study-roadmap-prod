@@ -116,6 +116,11 @@ Check configuration
 
     heroku config --app <name_of_your_application>
 
+Make sure heroku builds our application
+
+    heroku buildpacks:add --index 1 heroku/nodejs
+    heroku buildpacks:add --index 2 heroku/python
+
 Push it!
 
     git push heroku master
