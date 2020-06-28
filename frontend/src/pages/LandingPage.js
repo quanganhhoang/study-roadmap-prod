@@ -25,7 +25,7 @@ class LandingPage extends Component {
                     <Col span={12} offset={6} align="middle">
                         <Button
                             id="view-roadmaps-btn"
-                            href="/#"
+                            href="/dashboard"
                         >
                             View all roadmaps
                         </Button>

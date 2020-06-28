@@ -57,7 +57,7 @@ class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Roadmap.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.AllowAny
     ]
     authentication_classes = (TokenAuthentication,)
     serializer_class = RoadmapSerializer

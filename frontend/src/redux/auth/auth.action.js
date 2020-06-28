@@ -15,12 +15,10 @@ export const authStart = () => {
     }
 }
 
-export const authSuccess = (token, username, id) => {
+export const authSuccess = (token) => {
     return {
         type: AUTH_SUCCESS,
         token: token,
-        username: username,
-        id: id
     }
 }
 
@@ -56,7 +54,7 @@ export const fetchUser = (token, username) => {
             }
         })
         .then(res => {
-            dispatch(fetchUserSuccess(res.data.id))
+            dispatch(fetchUserSuccess(res.data))
         })
         .catch(err => {
             console.log(err)
@@ -64,15 +62,15 @@ export const fetchUser = (token, username) => {
     }
 }
 
-export const fetchUserSuccess = (userId) => {
+export const fetchUserSuccess = (user) => {
     return {
         type: FETCH_USER_SUCCESS,
-        userId: userId
+        user: user
     }
 }
 
 export const authLogin = (username, password) => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         dispatch(authStart())
         api.post('rest-auth/login/', {
             username: username,
@@ -85,8 +83,7 @@ export const authLogin = (username, password) => {
 
             localStorage.setItem('expirationDate', expirationDate)
             dispatch(fetchUser(token, username))
-            const userId = getState().auth.userId
-            dispatch(authSuccess(token, username, userId))            
+            dispatch(authSuccess(token))            
             dispatch(checkAuthTimeout(3600))
         })
         .catch(err => {
@@ -97,7 +94,8 @@ export const authLogin = (username, password) => {
 }
 
 export const authSignup = (username, email, password, passwordConfirmed) => {
-    return (dispatch, getState) => {
+    // (dispatch, getState)
+    return (dispatch) => {
         dispatch(authStart())
         api.post('rest-auth/registration/', {
             username: username,
@@ -112,8 +110,7 @@ export const authSignup = (username, email, password, passwordConfirmed) => {
             // save in browser
             localStorage.setItem('expirationDate', expirationDate)
             dispatch(fetchUser(token, username))
-            const userId = getState().auth.userId
-            dispatch(authSuccess(token, username, userId))     
+            dispatch(authSuccess(token))     
             dispatch(checkAuthTimeout(3600))
         })
         .catch(err => {

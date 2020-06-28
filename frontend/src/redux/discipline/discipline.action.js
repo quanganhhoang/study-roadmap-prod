@@ -7,10 +7,10 @@ import api from '../../api';
 
 export const fetchAllDisciplines = () => {
     return (dispatch, getState) => {
-        const token = getState().auth.token;
+        const { token } = getState().auth;
         api.get('api/roadmaps/disciplines/', {
             headers: {
-                Authorization: `Token ${token}`
+                Authorization: token ? `Token ${token}` : ''
             }
         })
         .then(res => {

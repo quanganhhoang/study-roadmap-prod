@@ -78,7 +78,6 @@ const DashboardRoadmapList = props => {
                                 <div>
                                     <p className="dashboard-roadmap-card-description">{item.description}</p>
                                 </div>
-                                
                             )}
                         />
                         {item.content}

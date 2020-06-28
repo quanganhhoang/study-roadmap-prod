@@ -8,30 +8,53 @@ import {
     fetchHighestRatedRoadmaps
 } from '../redux/roadmap/roadmap.action'
 
+import {
+    selectRoadmapByUser, 
+    selectMostPopularRoadmaps, 
+    selectAllRoadmaps, 
+    selectHighestRatedRoadmaps
+} from '../redux/roadmap/roadmap.selector'
+
+import { selectAllDisciplines } from '../redux/discipline/discipline.selector'
+
 import { fetchAllDisciplines } from '../redux/discipline/discipline.action'
 
 import { Row, Col } from 'antd';
-
 import DisciplineCard from '../components/DisciplineCard';
 import DashboardRoadmapList from '../components/DashboardRoadmapList';
+
+import { selectUser } from '../redux/auth/auth.selector';
 
 
 class Dashboard extends Component {
 
 	componentDidMount() {    
-        this.props.fetchAllRoadmaps()
-        this.props.fetchRoadmapByUser()
         this.props.fetchExistingDisciplines();
         this.props.fetchHighestRatedRoadmaps();
         this.props.fetchMostPopularRoadmaps();
+
+        if (this.props.isAuthenticated) {
+            this.props.fetchRoadmapByUser();
+        } else {
+            this.props.fetchAllRoadmaps();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.user !== this.props.user) {
+            this.props.fetchRoadmapByUser()
+        }
     }
     
     render() {
         const { 
             roadmapsByUser,
+            allRoadmaps,
             mostPopularRoadmaps,
             highestRatedRoadmaps,
-            existingDisciplines } = this.props;
+            existingDisciplines,
+            isAuthenticated
+        } = this.props;
      
         const disciplines = [];
         if (existingDisciplines.length != 0) {
@@ -46,15 +69,17 @@ class Dashboard extends Component {
                 )
             })
         }
+
+        const message = isAuthenticated ? "Welcome back! Pick up where you left off" : "Let's get started!"
         
         return (
             <div className="container-fluid">
                 <div>
-                    <h3>Welcome back, let&apos;s continue our studies?</h3>
+                    <h3>{message}</h3>
                 </div>
                 <div>
                     <DashboardRoadmapList
-                        data={roadmapsByUser}
+                        data={this.props.isAuthenticated ? roadmapsByUser : allRoadmaps}
                     />
                 </div>
                 
@@ -89,11 +114,13 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.token !== null,
-    userId: state.auth.userId,
-    roadmapsByUser: state.roadmap.roadmapsByUser,
-    mostPopularRoadmaps: state.roadmap.mostPopularRoadmaps,
-    highestRatedRoadmaps: state.roadmap.highestRatedRoadmaps,
-    existingDisciplines: state.discipline.disciplines
+    allRoadmaps: selectAllRoadmaps(state),
+    mostPopularRoadmaps: selectMostPopularRoadmaps(state),
+    highestRatedRoadmaps: selectHighestRatedRoadmaps(state),
+    existingDisciplines: selectAllDisciplines(state),
+
+    user: selectUser(state),
+    roadmapsByUser: selectRoadmapByUser(state)
 });
 
 // (dispatch, ownProps)

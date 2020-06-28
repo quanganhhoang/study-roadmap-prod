@@ -21,7 +21,7 @@ export const fetchAllRoadmaps = () => {
         
         api.get('api/roadmaps/', {
             headers: {
-                Authorization: `Token ${token}`
+                Authorization: token ? `Token ${token}` : ''
             }
         })
         .then(res => {
@@ -38,22 +38,23 @@ export const fetchAllRoadmaps = () => {
 
 export const fetchRoadmapByUser = () => {
     return (dispatch, getState) => {
-        const { token, userId } = getState().auth
- 
-        api.get(`api/users/${userId}/roadmaps/`, {
-            headers: {
-                Authorization: `Token ${token}`
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: FETCH_ROADMAP_BY_USER,
-                payload: res.data.results,
+        const { token, user } = getState().auth
+        if (user) {
+            api.get(`api/users/${user.id}/roadmaps/`, {
+                headers: {
+                    Authorization: token ? `Token ${token}` : ''
+                }
             })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                dispatch({
+                    type: FETCH_ROADMAP_BY_USER,
+                    payload: res.data.results,
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
     }
 }
 
@@ -62,7 +63,7 @@ export const fetchMostPopularRoadmaps = () => {
         const token = getState().auth.token
         api.get('api/roadmaps/most-popular/', {
             headers: {
-                Authorization: `Token ${token}`
+                Authorization: token ? `Token ${token}` : ''
             }
         })
         .then(res => {
@@ -87,7 +88,7 @@ export const fetchHighestRatedRoadmaps = () => {
         const token = getState().auth.token
         api.get('api/roadmaps/highest-rated/', {
             headers: {
-                Authorization: `Token ${token}`
+                Authorization: token ? `Token ${token}` : ''
             }
         })
         .then(res => {
@@ -112,11 +113,10 @@ export const searchRoadmaps = (searchTerm) => {
         const token = getState().auth.token
         api.get(`api/roadmaps?search=${searchTerm}`, {
             headers: {
-                Authorization: `Token ${token}`
+                Authorization: token ? `Token ${token}` : ''
             }
         })
         .then(res => {
-            console.log('res', res)
             dispatch({
                 type: SEARCH_ROADMAPS_SUCCESS,
                 searchResult: res.data.results,

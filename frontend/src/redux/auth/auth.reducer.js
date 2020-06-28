@@ -29,7 +29,6 @@ const authSuccess = (state, action) => {
         token: action.token,
         error: null,
         loading: false,
-        username: action.username,
     }
 }
 
@@ -45,15 +44,15 @@ const authLogout = (state) => {
     return {
         ...state,
         token: null,
-        username: null,
-        userId: null
+        user: null,
     }
 }
 
 const fetchUserSuccess = (state, action) => {
     return {
         ...state,
-        userId: action.userId
+        user: action.user,
+        loading: true
     }
 }
 
