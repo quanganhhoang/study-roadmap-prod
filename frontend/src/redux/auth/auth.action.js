@@ -1,30 +1,24 @@
-import {
-    AUTH_START,
-    AUTH_SUCCESS,
-    AUTH_FAIL,
-    AUTH_LOGOUT,
-    FETCH_USER_SUCCESS
-} from './auth.types';
+import AuthActionTypes from './auth.types';
 
 import api from '../../api';
 import storage from 'redux-persist/lib/storage'; // local storage
 
 export const authStart = () => {
     return {
-        type: AUTH_START,
+        type: AuthActionTypes.AUTH_START,
     }
 }
 
 export const authSuccess = (token) => {
     return {
-        type: AUTH_SUCCESS,
+        type: AuthActionTypes.AUTH_SUCCESS,
         token: token,
     }
 }
 
 export const authFail = error => {
     return {
-        type: AUTH_FAIL,
+        type: AuthActionTypes.AUTH_FAIL,
         error: error,
     }
 }
@@ -34,7 +28,7 @@ export const logout = () => {
     // clear storage used by redux-persist
     storage.removeItem('persist:root')
     return {
-        type: AUTH_LOGOUT
+        type: AuthActionTypes.AUTH_LOGOUT
     }
 }
 
@@ -64,7 +58,7 @@ export const fetchUser = (token, username) => {
 
 export const fetchUserSuccess = (user) => {
     return {
-        type: FETCH_USER_SUCCESS,
+        type: AuthActionTypes.FETCH_USER_SUCCESS,
         user: user
     }
 }

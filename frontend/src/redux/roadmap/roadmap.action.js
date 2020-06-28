@@ -1,18 +1,6 @@
 import api from '../../api';
 
-import {
-    FETCH_ALL_ROADMAP,
-    FETCH_ROADMAP_BY_USER,
-    FETCH_MOST_POPULAR_ROADMAPS,
-    FETCH_MOST_POPULAR_ROADMAPS_FAIL,
-    FETCH_HIGHEST_RATED_ROADMAPS,
-    FETCH_HIGHEST_RATED_ROADMAPS_FAIL,
-
-    // SEARCH BAR
-    SEARCH_ROADMAPS_SUCCESS,
-    SEARCH_ROADMAPS_FAIL,
-    // SEARCH BAR
-} from './roadmap.types'
+import RoadmapActionTypes from './roadmap.types';
 
 
 export const fetchAllRoadmaps = () => {
@@ -26,7 +14,7 @@ export const fetchAllRoadmaps = () => {
         })
         .then(res => {
             dispatch({
-                type: FETCH_ALL_ROADMAP,
+                type: RoadmapActionTypes.FETCH_ALL_ROADMAP,
                 payload: res.data.results,
             })
         })
@@ -47,7 +35,7 @@ export const fetchRoadmapByUser = () => {
             })
             .then(res => {
                 dispatch({
-                    type: FETCH_ROADMAP_BY_USER,
+                    type: RoadmapActionTypes.FETCH_ROADMAP_BY_USER,
                     payload: res.data.results,
                 })
             })
@@ -68,7 +56,7 @@ export const fetchMostPopularRoadmaps = () => {
         })
         .then(res => {
             dispatch({
-                type: FETCH_MOST_POPULAR_ROADMAPS,
+                type: RoadmapActionTypes.FETCH_MOST_POPULAR_ROADMAPS,
                 payload: res.data,
             })
             
@@ -76,7 +64,7 @@ export const fetchMostPopularRoadmaps = () => {
         .catch(err => {
             console.log(err)
             dispatch(({
-                type: FETCH_MOST_POPULAR_ROADMAPS_FAIL,
+                type: RoadmapActionTypes.FETCH_MOST_POPULAR_ROADMAPS_FAIL,
                 payload: err,
             }))
         })
@@ -93,14 +81,14 @@ export const fetchHighestRatedRoadmaps = () => {
         })
         .then(res => {
             dispatch({
-                type: FETCH_HIGHEST_RATED_ROADMAPS,
+                type: RoadmapActionTypes.FETCH_HIGHEST_RATED_ROADMAPS,
                 payload: res.data,
             })
         })
         .catch(err => {
             console.log(err)
             dispatch(({
-                type: FETCH_HIGHEST_RATED_ROADMAPS_FAIL,
+                type: RoadmapActionTypes.FETCH_HIGHEST_RATED_ROADMAPS_FAIL,
                 payload: err,
             }))
         })

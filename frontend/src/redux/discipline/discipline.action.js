@@ -1,7 +1,4 @@
-import {
-    FETCH_ALL_DISCIPLINE_SUCCESS,
-    FETCH_ALL_DISCIPLINE_FAIL
-} from './discipline.type';
+import DisciplineActionTypes from './discipline.type';
 
 import api from '../../api';
 
@@ -24,14 +21,14 @@ export const fetchAllDisciplines = () => {
 
 export const fetchAllDisciplineSuccess = (data) => {
     return {
-        type: FETCH_ALL_DISCIPLINE_SUCCESS,
+        type: DisciplineActionTypes.FETCH_ALL_DISCIPLINE_SUCCESS,
         payload: data
     }
 }
 
 export const fetchAllDisciplineFail = (err) => {
     return {
-        type: FETCH_ALL_DISCIPLINE_FAIL,
+        type: DisciplineActionTypes.FETCH_ALL_DISCIPLINE_FAIL,
         payload: err
     }
 }
