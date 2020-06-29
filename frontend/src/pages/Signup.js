@@ -17,12 +17,7 @@ class RegistrationForm extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                this.props.onAuth(
-                    values.username,
-                    values.email,
-                    values.password,
-                    values.confirm
-                );
+                this.props.signUpStart(values);
             }
         });
     }
@@ -154,7 +149,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username, email, password, confirm) => dispatch(signUpStart(username, email, password, confirm)) 
+        signUpStart: (userCredential) => dispatch(signUpStart(userCredential)) 
     }
 }
 

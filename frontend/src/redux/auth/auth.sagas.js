@@ -27,13 +27,13 @@ export function* signInWithEmail({ payload: { username, password } }) {
     }
 }
 
-export function* signUp({ payload: {username, email, password, passwordConfirmed} }) {
+export function* signUp({ payload: {username, email, password, confirm} }) {
     try {
         const res = yield api.post('rest-auth/registration/', {
             username: username,
             email: email,
             password: password,
-            passwordConfirmed: passwordConfirmed
+            passwordConfirmed: confirm
         })
 
         const token = res.data.key;
