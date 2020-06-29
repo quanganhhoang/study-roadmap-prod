@@ -1,12 +1,18 @@
 import { takeLatest, call, put, all, takeEvery } from 'redux-saga/effects';
 import api from '../../api'
+import storage from 'redux-persist/lib/storage'; // local storage
 
 import AuthActionTypes from './auth.types'
 import { 
     signInSuccess,
     signInFail,
+
     signUpSuccess,
-    signUpFail
+    signUpFail,
+
+    logoutSuccess,
+    logoutFail,
+
 } from './auth.action'
 
 
@@ -46,8 +52,24 @@ export function* signUp({ payload: {username, email, password, confirm} }) {
     }
 }
 
-// export function* logout() {
+export function* logout() {
+    try {
+        yield localStorage.removeItem('expirationDate')
+        // clear storage used by redux-persist
+        yield storage.removeItem('persist:root')
+        yield put(logoutSuccess());
+    } catch (err) {
+        yield put(logoutFail(err))
+    }
+}
 
+// export const logout = () => {
+//     return dispatch => {
+//         localStorage.removeItem('expirationDate')
+//         // clear storage used by redux-persist
+//         storage.removeItem('persist:root')
+//         dispatch(logoutSuccess);
+//     }
 // }
 
 // function* fetchUser(action) {
