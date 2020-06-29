@@ -76,14 +76,14 @@ export const logoutFail = (error) => {
 export const fetchUserSuccess = (user) => {
     return {
         type: AuthActionTypes.FETCH_USER_SUCCESS,
-        user: user
+        payload: user
     }
 }
 
 export const fetchUserFail = (err) => {
     return {
         type: AuthActionTypes.FETCH_USER_FAIL,
-        error: err
+        payload: err
     }
 }
 

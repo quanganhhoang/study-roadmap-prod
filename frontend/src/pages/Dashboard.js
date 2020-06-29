@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 import {
-    fetchAllRoadmaps,
-    fetchRoadmapByUser,
-    fetchMostPopularRoadmaps,
-    fetchHighestRatedRoadmaps
+    fetchRoadmapRequested
 } from '../redux/roadmap/roadmap.action'
 
 import {
@@ -15,9 +12,8 @@ import {
     selectHighestRatedRoadmaps
 } from '../redux/roadmap/roadmap.selector'
 
+import { fetchAllDisciplineStart } from '../redux/discipline/discipline.action'
 import { selectAllDisciplines } from '../redux/discipline/discipline.selector'
-
-import { fetchAllDisciplines } from '../redux/discipline/discipline.action'
 
 import { Row, Col } from 'antd';
 import DisciplineCard from '../components/DisciplineCard';
@@ -29,21 +25,8 @@ import { selectUser } from '../redux/auth/auth.selector';
 class Dashboard extends Component {
 
 	componentDidMount() {    
-        this.props.fetchExistingDisciplines();
-        this.props.fetchHighestRatedRoadmaps();
-        this.props.fetchMostPopularRoadmaps();
-
-        if (this.props.isAuthenticated) {
-            this.props.fetchRoadmapByUser();
-        } else {
-            this.props.fetchAllRoadmaps();
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.user !== this.props.user) {
-            this.props.fetchRoadmapByUser()
-        }
+        this.props.fetchRoadmapRequested();
+        this.props.fetchAllDiscipline();
     }
     
     render() {
@@ -79,7 +62,7 @@ class Dashboard extends Component {
                 </div>
                 <div>
                     <DashboardRoadmapList
-                        data={this.props.isAuthenticated ? roadmapsByUser : allRoadmaps}
+                        data={isAuthenticated ? roadmapsByUser : allRoadmaps}
                     />
                 </div>
                 
@@ -126,20 +109,11 @@ const mapStateToProps = state => ({
 // (dispatch, ownProps)
 const mapDispatchToProps = (dispatch) => {
     return ({
-        fetchAllRoadmaps: () => {
-            dispatch(fetchAllRoadmaps())
+        fetchRoadmapRequested: () => {
+            dispatch(fetchRoadmapRequested())
         },
-        fetchRoadmapByUser: () => {
-            dispatch(fetchRoadmapByUser())
-        },
-        fetchMostPopularRoadmaps: () => {
-            dispatch(fetchMostPopularRoadmaps())
-        },
-        fetchHighestRatedRoadmaps: () => {
-            dispatch(fetchHighestRatedRoadmaps())
-        },
-        fetchExistingDisciplines: () => {
-            dispatch(fetchAllDisciplines())
+        fetchAllDiscipline: () => {
+            dispatch(fetchAllDisciplineStart())
         }
     })
 }

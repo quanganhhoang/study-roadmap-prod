@@ -7,7 +7,7 @@ import { disciplineSagas } from './discipline/discipline.sagas'
 export default function* rootSaga() {
     yield all([
         call(authSagas),
-        // call(roadmapSagas), 
-        // call(disciplineSagas)
+        call(roadmapSagas), 
+        call(disciplineSagas)
     ])
 }

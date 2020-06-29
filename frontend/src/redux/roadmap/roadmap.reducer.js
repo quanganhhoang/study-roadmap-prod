@@ -14,21 +14,35 @@ const INITIAL_STATE = {
     // SEARCH BAR
 }
 
-const fetchAllRoadmaps = (state, action) => {
+const fetchAllRoadmapsSuccess = (state, action) => {
     return {
         ...state,
         allRoadmaps: action.payload
     }
 }
 
-const fetchRoadmapByUser = (state, action) => {
+const fetchAllRoadmapsFail = (state, action) => {
+    return {
+        ...state,
+        error: action.payload
+    }
+}
+
+const fetchRoadmapByUserSuccess = (state, action) => {
     return {
         ...state,
         roadmapsByUser: action.payload
     }
 }
 
-const fetchMostPopularRoadmaps = (state, action) => {
+const fetchRoadmapByUserFail = (state, action) => {
+    return {
+        ...state,
+        error: action.payload
+    }
+}
+
+const fetchMostPopularRoadmapsSuccess = (state, action) => {
     return {
         ...state,
         mostPopularRoadmaps: action.payload
@@ -42,7 +56,7 @@ const fetchMostPopularRoadmapsFail = (state, action) => {
     }
 }
 
-const fetchHighestRatedRoadmaps = (state, action) => {
+const fetchHighestRatedRoadmapsSuccess = (state, action) => {
     return {
         ...state,
         highestRatedRoadmaps: action.payload
@@ -52,7 +66,7 @@ const fetchHighestRatedRoadmaps = (state, action) => {
 const fetchHighestRatedRoadmapsFail = (state, action) => {
     return {
         ...state,
-        error: action.error
+        error: action.payload
     }
 }
 
@@ -74,22 +88,31 @@ const searchRoadmapsFail = (state, action) => {
 
 const roadmapReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
-        case RoadmapActions.FETCH_ALL_ROADMAP:
-            return fetchAllRoadmaps(state, action)
-        case RoadmapActions.FETCH_ROADMAP_BY_USER:
-            return fetchRoadmapByUser(state, action)
-        case RoadmapActions.FETCH_MOST_POPULAR_ROADMAPS:
-            return fetchMostPopularRoadmaps(state, action)
+        case RoadmapActions.FETCH_ALL_ROADMAP_SUCCESS:
+            return fetchAllRoadmapsSuccess(state, action)
+        case RoadmapActions.FETCH_ALL_ROADMAP_FAIL:
+            return fetchAllRoadmapsFail(state, action)
+
+        case RoadmapActions.FETCH_ROADMAP_BY_USER_SUCCESS:
+            return fetchRoadmapByUserSuccess(state, action)
+        case RoadmapActions.FETCH_ROADMAP_BY_USER_FAIL:
+            return fetchRoadmapByUserFail(state, action)
+
+        case RoadmapActions.FETCH_MOST_POPULAR_ROADMAPS_SUCCESS:
+            return fetchMostPopularRoadmapsSuccess(state, action)
         case RoadmapActions.FETCH_MOST_POPULAR_ROADMAPS_FAIL:
             return fetchMostPopularRoadmapsFail(state, action)
-        case RoadmapActions.FETCH_HIGHEST_RATED_ROADMAPS:
-            return fetchHighestRatedRoadmaps(state, action)
+
+        case RoadmapActions.FETCH_HIGHEST_RATED_ROADMAPS_SUCCESS:
+            return fetchHighestRatedRoadmapsSuccess(state, action)
         case RoadmapActions.FETCH_HIGHEST_RATED_ROADMAPS_FAIL:
             return fetchHighestRatedRoadmapsFail(state, action)
+
         case RoadmapActions.SEARCH_ROADMAPS_SUCCESS:
             return searchRoadmapsSuccess(state, action)
         case RoadmapActions.SEARCH_ROADMAPS_FAIL:
             return searchRoadmapsFail(state, action)
+            
         default:
             return state
     }

@@ -10,12 +10,14 @@ import {
     signUpSuccess,
     signUpFail,
 
+    fetchUserSuccess,
+    fetchUserFail,
+
     logoutSuccess,
     logoutFail,
 
 } from './auth.action'
 
-// import { selectUser, selectToken } from './auth.selector'
 const getAuth = state => state.auth;
 
 export function* signInWithEmail({ payload: { username, password } }) {
@@ -75,15 +77,9 @@ function* fetchUser() {
             }
         })
 
-        yield put({
-            type: AuthActionTypes.FETCH_USER_SUCCESS,
-            user: res.data
-        });
+        yield put(fetchUserSuccess(res.data));
     } catch (err) {
-        yield put({
-            type: AuthActionTypes.FETCH_USER_FAIL,
-            error: err.message
-        });
+        yield put(fetchUserFail(err));
     }
 }
 

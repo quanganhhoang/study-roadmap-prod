@@ -1,68 +1,84 @@
-import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { takeLatest, call, put, all, select } from 'redux-saga/effects';
 
 import RoadmapActionTypes from './roadmap.types';
+import * as roadmapActions from './roadmap.action'
+import AuthActionTypes from '../auth/auth.types'
+import api from '../../api';
+
+const getAuth = state => state.auth;
 
 export function* fetchAllRoadmaps() {
-    yield console.log('Fetch all roadmaps saga fired');
-}
-
-export function* fetchAllRoadmapSuccess() {
-
-}
-
-export function* fetchMostPopularRoadmaps() {
-    yield console.log('Fetch most popular roadmaps saga fired');
-}
-
-export function* fetchMostPopularRoadmapSuccess() {
-
-}
-
-export function* fetchHighestRatedRoadmaps() {
-    yield console.log('Fetch highest rataed roadmaps saga fired');
-}
-
-export function* fetchHighestRatedRoadmapSuccess() {
-
-}
-
-export function* fetchRoadmapsByUser() {
-    yield console.log('Fetch roadmaps by user saga fired');
-}
-
-export function* fetchRoadmapsByUserSuccess() {
-
-}
-
-export function* fetchRoadmaps() {
     try {
-        const allRoadmaps = yield call(fetchAllRoadmaps);
-        const mostPopularRoadmaps = yield call(fetchMostPopularRoadmaps);
-        const highestRatedRoadmaps = yield call(fetchHighestRatedRoadmaps);
-        const roadmapsByUser = yield call(fetchRoadmapsByUser);
-
-        yield put(fetchAllRoadmapSuccess(allRoadmaps));
-        yield put(fetchMostPopularRoadmapSuccess(mostPopularRoadmaps));
-        yield put(fetchHighestRatedRoadmapSuccess(highestRatedRoadmaps));
-        yield put(fetchRoadmapsByUserSuccess(roadmapsByUser));
+        const res = yield api.get('api/roadmaps/')
+        
+        yield put(roadmapActions.fetchAllRoadmapSuccess(res.data.results))
     } catch (error) {
-        yield put(fetchRoadmapsFailure(error.message));
+        yield put(roadmapActions.fetchAllRoadmapFail(error))
     }
 }
 
-export function* fetchRoadmapsFailure(error) {
-
+export function* fetchMostPopularRoadmaps() {
+    try {
+        const res = yield api.get('api/roadmaps/most-popular/')
+        
+        yield put(roadmapActions.fetchMostPopularRoadmapsSuccess(res.data))
+    } catch (error) {
+        yield put(roadmapActions.fetchMostPopularRoadmapsFail(error))
+    }
 }
 
-export function* fetchRoadmapStart() {
+export function* fetchHighestRatedRoadmaps() {
+    try {
+        const res = yield api.get('api/roadmaps/highest-rated/')
+
+        yield put(roadmapActions.fetchHighestRatedRoadmapsSuccess(res.data))
+    } catch (error) {
+        yield put(roadmapActions.fetchHighestRatedRoadmapsFail(error))
+    }
+}
+
+export function* fetchRoadmapsByUser() {
+    const auth = yield select(getAuth);
+    console.log('auth', auth)
+    const { token, user } = auth;
+    try {
+        const res = yield api.get(`api/users/${user.id}/roadmaps/`, {
+            headers: {
+                Authorization: token ? `Token ${token}` : ''
+            }
+        })
+
+        yield put(roadmapActions.fetchRoadmapsByUserSuccess(res.data.results));
+    } catch (error) {
+        yield put(roadmapActions.fetchRoadmapsByUserFail(error));
+    }
+}
+
+export function* fetchAll() {
+    yield all([
+        call(fetchAllRoadmaps), 
+        call(fetchMostPopularRoadmaps), 
+        call(fetchHighestRatedRoadmaps)
+    ])
+}
+
+export function* watchFetchRoadmaps() {
     yield takeLatest(
-        RoadmapActionTypes.FETCH_ALL_ROADMAP,
-        fetchRoadmaps
+        RoadmapActionTypes.FETCH_ROADMAPS_REQUESTED,
+        fetchAll
     )
 }
 
-export function* userSagas() {
+export function* watchFetchUser() {
+    yield takeLatest(
+        AuthActionTypes.FETCH_USER_SUCCESS,
+        fetchRoadmapsByUser
+    )
+}
+
+export function* roadmapSagas() {
     yield all([
-        
+        call(watchFetchUser),
+        call(watchFetchRoadmaps)
     ]);
 }

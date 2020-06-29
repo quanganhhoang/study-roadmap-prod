@@ -3,99 +3,68 @@ import api from '../../api';
 import RoadmapActionTypes from './roadmap.types';
 
 
-export const fetchAllRoadmaps = () => {
-    return (dispatch, getState) => {
-        const token = getState().auth.token
-        
-        api.get('api/roadmaps/', {
-            headers: {
-                Authorization: token ? `Token ${token}` : ''
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: RoadmapActionTypes.FETCH_ALL_ROADMAP,
-                payload: res.data.results,
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+export const fetchRoadmapRequested = () => {
+    return {
+        type: RoadmapActionTypes.FETCH_ROADMAPS_REQUESTED
     }
 }
 
-export const fetchRoadmapByUser = () => {
-    return (dispatch, getState) => {
-        const { token, user } = getState().auth
-        if (user) {
-            api.get(`api/users/${user.id}/roadmaps/`, {
-                headers: {
-                    Authorization: token ? `Token ${token}` : ''
-                }
-            })
-            .then(res => {
-                dispatch({
-                    type: RoadmapActionTypes.FETCH_ROADMAP_BY_USER,
-                    payload: res.data.results,
-                })
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
+export const fetchAllRoadmapSuccess = (data) => {
+    return {
+        type: RoadmapActionTypes.FETCH_ALL_ROADMAP_SUCCESS,
+        payload: data
     }
 }
 
-export const fetchMostPopularRoadmaps = () => {
-    return (dispatch, getState) => {
-        const token = getState().auth.token
-        api.get('api/roadmaps/most-popular/', {
-            headers: {
-                Authorization: token ? `Token ${token}` : ''
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: RoadmapActionTypes.FETCH_MOST_POPULAR_ROADMAPS,
-                payload: res.data,
-            })
-            
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch(({
-                type: RoadmapActionTypes.FETCH_MOST_POPULAR_ROADMAPS_FAIL,
-                payload: err,
-            }))
-        })
+export const fetchAllRoadmapFail = (error) => {
+    return {
+        type: RoadmapActionTypes.FETCH_ALL_ROADMAP_FAIL,
+        payload: error
     }
 }
 
-export const fetchHighestRatedRoadmaps = () => {
-    return (dispatch, getState) => {
-        const token = getState().auth.token
-        api.get('api/roadmaps/highest-rated/', {
-            headers: {
-                Authorization: token ? `Token ${token}` : ''
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: RoadmapActionTypes.FETCH_HIGHEST_RATED_ROADMAPS,
-                payload: res.data,
-            })
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch(({
-                type: RoadmapActionTypes.FETCH_HIGHEST_RATED_ROADMAPS_FAIL,
-                payload: err,
-            }))
-        })
+export const fetchMostPopularRoadmapsSuccess = (data) => {
+    return {
+        type: RoadmapActionTypes.FETCH_MOST_POPULAR_ROADMAPS_SUCCESS,
+        payload: data
     }
 }
 
-// TODO(qahoang): implement search feature
+export const fetchMostPopularRoadmapsFail = (error) => {
+    return {
+        type: RoadmapActionTypes.FETCH_MOST_POPULAR_ROADMAPS_FAIL,
+        payload: error
+    }
+}
+
+export const fetchHighestRatedRoadmapsSuccess = (data) => {
+    return {
+        type: RoadmapActionTypes.FETCH_HIGHEST_RATED_ROADMAPS_SUCCESS,
+        payload: data
+    }
+}
+
+export const fetchHighestRatedRoadmapsFail = (error) => {
+    return {
+        type: RoadmapActionTypes.FETCH_HIGHEST_RATED_ROADMAPS_FAIL,
+        payload: error
+    }
+}
+
+export const fetchRoadmapsByUserSuccess = (data) => {
+    return {
+        type: RoadmapActionTypes.FETCH_ROADMAP_BY_USER_SUCCESS,
+        payload: data
+    }
+}
+
+export const fetchRoadmapsByUserFail = (error) => {
+    return {
+        type: RoadmapActionTypes.FETCH_ROADMAP_BY_USER_FAIL,
+        payload: error
+    }
+}
+
 export const searchRoadmaps = (searchTerm) => {
     return (dispatch, getState) => {
         const token = getState().auth.token
@@ -106,7 +75,7 @@ export const searchRoadmaps = (searchTerm) => {
         })
         .then(res => {
             dispatch({
-                type: SEARCH_ROADMAPS_SUCCESS,
+                type: RoadmapActionTypes.SEARCH_ROADMAPS_SUCCESS,
                 searchResult: res.data.results,
                 searchTerm: searchTerm
             })
@@ -115,26 +84,10 @@ export const searchRoadmaps = (searchTerm) => {
         .catch(err => {
             console.log(err)
             dispatch(({
-                type: SEARCH_ROADMAPS_FAIL,
+                type: RoadmapActionTypes.SEARCH_ROADMAPS_FAIL,
                 error: err,
                 searchTerm: searchTerm,
             }))
         })
     }
 }
-// async await syntax
-
-/*
-export const fetchAllRoadmaps = () => async (dispatch, getState) => {
-    const response = await api.get('api/roadmaps/', {
-        headers: {
-            Authorization: `Token ${token}`
-        }
-    })
-
-    dispatch({
-        type: 'FETCH_ALL_ROADMAP',
-        payload: response
-    })
-}
-*/

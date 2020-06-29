@@ -1,21 +1,9 @@
 import DisciplineActionTypes from './discipline.type';
 
-import api from '../../api';
 
-export const fetchAllDisciplines = () => {
-    return (dispatch, getState) => {
-        const { token } = getState().auth;
-        api.get('api/roadmaps/disciplines/', {
-            headers: {
-                Authorization: token ? `Token ${token}` : ''
-            }
-        })
-        .then(res => {
-            dispatch(fetchAllDisciplineSuccess(res.data))
-        })
-        .catch(err => {
-            dispatch(fetchAllDisciplineFail(err))
-        })
+export const fetchAllDisciplineStart = () => {
+    return {
+        type: DisciplineActionTypes.FETCH_ALL_DISCIPLINE_START
     }
 }
 
