@@ -6,3 +6,8 @@ export const selectUser = createSelector(
     [selectAuth],
     auth => auth.user
 )
+
+export const selectToken = createSelector(
+    [selectAuth],
+    auth => auth.token
+)

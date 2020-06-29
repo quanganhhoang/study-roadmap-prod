@@ -5,10 +5,13 @@ export const signInStart = (usernameAndPassword) => ({
     payload: usernameAndPassword
 })
 
-export const signInSuccess = (token) => {
+export const signInSuccess = (token, username) => {
     return {
         type: AuthActionTypes.SIGN_IN_SUCCESS,
-        payload: token,
+        payload: {
+            token: token,
+            username: username
+        },
     }
 }
 
@@ -26,10 +29,13 @@ export const signUpStart = (userCredentials) => {
     }
 }
 
-export const signUpSuccess = (token) => {
+export const signUpSuccess = (token, username) => {
     return {
         type: AuthActionTypes.SIGN_UP_SUCCESS,
-        payload: token
+        payload: {
+            token: token,
+            username: username
+        },
     }
 }
 
@@ -59,15 +65,6 @@ export const logoutFail = (error) => {
     }
 }
 
-// export const logout = () => {
-//     return dispatch => {
-//         localStorage.removeItem('expirationDate')
-//         // clear storage used by redux-persist
-//         storage.removeItem('persist:root')
-//         dispatch(logoutSuccess);
-//     }
-// }
-
 // export const checkAuthTimeout = expirationTime => {
 //     return dispatch => {
 //         setTimeout(() => {
@@ -75,28 +72,6 @@ export const logoutFail = (error) => {
 //         }, expirationTime * 1000)
 //     }
 // }
-
-// export const fetchUser = (token, username) => {
-//     return dispatch => {
-//         api.get(`api/users/username/${username}/`, {
-//             headers: {
-//                 Authorization: `Token ${token}`
-//             }
-//         })
-//         .then(res => {
-//             dispatch(fetchUserSuccess(res.data));
-//         })
-//         .catch(err => {
-//             dispatch(fetchUserFail(err));
-//         })
-//     }
-// }
-
-export const fetchUserRequested = () => {
-    return {
-        type: AuthActionTypes.FETCH_USER_REQUESTED
-    }
-}
 
 export const fetchUserSuccess = (user) => {
     return {

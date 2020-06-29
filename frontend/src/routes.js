@@ -24,12 +24,12 @@ class BaseRouter extends Component {
                     <Route 
                         exact 
                         path="/login/"
-                        render= { () => this.props.isAuthenticated ? (<Redirect to="/dashboard/"/>) : (<Login />) }
+                        render= { () => this.props.isAuthenticated ? (<Redirect to="/dashboard"/>) : (<Login />) }
                     />
                     <Route 
                         exact 
                         path="/signup/"
-                        render= { () => this.props.isAuthenticated ? (<Redirect to="/dashboard/"/>) : (<Signup />) }
+                        render= { () => this.props.isAuthenticated ? (<Redirect to="/dashboard"/>) : (<Signup />) }
                     />
                     <Route exact path="/search/" component={SearchResult} />
                     <Route exact path="/roadmaps/" component={MyRoadmap} />
