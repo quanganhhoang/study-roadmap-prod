@@ -39,7 +39,6 @@ export function* fetchHighestRatedRoadmaps() {
 
 export function* fetchRoadmapsByUser() {
     const auth = yield select(getAuth);
-    console.log('auth', auth)
     const { token, user } = auth;
     try {
         const res = yield api.get(`api/users/${user.id}/roadmaps/`, {
@@ -51,6 +50,16 @@ export function* fetchRoadmapsByUser() {
         yield put(roadmapActions.fetchRoadmapsByUserSuccess(res.data.results));
     } catch (error) {
         yield put(roadmapActions.fetchRoadmapsByUserFail(error));
+    }
+}
+
+export function* searchRoadmaps({ payload: searchTerm }) {
+    try {
+        const res = yield api.get(`api/roadmaps?search=${searchTerm}`)
+
+        yield put(roadmapActions.searchRoadmapSuccess(res.data.results))
+    } catch (error) {
+        yield put(roadmapActions.searchRoadmapFail(error))
     }
 }
 
@@ -76,9 +85,17 @@ export function* watchFetchUser() {
     )
 }
 
+export function* watchSearch() {
+    yield takeLatest(
+        RoadmapActionTypes.SEARCH_ROADMAPS_START,
+        searchRoadmaps
+    )
+}
+
 export function* roadmapSagas() {
     yield all([
         call(watchFetchUser),
-        call(watchFetchRoadmaps)
+        call(watchFetchRoadmaps),
+        call(watchSearch)
     ]);
 }

@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { FacebookOutlined, GoogleOutlined, TwitterOutlined, UserOutlined } from '@ant-design/icons';
 
 import { logoutStart } from '../redux/auth/auth.action';
-import { searchRoadmaps } from '../redux/roadmap/roadmap.action'
+import { searchRoadmapStart } from '../redux/roadmap/roadmap.action'
 
 const { Header, Footer, Content } = Layout;
 const { Search } = Input;
@@ -179,7 +179,7 @@ class CustomLayout extends Component {
 const mapDispatchToProps = dispatch => {
 	return {
         logoutStart: () => dispatch(logoutStart()),
-        searchRoadmaps: (value) => dispatch(searchRoadmaps(value)),
+        searchRoadmaps: (value) => dispatch(searchRoadmapStart(value)),
 	}
 }
 

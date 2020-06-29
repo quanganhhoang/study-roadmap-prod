@@ -65,29 +65,23 @@ export const fetchRoadmapsByUserFail = (error) => {
     }
 }
 
-export const searchRoadmaps = (searchTerm) => {
-    return (dispatch, getState) => {
-        const token = getState().auth.token
-        api.get(`api/roadmaps?search=${searchTerm}`, {
-            headers: {
-                Authorization: token ? `Token ${token}` : ''
-            }
-        })
-        .then(res => {
-            dispatch({
-                type: RoadmapActionTypes.SEARCH_ROADMAPS_SUCCESS,
-                searchResult: res.data.results,
-                searchTerm: searchTerm
-            })
-            
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch(({
-                type: RoadmapActionTypes.SEARCH_ROADMAPS_FAIL,
-                error: err,
-                searchTerm: searchTerm,
-            }))
-        })
+export const searchRoadmapStart = (searchTerm) => {
+    return {
+        type: RoadmapActionTypes.SEARCH_ROADMAPS_START,
+        payload: searchTerm
+    }
+}
+
+export const searchRoadmapSuccess = (data) => {
+    return {
+        type: RoadmapActionTypes.SEARCH_ROADMAPS_SUCCESS,
+        payload: data
+    }
+}
+
+export const searchRoadmapFail = (error) => {
+    return {
+        type: RoadmapActionTypes.SEARCH_ROADMAPS_FAIL,
+        payload: error
     }
 }

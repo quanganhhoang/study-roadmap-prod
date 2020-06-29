@@ -70,12 +70,17 @@ const fetchHighestRatedRoadmapsFail = (state, action) => {
     }
 }
 
-const searchRoadmapsSuccess = (state, action) => {
-    // console.log('SEARCH ROADMAP REDUCER', action.searchResult)
+const searchRoadmapsStart = (state, action) => {
     return {
         ...state,
-        searchResult: action.searchResult,
-        searchTerm: action.searchTerm,
+        searchTerm: action.payload
+    }
+}
+
+const searchRoadmapsSuccess = (state, action) => {
+    return {
+        ...state,
+        searchResult: action.payload,
     }
 }
 
@@ -108,6 +113,8 @@ const roadmapReducer = (state=INITIAL_STATE, action) => {
         case RoadmapActions.FETCH_HIGHEST_RATED_ROADMAPS_FAIL:
             return fetchHighestRatedRoadmapsFail(state, action)
 
+        case RoadmapActions.SEARCH_ROADMAPS_START:
+            return searchRoadmapsStart(state, action)
         case RoadmapActions.SEARCH_ROADMAPS_SUCCESS:
             return searchRoadmapsSuccess(state, action)
         case RoadmapActions.SEARCH_ROADMAPS_FAIL:
