@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { FacebookOutlined, GoogleOutlined, TwitterOutlined, UserOutlined } from '@ant-design/icons';
 
-import * as authActions from '../redux/auth/auth.action';
+import { logoutStart } from '../redux/auth/auth.action';
 import { searchRoadmaps } from '../redux/roadmap/roadmap.action'
 
 const { Header, Footer, Content } = Layout;
@@ -13,9 +13,6 @@ const { Search } = Input;
 
 
 class CustomLayout extends Component {
-    constructor(props) {
-        super(props)
-    }
       
     handleMenuClick = (e) => {
         switch (e.key) {
@@ -32,7 +29,7 @@ class CustomLayout extends Component {
                 this.props.history.push('/help');
                 break;
             case 'Logout':
-                this.props.logout();
+                this.props.logoutStart();
                 this.props.history.push('/')
                 break;
             default:
@@ -179,17 +176,11 @@ class CustomLayout extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        token: state.auth.token
-    };
-}
-
 const mapDispatchToProps = dispatch => {
 	return {
-        logout: () => dispatch(authActions.logout()),
+        logoutStart: () => dispatch(logoutStart()),
         searchRoadmaps: (value) => dispatch(searchRoadmaps(value)),
 	}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomLayout));
+export default withRouter(connect(null, mapDispatchToProps)(CustomLayout));

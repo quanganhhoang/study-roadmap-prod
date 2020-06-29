@@ -3,7 +3,7 @@ import { Form, Input, Button, Spin } from 'antd';
 import Icon from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import * as actions from '../redux/auth/auth.action';
+import { signUpStart } from '../redux/auth/auth.action';
 
 const FormItem = Form.Item;
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
@@ -154,7 +154,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username, email, password, confirm) => dispatch(actions.authSignup(username, email, password, confirm)) 
+        onAuth: (username, email, password, confirm) => dispatch(signUpStart(username, email, password, confirm)) 
     }
 }
 

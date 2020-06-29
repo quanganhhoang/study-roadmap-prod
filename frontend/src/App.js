@@ -12,7 +12,7 @@ import './App.less';
 
 class App extends Component {
 	componentDidMount() {
-		this.props.onTryAutoSignup();
+		// this.props.onTryAutoSignup();
 	}
 
 	render() {
@@ -29,15 +29,15 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.auth.token !== null
-  }
+    return {
+        isAuthenticated: state.auth.token !== null
+    }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onTryAutoSignup: () => dispatch(authCheckState())
-  }
+    return {
+        // onTryAutoSignup: () => dispatch(authCheckState())
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

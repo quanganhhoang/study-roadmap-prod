@@ -1,7 +1,4 @@
-import {
-    FETCH_ALL_DISCIPLINE_SUCCESS,
-    FETCH_ALL_DISCIPLINE_FAIL,
-} from './discipline.type'
+import DisciplineActionTypes from './discipline.type'
 
 const INITIAL_STATE = {
     disciplines: [],
@@ -24,9 +21,9 @@ const fetchAllDisciplinesFail = (state, action) => {
 
 const disciplineReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
-        case FETCH_ALL_DISCIPLINE_SUCCESS:
+        case DisciplineActionTypes.FETCH_ALL_DISCIPLINE_SUCCESS:
             return fetchAllDisciplines(state, action);
-        case FETCH_ALL_DISCIPLINE_FAIL:
+        case DisciplineActionTypes.FETCH_ALL_DISCIPLINE_FAIL:
             return fetchAllDisciplinesFail(state, action);
         default:
             return state

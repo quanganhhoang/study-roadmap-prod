@@ -1,46 +1,52 @@
-import {
-    AUTH_START,
-    AUTH_SUCCESS,
-    AUTH_FAIL,
-    AUTH_LOGOUT,
-    FETCH_USER_SUCCESS
-} from './auth.types'
-
+import AuthActionTypes from './auth.types'
 
 const INITIAL_STATE = {
     token: null,
     error: null,
     loading: false,
-    username: null,
-    userId: null,
+    user: null,
 }
 
-const authStart = (state) => {
-    return {
-        ...state,
-        error: null,
-        loading: true
-    }
-}
+// const signInStart = (state) => {
+//     return {
+//         ...state,
+//         error: null,
+//         loading: true
+//     }
+// }
 
-const authSuccess = (state, action) => {
+const signInSuccess = (state, action) => {
     return {
         ...state,
-        token: action.token,
+        token: action.payload,
         error: null,
         loading: false,
     }
 }
 
-const authFail = (state, action) => {
+const signInFail = (state, action) => {
     return {
         ...state,
-        error: action.error,
+        error: action.payload,
         loading: false,
     }
 }
 
-const authLogout = (state) => {
+const signUpSuccess = (state, action) => {
+    return {
+        ...state,
+        token: action.payload
+    }
+}
+
+const signUpFail = (state, action) => {
+    return {
+        ...state,
+        error: action.payload
+    }
+}
+
+const logoutSuccess = (state) => {
     return {
         ...state,
         token: null,
@@ -48,26 +54,52 @@ const authLogout = (state) => {
     }
 }
 
+const logoutFail = (state, action) => {
+    return {
+        ...state,
+        error: action.payload
+    }
+}
+
 const fetchUserSuccess = (state, action) => {
     return {
         ...state,
-        user: action.user,
-        loading: true
+        user: action.payload,
+        loading: false,
+    }
+}
+
+const fetchUserFail = (state, action) => {
+    return {
+        ...state,
+        user: null,
+        loading: false,
+        error: action.payload
     }
 }
 
 const authReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
-        case AUTH_START:
-            return authStart(state, action)
-        case AUTH_FAIL:
-            return authFail(state, action)
-        case AUTH_SUCCESS:
-            return authSuccess(state, action)
-        case AUTH_LOGOUT:
-            return authLogout(state, action)
-        case FETCH_USER_SUCCESS:
-            return fetchUserSuccess(state, action)
+        case AuthActionTypes.SIGN_IN_FAIL:
+            return signInFail(state, action)
+        case AuthActionTypes.SIGN_IN_SUCCESS:
+            return signInSuccess(state, action)
+
+        case AuthActionTypes.SIGN_UP_SUCCESS:
+            return signUpSuccess(state, action)
+        case AuthActionTypes.SIGN_UP_FAIL:
+            return signUpFail(state, action)
+
+        case AuthActionTypes.LOGOUT_SUCCESS:
+            return logoutSuccess(state, action)
+        case AuthActionTypes.LOGOUT_FAIL:
+            return logoutFail(state, action)
+
+        case AuthActionTypes.FETCH_USER_SUCCESS:
+            return fetchUserSuccess(state, action);
+        case AuthActionTypes.FETCH_USER_FAIL:
+            return fetchUserFail(state, action);
+            
         default:
             return state
     }

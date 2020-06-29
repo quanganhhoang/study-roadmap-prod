@@ -1,4 +1,4 @@
-import * as roadmapActions from './roadmap.types'
+import RoadmapActions from './roadmap.types'
 
 const INITIAL_STATE = {
     error: null,
@@ -57,7 +57,7 @@ const fetchHighestRatedRoadmapsFail = (state, action) => {
 }
 
 const searchRoadmapsSuccess = (state, action) => {
-    console.log('SEARCH ROADMAP REDUCER', action.searchResult)
+    // console.log('SEARCH ROADMAP REDUCER', action.searchResult)
     return {
         ...state,
         searchResult: action.searchResult,
@@ -74,21 +74,21 @@ const searchRoadmapsFail = (state, action) => {
 
 const roadmapReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
-        case roadmapActions.FETCH_ALL_ROADMAP:
+        case RoadmapActions.FETCH_ALL_ROADMAP:
             return fetchAllRoadmaps(state, action)
-        case roadmapActions.FETCH_ROADMAP_BY_USER:
+        case RoadmapActions.FETCH_ROADMAP_BY_USER:
             return fetchRoadmapByUser(state, action)
-        case roadmapActions.FETCH_MOST_POPULAR_ROADMAPS:
+        case RoadmapActions.FETCH_MOST_POPULAR_ROADMAPS:
             return fetchMostPopularRoadmaps(state, action)
-        case roadmapActions.FETCH_MOST_POPULAR_ROADMAPS_FAIL:
+        case RoadmapActions.FETCH_MOST_POPULAR_ROADMAPS_FAIL:
             return fetchMostPopularRoadmapsFail(state, action)
-        case roadmapActions.FETCH_HIGHEST_RATED_ROADMAPS:
+        case RoadmapActions.FETCH_HIGHEST_RATED_ROADMAPS:
             return fetchHighestRatedRoadmaps(state, action)
-        case roadmapActions.FETCH_HIGHEST_RATED_ROADMAPS_FAIL:
+        case RoadmapActions.FETCH_HIGHEST_RATED_ROADMAPS_FAIL:
             return fetchHighestRatedRoadmapsFail(state, action)
-        case roadmapActions.SEARCH_ROADMAPS_SUCCESS:
+        case RoadmapActions.SEARCH_ROADMAPS_SUCCESS:
             return searchRoadmapsSuccess(state, action)
-        case roadmapActions.SEARCH_ROADMAPS_FAIL:
+        case RoadmapActions.SEARCH_ROADMAPS_FAIL:
             return searchRoadmapsFail(state, action)
         default:
             return state
