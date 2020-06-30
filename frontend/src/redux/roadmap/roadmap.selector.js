@@ -21,3 +21,13 @@ export const selectHighestRatedRoadmaps = createSelector(
     [selectRoadmap],
     roadmap => roadmap.highestRatedRoadmaps
 )
+
+export const selectSearchTerm = createSelector(
+    [selectRoadmap],
+    roadmap => roadmap.searchTerm
+)
+
+export const selectSearchResult = createSelector(
+    [selectRoadmap],
+    roadmap => roadmap.searchResult
+)

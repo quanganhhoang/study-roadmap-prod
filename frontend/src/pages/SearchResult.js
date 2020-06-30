@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux'
 
 import { Row, Col, Radio } from 'antd'
 
 import RoadmapList from '../components/RoadmapList'
+import { selectSearchTerm, selectSearchResult } from '../redux/roadmap/roadmap.selector'
+
 
 class SearchResult extends Component {
     state = {
@@ -91,11 +94,9 @@ class SearchResult extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        searchTerm: state.roadmap.searchTerm,
-        searchResult: state.roadmap.searchResult
-    }
-}
+const mapStateToProps = createStructuredSelector({
+    searchTerm: selectSearchTerm,
+    searchResult: selectSearchResult
+})
 
 export default connect(mapStateToProps, null)(SearchResult)
