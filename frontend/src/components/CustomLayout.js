@@ -63,14 +63,15 @@ class CustomLayout extends Component {
                     <Header className="navbar">
                         <Row justify="space-between" type="flex">
                             <Col span={6} className="navbar-brand">
-                                <Link to={this.props.isAuthenticated ? "/dashboard" : "/"}>
+                                <a href={this.props.isAuthenticated ? "/dashboard" : "/"}>
                                     <img id="nav-logo" src={"/static/frontend/logo.svg"} alt="logo"></img>
-                                </Link>
+                                </a>
                             </Col>
                             <Col span={12}>
                                 <Search
                                     id="nav-searchbar"
                                     placeholder="Search..."
+                                    // loading
                                     onSearch={
                                         value => {
                                             this.props.searchRoadmaps(value)
