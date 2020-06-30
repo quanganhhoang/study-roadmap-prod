@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Layout, Menu, Button, Input, Dropdown } from 'antd';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { FacebookOutlined, GoogleOutlined, TwitterOutlined, UserOutlined } from '@ant-design/icons';
 
