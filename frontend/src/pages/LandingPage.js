@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Row, Col, Button, Divider } from 'antd';
 
 
@@ -17,7 +16,7 @@ class LandingPage extends Component {
                         </Row>
                     </Col>
                     <Col span={12}>
-                        <img id="landing-pic-1" src={"/static/frontend/landing-page-1.svg"} alt="todo"></img>
+                        <img id="landing-pic-1" src={"/static/frontend/landing-page/landing-page-1.svg"} alt="todo"></img>
                     </Col>
                 </Row>
 
@@ -50,12 +49,12 @@ class LandingPage extends Component {
                             </Row>
                         </Col>
                         <Col span={12}>
-                            <img id="landing-pic-1" src={"/static/frontend/personalized.png"} alt="personalized"></img>
+                            <img id="landing-pic-1" src={"/static/frontend/landing-page/personalized.png"} alt="personalized"></img>
                         </Col>
                     </Row>
                     <Row>
                         <Col span={12}>
-                            <img id="landing-pic-1" src={"/static/frontend/simple.png"} alt="simple"></img>
+                            <img id="landing-pic-1" src={"/static/frontend/landing-page/simple.png"} alt="simple"></img>
                         </Col>
                         <Col span={12}>
                             <Row type="flex">
@@ -76,12 +75,12 @@ class LandingPage extends Component {
                             </Row>
                         </Col>
                         <Col span={12}>
-                            <img id="landing-pic-1" src={"/static/frontend/effective.png"} alt="effective"></img>
+                            <img id="landing-pic-1" src={"/static/frontend/landing-page/effective.png"} alt="effective"></img>
                         </Col>
                     </Row>
                     <Row>
                         <Col span={12}>
-                            <img id="landing-pic-1" src={"/static/frontend/sharing.jpg"} alt="reinforced-learning"></img>
+                            <img id="landing-pic-1" src={"/static/frontend/landing-page/sharing.jpg"} alt="reinforced-learning"></img>
                         </Col>
                         <Col span={12}>
                             <Row type="flex">

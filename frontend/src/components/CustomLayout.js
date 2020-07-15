@@ -64,7 +64,7 @@ class CustomLayout extends Component {
                         <Row justify="space-between" type="flex">
                             <Col span={6} className="navbar-brand">
                                 <a href={this.props.isAuthenticated ? "/dashboard" : "/"}>
-                                    <img id="nav-logo" src={"/static/frontend/logo.svg"} alt="logo"></img>
+                                    <img id="nav-logo" src={"/static/frontend/misc/logo.svg"} alt="logo"></img>
                                 </a>
                             </Col>
                             <Col span={12}>
@@ -121,7 +121,7 @@ class CustomLayout extends Component {
                         <div className="container-fluid">
                             <Row>
                                 <Col span={8}>
-                                    <img id="footer-logo" src={"/static/frontend/logo-footer.svg"} alt="logo"></img>
+                                    <img id="footer-logo" src={"/static/frontend/misc/logo-footer.svg"} alt="logo"></img>
                                     <p>A social platform for you to start a new hobby.</p>
                                     <div>
                                         <GoogleOutlined className="footer-social-media-btn"/>
