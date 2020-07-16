@@ -4,16 +4,20 @@ matrix:
             python:
                 - "3.8"
             env:
-                - SECRET_KEY='TEST'
+                secure:
+                    - SECRET_KEY='TEST'
+
             services:
                 - postgres
 
             install:
                 - pip install -r requirements.txt
+            
+            # before_script:
+            #     - psql -c 'create database travis_ci_test;' -U postgres
 
             script:
                 - python manage.py test
-                - npm run test
 
         -   language: node_js
             node_js:
@@ -23,9 +27,9 @@ matrix:
             script:
                 - npm run test
 
-notifications:
-    email:
-        - qahoang317@gmail.com
+# notifications:
+#     email:
+#         - qahoang317@gmail.com
 
 # deploy:
 #     provider: heroku
