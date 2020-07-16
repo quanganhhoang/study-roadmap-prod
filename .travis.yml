@@ -4,8 +4,7 @@ matrix:
             python:
                 - "3.8"
             env:
-                secure:
-                    - SECRET_KEY='TEST'
+                - SECRET_KEY='TEST'
 
             services:
                 - postgres
