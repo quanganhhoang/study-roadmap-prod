@@ -1,0 +1,36 @@
+matrix:
+    include:
+        -   language: python
+            python:
+                - "3.8"
+            env:
+                - SECRET_KEY='TEST'
+            services:
+                - postgres
+
+            install:
+                - pip install -r requirements.txt
+
+            script:
+                - python manage.py test
+                - npm run test
+
+        -   language: node_js
+            node_js:
+                - "14.2.0"
+            install:
+                - npm install --silent
+            script:
+                - npm run test
+
+notifications:
+    email:
+        - qahoang317@gmail.com
+
+# deploy:
+#     provider: heroku
+#     api_key:
+#         secure:
+#     app:
+
+# after_deploy:
