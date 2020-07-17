@@ -16,7 +16,7 @@ matrix:
             #     - psql -c 'create database travis_ci_test;' -U postgres
 
             script:
-                - python manage.py test
+                - DJANGO_SETTINGS_MODULE=manager.dev_settings python manage.py test
 
         -   language: node_js
             node_js:
