@@ -5,6 +5,7 @@ matrix:
                 - "3.8"
             env:
                 - SECRET_KEY='TEST'
+                - DJANGO_SETTINGS_MODULE=manager.dev_settings
 
             services:
                 - postgres
@@ -16,7 +17,7 @@ matrix:
             #     - psql -c 'create database travis_ci_test;' -U postgres
 
             script:
-                - DJANGO_SETTINGS_MODULE=manager.dev_settings python manage.py test
+                - python manage.py test
 
         -   language: node_js
             node_js:

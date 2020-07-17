@@ -1,4 +1,6 @@
-# studyroadmap
+# studyroadmap 
+[![Build Status](https://travis-ci.com/quanganhhoang/study-roadmap-prod.svg?branch=master)](https://travis-ci.com/quanganhhoang/study-roadmap-prod)
+
 A web app to post/upvote/downvote on study roadmaps for any disciplines or hobbies.
 
 Technology stack: Django, Django Rest Framework & React
