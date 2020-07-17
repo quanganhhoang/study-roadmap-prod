@@ -11,7 +11,7 @@ matrix:
                 - postgres
 
             install:
-                - pip install -r requirements.txt
+                - pip install --upgrade -r requirements.txt
             
             before_script:
                 - psql -c 'create database studyroadmaps;' -U postgres
