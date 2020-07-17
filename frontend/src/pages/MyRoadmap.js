@@ -7,14 +7,6 @@ import RoadmapList from "../components/RoadmapList";
 
 
 class MyRoadmap extends Component {
-	state = {
-        
-    };
-
-	componentDidMount() {
-        
-	}
-
 	render() {
 		return (
 			<div>

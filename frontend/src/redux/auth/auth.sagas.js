@@ -41,8 +41,8 @@ export function* signUp({ payload: {username, email, password, confirm} }) {
         const res = yield api.post('rest-auth/registration/', {
             username: username,
             email: email,
-            password: password,
-            passwordConfirmed: confirm
+            password1: password,
+            password2: confirm
         })
 
         const token = res.data.key;
@@ -54,6 +54,19 @@ export function* signUp({ payload: {username, email, password, confirm} }) {
         yield put(signUpFail(error));
     }
 }
+
+// export function* createCustomProfile({ payload: {username, email} }) {
+//     try {
+//         const res = yield api.post('/api/customprofile/', {
+//             username: username,
+//             email: email
+//         });
+
+//         yield put(createCustomProfileSuccess());
+//     } catch (error) {
+//         yield put(createCustomProfileFail(error));
+//     }
+// }
 
 export function* logout() {
     try {
@@ -101,6 +114,13 @@ export function* watchSignUpStart() {
     yield takeLatest(
         AuthActionTypes.SIGN_UP_START,
         signUp
+    )
+}
+
+export function* watchSignUpSuccess() {
+    yield takeLatest(
+        AuthActionTypes.SIGN_UP_SUCCESS,
+        createCustomProfile
     )
 }
 

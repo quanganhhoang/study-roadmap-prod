@@ -25,5 +25,5 @@ urlpatterns = [
 
     path('', include('frontend.urls')),
     path('', include('studyroadmap.urls')),
-    re_path('', TemplateView.as_view(template_name='frontend/index.html')),
+    re_path('', TemplateView.as_view(template_name='index.html')),
 ]

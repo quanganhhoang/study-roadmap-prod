@@ -69,7 +69,7 @@ const DashboardRoadmapList = props => {
                                     </div>
                                     <div>
                                         <a className="dashboard-roadmap-card-author" href={`/users/${item.author}/`}> 
-                                            {item.author} 
+                                            {item.author}
                                         </a>
                                     </div> 
                                 </div>
@@ -80,7 +80,6 @@ const DashboardRoadmapList = props => {
                                 </div>
                             )}
                         />
-                        {item.content}
                     </List.Item>
                 )
             }}

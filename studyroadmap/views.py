@@ -25,10 +25,11 @@ from .permissions import *
 class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = User.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated,
+        # permissions.IsAuthenticated,
+        permissions.AllowAny
     ]
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = UserSerializer 
+    # authentication_classes = (TokenAuthentication,)
+    serializer_class = UserSerializer
 
     def get_permissions(self):
         if self.action == 'list':
@@ -47,9 +48,10 @@ class UserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
 class CustomProfileViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = CustomProfile.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated
+        # permissions.IsAuthenticated
+        permissions.AllowAny
     ]
-    authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication,)
     serializer_class = CustomProfileSerializer
 
 
@@ -59,11 +61,11 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny
     ]
-    authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication,)
     serializer_class = RoadmapSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     filterset_fields = ['discipline', 'level']
-    search_fields = ['author__id', 'title', 'description']
+    search_fields = ['author', 'title', 'description']
 
     @action(methods=['get'], detail=False, url_path='most-popular')
     def most_popular(self, request):
@@ -82,18 +84,18 @@ class RoadmapViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     @action(methods=['get'], detail=False, url_path='disciplines')
     def get_disciplines(self, request):
         disciplines = self.get_queryset().order_by().values_list('discipline').distinct()
-        
+
         return JsonResponse({'data': list(disciplines)})
 
 
 class MilestoneViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     queryset = Milestone.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated
+        # permissions.IsAuthenticated
+        permissions.AllowAny
     ]
-    authentication_classes = (TokenAuthentication,)
+    # authentication_classes = (TokenAuthentication,)
     serializer_class = MilestoneSerializer
-
 
 ### Iteration 4 ###
 

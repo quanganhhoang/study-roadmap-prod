@@ -6,5 +6,3 @@ from .models import CustomProfile, Roadmap
 
 admin.site.register(CustomProfile)
 admin.site.register(Roadmap)
-
-# admin.site.register(CustomProfile, UserAdmin)

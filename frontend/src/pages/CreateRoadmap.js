@@ -179,6 +179,17 @@ class CreateRoadmap extends Component {
             milestones,
         })
     }
+
+    onChangeMilestoneLink = (e, milestoneId) => {
+        e.preventDefault();
+        const { value } = e.target;
+        const { milestones } = this.state;
+        milestones[milestoneId].link = value;
+
+        this.setState({
+            milestones,
+        })
+    }
     // functions for adding roadmap steps
     
     // save and publish roadmap
@@ -188,7 +199,7 @@ class CreateRoadmap extends Component {
         let transactionSuccess = true;
         // TODO(qahoang): rollback transaction if anything fails here
         api.post(`api/roadmaps/`, {
-            "author": this.props.authorId,
+            "author": this.props.username,
             "title": this.state.roadmapTitle,
             "description": this.state.roadmapDescription,
             "level": this.state.roadmapLevel,
@@ -232,10 +243,6 @@ class CreateRoadmap extends Component {
         }
     }
 
-    componentDidMount() {
-        
-    }
-
     render() {
         const { tags, inputVisible, inputValue, editInputIndex, editInputValue } = this.state;
 
@@ -273,12 +280,7 @@ class CreateRoadmap extends Component {
                                         className="milestone-link"
                                         placeholder="Link"
                                         onChange={(e) => {
-                                            this.setState(prevState => ({
-                                                milestones: {
-                                                    ...prevState.milestones,
-                                                    [prevState.milestones[i].link]: e.target.value
-                                                }
-                                            }))
+                                            this.onChangeMilestoneLink(e, i)
                                         }}
                                     />
                                 </Col>
@@ -453,7 +455,6 @@ const mapStateToProps = state => {
     return {
         token: state.auth.token,
         username: state.auth.username,
-        authorId: state.auth.userId,
     };
 };
 

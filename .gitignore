@@ -195,3 +195,5 @@ venv
 # End of https://www.gitignore.io/api/react,django,python
 
 main.js
+staticfiles
+.idea/

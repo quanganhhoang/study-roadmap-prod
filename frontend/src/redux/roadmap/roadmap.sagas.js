@@ -41,7 +41,7 @@ export function* fetchRoadmapsByUser() {
     const auth = yield select(getAuth);
     const { token, user } = auth;
     try {
-        const res = yield api.get(`api/users/${user.id}/roadmaps/`, {
+        const res = yield api.get(`api/users/${user.username}/roadmaps/`, {
             headers: {
                 Authorization: token ? `Token ${token}` : ''
             }

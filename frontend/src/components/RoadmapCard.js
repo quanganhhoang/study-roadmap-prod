@@ -14,7 +14,7 @@ const RoadmapCard = props => {
                 <Col span={18}>
                     <p className="roadmap-card-title">{props.title}</p>
                     <p className="roadmap-card-author">{props.author}</p>
-                    <p>{props.content}</p>    
+                    <p>{props.description}</p>    
                 </Col>
                 <Col span={6}>
                     <div className="roadmap-card-thumbnail">

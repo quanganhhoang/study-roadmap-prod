@@ -1,24 +1,27 @@
 from django.db import models
 from django.contrib.auth.models import User
 from enum import Enum
+import datetime
+from django_countries.fields import CountryField
 
 
 # User model
 class CustomProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # username = models.CharField(max_length=100, unique=True)
-    # password = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    # email = models.CharField(max_length = 100)
-    dob = models.DateTimeField()
+    username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, to_field="username")
+    first_name = models.CharField(max_length=50, default="")
+    last_name = models.CharField(max_length=50, default="")
+    email = models.CharField(max_length=100, default="")
+    dob = models.DateField(default=datetime.date.today)
     creation_date = models.DateTimeField(auto_now=True)
     profile_image = models.CharField(max_length=200, default="")
-    user_latitude = models.IntegerField()
-    user_longitude = models.IntegerField()
-    credential = models.CharField(max_length=200)
-    description = models.TextField()
+    country = CountryField()
+    credential = models.CharField(max_length=200, default="")
+    description = models.TextField(default="")
     is_admin = models.BooleanField(default=False)
+
+    @property
+    def username(self):
+        return self.user.username
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -48,7 +51,7 @@ class DisciplineEnum(Enum):
 # Roadmap created by a user
 # Each roadmap contains multiple RoadmapNodes and comments
 class Roadmap(models.Model):
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, to_field="username")
     title = models.CharField(max_length=100)
     level = models.IntegerField(
         choices=LevelCategory.choices,
@@ -92,13 +95,13 @@ class UserFollow(models.Model):
 
 # Association table for many-to-many relationship between users and followed roadmaps
 class RoadmapFollow(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, to_field="username")
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
 
 
 # Comments in a roadmap
 class Comment(models.Model):
     roadmap_id = models.ForeignKey(Roadmap, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, to_field="username")
     content = models.TextField()
     creation_date = models.DateTimeField(auto_now=True)
