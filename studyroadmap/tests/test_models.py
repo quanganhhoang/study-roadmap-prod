@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import *
+from studyroadmap.models import *
 
 # Create your tests here.
 class UsersManagersTests(TestCase):
