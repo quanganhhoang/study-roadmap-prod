@@ -11,19 +11,19 @@ describe('My Test Suite', () => {
     });
 });
 
-const fetchRoadmaps = async () => {
-    const res = await api.get('api/roadmaps');
+// const fetchRoadmaps = async () => {
+//     const res = await api.get('api/roadmaps');
 
-    return res.data.results;
-}
+//     return res.data.results;
+// }
 
-it('Test api', () => {
-    expect.assertions(1)
-    // either return promise or call the implicit done() method after an async call
-    return fetchRoadmaps().then(res => {
-        expect(res).toEqual([]);
-    })
-})
+// it('Test api', () => {
+//     expect.assertions(1)
+//     // either return promise or call the implicit done() method after an async call
+//     return fetchRoadmaps().then(res => {
+//         expect(res).toEqual([]);
+//     })
+// })
 
 // it('Test mock', () => {
 //     const mockFetch = jest.fn()
