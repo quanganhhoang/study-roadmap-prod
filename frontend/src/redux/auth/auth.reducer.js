@@ -7,13 +7,13 @@ const INITIAL_STATE = {
     user: null,
 }
 
-// const signInStart = (state) => {
-//     return {
-//         ...state,
-//         error: null,
-//         loading: true
-//     }
-// }
+const signInStart = (state) => {
+    return {
+        ...state,
+        error: null,
+        loading: true
+    }
+}
 
 const signInSuccess = (state, action) => {
     return {
@@ -37,14 +37,16 @@ const signUpSuccess = (state, action) => {
     return {
         ...state,
         token: action.payload.token,
-        username: action.payload.username
+        username: action.payload.username,
+        loading: false
     }
 }
 
 const signUpFail = (state, action) => {
     return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        loading: false
     }
 }
 
@@ -83,6 +85,8 @@ const fetchUserFail = (state, action) => {
 
 const authReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
+        case AuthActionTypes.SIGN_IN_START:
+            return signInStart(state, action)
         case AuthActionTypes.SIGN_IN_FAIL:
             return signInFail(state, action)
         case AuthActionTypes.SIGN_IN_SUCCESS:

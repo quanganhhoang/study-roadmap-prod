@@ -3,7 +3,7 @@ import api from '../../api'
 import storage from 'redux-persist/lib/storage'; // local storage
 
 import AuthActionTypes from './auth.types'
-import { 
+import {
     signInSuccess,
     signInFail,
 
