@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { authCheckState } from './redux/auth/auth.action'
 
 import CustomLayout from './components/CustomLayout'
 import BaseRouter from './routes'
@@ -34,10 +33,5 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        // onTryAutoSignup: () => dispatch(authCheckState())
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);

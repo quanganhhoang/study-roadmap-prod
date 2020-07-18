@@ -197,3 +197,4 @@ venv
 main.js
 staticfiles
 .idea/
+coverage

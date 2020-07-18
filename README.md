@@ -1,5 +1,6 @@
 # studyroadmap 
 [![Build Status](https://travis-ci.com/quanganhhoang/study-roadmap-prod.svg?branch=master)](https://travis-ci.com/quanganhhoang/study-roadmap-prod)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A web app to post/upvote/downvote on study roadmaps for any disciplines or hobbies.
 
@@ -71,6 +72,13 @@ Start our front-end server
     npm run dev
     
 
+### Testing
+
+Installing test libraries (jest & enzyme)
+
+    npm install --save-dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer
+
+    npm i --save-dev enzyme enzyme-adapter-react-16
 
 ## TODO:
 - ~~Deploy to Heroku~~
