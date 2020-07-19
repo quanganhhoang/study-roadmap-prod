@@ -79,7 +79,7 @@ export function* logout() {
     }
 }
 
-function* fetchUser() {
+export function* fetchUser() {
     const auth = yield select(getAuth);
     const { token, username } = auth;
 
@@ -104,7 +104,7 @@ export function* watchFetchUser() {
 }
 
 export function* watchEmailSignInStart() {
-    yield takeEvery(
+    yield takeLatest(
         AuthActionTypes.SIGN_IN_START,
         signInWithEmail
     )

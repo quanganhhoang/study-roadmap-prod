@@ -65,6 +65,12 @@ export const logoutFail = (error) => {
     }
 }
 
+export const fetchUserRequested = () => {
+    return {
+        type: AuthActionTypes.FETCH_USER_REQUESTED,
+    }
+}
+
 export const fetchUserSuccess = (user) => {
     return {
         type: AuthActionTypes.FETCH_USER_SUCCESS,

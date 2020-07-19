@@ -75,3 +75,49 @@ describe('sign up user action', () => {
         expect(action.payload).toEqual(mockError);
     })
 })
+
+describe('log out user action', () => {
+    it('log out start', () => {
+        const action = actions.logoutStart();
+        expect(action.type).toEqual(AuthActionTypes.LOGOUT_START);
+    })
+
+    it('log out success', () => {
+        const action = actions.logoutSuccess();
+        
+        expect(action.type).toEqual(AuthActionTypes.LOGOUT_SUCCESS);
+    })
+
+    it('log out fail', () => {
+        const mockError = 'error';
+        const action = actions.logoutFail(mockError);
+        
+        expect(action.type).toEqual(AuthActionTypes.LOGOUT_FAIL);
+        expect(action.payload).toEqual(mockError);
+    })
+})
+
+describe('fetch user action', () => {
+    it('fetch user requested', () => {
+        const action = actions.fetchUserRequested();
+
+        expect(action.type).toEqual(AuthActionTypes.FETCH_USER_REQUESTED);
+    })
+
+    it('fetch user success', () => {
+        const mockUser = {
+            username: 'username',
+            email: 'email'
+        };
+        const action = actions.fetchUserSuccess(mockUser);
+        expect(action.type).toEqual(AuthActionTypes.FETCH_USER_SUCCESS);
+        expect(action.payload).toEqual(mockUser);
+    })
+
+    it('fetch user fail', () => {
+        const mockError = 'error';
+        const action = actions.fetchUserFail(mockError);
+        expect(action.type).toEqual(AuthActionTypes.FETCH_USER_FAIL);
+        expect(action.payload).toEqual(mockError);
+    })
+})
